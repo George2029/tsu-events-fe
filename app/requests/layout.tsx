@@ -9,7 +9,9 @@ export default function Layout({
 	return (
 		<>
 			<GenresBar />
-			{children}
+			<div className="mt-6 md:mt-10">
+				{children}
+			</div>
 		</>
 	)
 }

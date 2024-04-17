@@ -4,7 +4,7 @@ import { RequestIcon, AccountIcon, HomeIcon, AboutIcon } from './icons';
 import { usePathname } from 'next/navigation';
 let navBarItems = [
 	{
-		title: 'Events',
+		title: 'Home',
 		icon: HomeIcon,
 		href: '/'
 	},
@@ -40,7 +40,7 @@ export default function NavBarItems() {
 				href={navItem.href}
 				key={navItem.title}
 				className={
-					`flex flex-col md:gap-4 align-center md:flex-row ${checkPath(navItem.href) && 'text-blue-600 dark:text-yellow-600'}`
+					`flex flex-col md:gap-4 align-center md:flex-row ${checkPath(navItem.href) && 'color-selected'}`
 				}
 			>
 				<div className="self-center">{navItem.icon}</div>
