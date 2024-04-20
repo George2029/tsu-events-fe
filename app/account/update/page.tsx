@@ -93,6 +93,8 @@ export default function UpdateUser() {
 									id="username"
 									name="username"
 									type="text"
+									minLength={6}
+									maxLength={30}
 									autoComplete="username"
 									required
 									className="block text-black w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -127,6 +129,8 @@ export default function UpdateUser() {
 									name="email"
 									type="email"
 									autoComplete="current-email"
+									minLength={6}
+									maxLength={40}
 									required
 									className="block text-black w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
@@ -212,6 +216,7 @@ export default function UpdateUser() {
 									name="fullName"
 									type="text"
 									autoComplete="fullName"
+									maxLength={50}
 									required
 									className="block text-black w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>

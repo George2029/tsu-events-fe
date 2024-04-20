@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import Link from "next/link";
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
-import { Event } from '@/app/classes/event';
+import { Event } from '@/app/classes/events/event';
 
 export default function EventPreviewCard({ ...event }: Event) {
 

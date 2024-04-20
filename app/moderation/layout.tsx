@@ -7,7 +7,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<div className="w-full flex flex-col">
+		<div className="px-10 w-full flex flex-col">
 			<div className="text-lg text-center">Moderation Page</div>
 			<ModerationNavBar />
 			<div>{children}</div>

@@ -16,13 +16,6 @@
   }
 }
 
-.bg-color {
-	background-color: rgb(var(--background-rgb));
-}
-
-.color-selected {
-	color: rgb(var(--selected-rgb));
-}
 
 body {
   color: rgb(var(--foreground-rgb));

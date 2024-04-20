@@ -1,7 +1,37 @@
-export default function BoardGamesEventsPage() {
+import Genre from '@/app/ui/Genre';
+
+let data = {
+	title: 'board games',
+	options: [
+		{
+			title: 'contests',
+			href: '/contests',
+		},
+		{
+			title: 'custom',
+			href: '/custom',
+		},
+		{
+			title: 'movies',
+			href: '/movies',
+		},
+		{
+			title: 'all events',
+			href: '/',
+		},
+	]
+}
+
+
+export default function MovieEventsPage() {
 	return (
-		<>
-			<div>a page with boardgames events</div>
-		</>
+		<div className="flex w-full">
+			<div className="w-full mx-2 md:w-auto absolute md:static md:max-w-3xl py-4">
+				<Genre {...data} />
+			</div>
+			<div className="mt-20 md:mt-0 grow mx-10">
+				<div className="text-center">Board Games Events Page</div>
+			</div>
+		</div>
 	);
 }

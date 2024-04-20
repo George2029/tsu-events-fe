@@ -27,20 +27,14 @@ let navBarItems = [
 
 export default function NavBarItems() {
 	const pathname = usePathname();
-	const checkPath = (href: string): boolean => {
-		if (pathname === href) return true; // to catch exact routes
-		if (['/movies', '/boardgames', '/contests', '/others'].includes(pathname) && href === '/') return true;
-		let regex = /\/\d/; // to catch specific-event routes like /:id
-		if (regex.test(pathname) && href === '/') return true;
-		return (pathname.startsWith('/requests') && href === '/requests'); // to catch all routes that starts with /requests
-	}
+	const checkPath = (href: string): boolean => pathname === href
 	return navBarItems.map((navItem) => {
 		return (
 			<Link
 				href={navItem.href}
 				key={navItem.title}
 				className={
-					`flex flex-col md:gap-4 align-center md:flex-row ${checkPath(navItem.href) && 'color-selected'}`
+					`flex flex-col md:gap-4 align-center md:flex-row ${checkPath(navItem.href) && 'text-selected'}`
 				}
 			>
 				<div className="self-center">{navItem.icon}</div>

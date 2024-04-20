@@ -6,13 +6,14 @@ import { plainToInstance } from 'class-transformer';
 
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
 
-import Link from 'next/link';
-
-import { ArrowUTurnLeft } from '@/app/ui/icons/otherIcons';
-
-import { Event } from '@/app/classes/event';
-
+import { Event } from '@/app/classes/events/event';
 import type { EventJSON } from '@/app/types/events/eventTypes';
+
+import EventFooter from '@/app/ui/event/EventFooter';
+import EventConfigs from '@/app/ui/event/EventConfigs';
+import Feedbacks from '@/app/ui/event/Feedbacks';
+import Participants from '@/app/ui/event/Participants';
+import EventSimpleField from '@/app/ui/event/EventSimpleField';
 
 export default async function Page(
 	{ params }: { params: { id: string } }
@@ -52,9 +53,8 @@ export default async function Page(
 	}
 
 	let eventStartTime = DateTime.fromJSDate(new Date(startTime)).toLocaleString(myTimeConfig)
-
 	let createdAtTime = DateTime.fromJSDate(new Date(createdAt)).toLocaleString(DateTime.DATE_SHORT);
-	let eventEndTime = DateTime.fromJSDate(new Date(endTime)).toLocaleString(DateTime.DATE_SHORT);
+	let eventEndTime = DateTime.fromJSDate(new Date(endTime)).toLocaleString(myTimeConfig);
 
 	let eventIcon: any;
 
@@ -72,26 +72,34 @@ export default async function Page(
 			eventIcon = ContestIcon;
 			break;
 	}
+	console.log(placesTotal);
+
 	return (
-		<div className="md:mt-20 w-full">
-			<div className="flex justify-between gap-2">
-				<div className="font-bold text-balance">{title}</div>
-				<div>{eventIcon}</div>
+		<div className="mt-20 px-10 max-w-xl w-full">
+			<div className="p-3 bg-neutral-900 rounded-lg">
+				<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
+					<div className="text-center grow overflow-scroll">{title}</div>
+					<div className="self-center">{eventIcon}</div>
+				</div>
+				<div className="space-y-4 mt-4">
+					<EventSimpleField props={{ title: 'Location', value: location }} />
+					{description && <EventSimpleField props={{ title: 'Description', value: description }} />}
+					<EventSimpleField props={{ title: 'Starts at', value: eventStartTime }} />
+					<EventSimpleField props={{ title: 'Moderator', value: moderator }} />
+					<Participants props={{ placesTotal, eventId: id }} />
+					<Feedbacks />
+					<EventConfigs />
+					<EventFooter props={{ createdAtTime, rating }} />
+				</div>
 			</div>
-			<div>{location}</div>
-			<div>{description}</div>
-			<div>PlacesTotal: {placesTotal}</div>
-			<div>{eventStartTime}</div>
-			<div>Status: {status}</div>
-			<div>Rating: {rating}</div>
-			<div>Moderator: {moderator}</div>
-			<div>Event ends at: {eventEndTime}</div>
-			<div>Published: {createdAtTime}</div>
-			<Link href="/">
-				{ArrowUTurnLeft}
-			</Link>
 		</div>
 	)
 }
 
 
+/*
+					<div className="p-2 bg-green-950 rounded-lg">
+						<div className="text-sm font-semibold">Ends at</div>
+						<div>{eventEndTime}</div>
+					</div>
+					*/

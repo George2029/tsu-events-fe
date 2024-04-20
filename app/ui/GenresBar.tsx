@@ -47,7 +47,7 @@ export default function GenresBar() {
 	}
 
 	return (
-		<div className="w-full justify-between flex md:mt-10">
+		<div className="w-full mx-10 md:w-auto absolute md:static md:max-w-3xl border-b border-indigo-500/20 py-4 justify-between flex md:flex-col">
 			{genreTypes.map(genre => {
 
 

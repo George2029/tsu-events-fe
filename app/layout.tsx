@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import 'reflect-metadata';
 import "./globals.css";
-import TopBar from './ui/TopBar';
 import NavBar from './ui/navbar/NavBar';
 import Content from './ui/Content';
 
@@ -18,10 +17,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<main className="overflow-hidden relative flex max-w-5xl min-h-screen flex-col items-center my-o mx-auto">
-					<TopBar />
-					<Content children={children} />
+				<main className="overflow-hidden relative flex max-w-4xl min-h-screen flex-col items-center my-o mx-auto">
 					<NavBar />
+					<Content children={children} />
 				</main>
 			</body >
 		</html >
