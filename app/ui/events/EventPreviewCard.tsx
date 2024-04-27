@@ -33,9 +33,9 @@ export default function EventPreviewCard({ ...event }: Event) {
 
 
 	return (
-		<div>
+		<div className="dark:bg-darkcardBG bg-cardBG p-4 rounded-lg ring-border dark:ring-darkborder hover:ring-active dark:hover:ring-darkactive ring-1 shadow-lg">
 			<div className="flex justify-between gap-2">
-				<Link href={'/' + id} className="font-bold text-balance">{title}</Link>
+				<Link href={'/' + id} className="hover:text-active dark:hover:text-darkactive text-title dark:text-darktitle font-bold text-balance">{title}</Link>
 				<div>{eventIcon}</div>
 			</div>
 			<div>{time}</div>

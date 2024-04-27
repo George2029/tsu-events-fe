@@ -46,7 +46,7 @@ export default async function Home() {
 			<div className="w-full mx-2 md:w-auto absolute md:static md:max-w-3xl py-4">
 				<Genre {...data} />
 			</div>
-			<div className="mt-20 md:mt-0 grow mx-10">
+			<div className="mt-20 md:mt-0 grow p-5">
 				{events.map((event: Event) =>
 					<div className="mt-6" key={event.id}>
 						<EventPreviewCard {...event} />

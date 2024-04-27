@@ -1,19 +1,23 @@
 import { notFound } from 'next/navigation'
-
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { DateTime, DateTimeFormatOptions } from "luxon";
 
 import { plainToInstance } from 'class-transformer';
 
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
+import { GoBackIcon } from '@/app/ui/icons';
 
 import { Event } from '@/app/classes/events/event';
 import type { EventJSON } from '@/app/types/events/eventTypes';
 
 import EventFooter from '@/app/ui/event/EventFooter';
-import EventConfigs from '@/app/ui/event/EventConfigs';
-import Feedbacks from '@/app/ui/event/Feedbacks';
-import Participants from '@/app/ui/event/Participants';
+import Feedbacks from './Feedbacks';
+import Participants from './Participants';
 import EventSimpleField from '@/app/ui/event/EventSimpleField';
+import EventConfigs from './EventConfigs';
+
+const ModEventIcon = dynamic(() => import('./ModEventIcon'));
 
 export default async function Page(
 	{ params }: { params: { id: string } }
@@ -72,34 +76,32 @@ export default async function Page(
 			eventIcon = ContestIcon;
 			break;
 	}
-	console.log(placesTotal);
 
 	return (
-		<div className="mt-20 px-10 max-w-xl w-full">
-			<div className="p-3 bg-neutral-900 rounded-lg">
-				<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
-					<div className="text-center grow overflow-scroll">{title}</div>
-					<div className="self-center">{eventIcon}</div>
-				</div>
-				<div className="space-y-4 mt-4">
-					<EventSimpleField props={{ title: 'Location', value: location }} />
-					{description && <EventSimpleField props={{ title: 'Description', value: description }} />}
-					<EventSimpleField props={{ title: 'Starts at', value: eventStartTime }} />
-					<EventSimpleField props={{ title: 'Moderator', value: moderator }} />
-					<Participants props={{ placesTotal, eventId: id }} />
-					<Feedbacks />
-					<EventConfigs />
-					<EventFooter props={{ createdAtTime, rating }} />
+		<>
+			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder px-6 max-w-xl w-full">
+				<div className="p-3 rounded-lg">
+					<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
+						<div className="text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
+						<div className="flex gap-2 self-center">
+							<div>{eventIcon}</div>
+							<ModEventIcon props={{ id }} />
+						</div>
+					</div>
+					<div className="space-y-4 mt-4">
+						<EventSimpleField props={{ title: 'Location', value: location }} />
+						{description && <EventSimpleField props={{ title: 'Description', value: description }} />}
+						<EventSimpleField props={{ title: 'Starts at', value: eventStartTime }} />
+						<EventSimpleField props={{ title: 'Moderator', value: moderator }} />
+						<Participants props={{ placesTotal, eventId: id }} />
+						<Feedbacks props={{ eventId: id }} />
+						<EventConfigs props={{ eventId: id, type }} />
+						<EventFooter props={{ createdAtTime, rating }} />
+					</div>
 				</div>
 			</div>
-		</div>
+			<Link href="/" className="dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+		</>
 	)
 }
 
-
-/*
-					<div className="p-2 bg-green-950 rounded-lg">
-						<div className="text-sm font-semibold">Ends at</div>
-						<div>{eventEndTime}</div>
-					</div>
-					*/

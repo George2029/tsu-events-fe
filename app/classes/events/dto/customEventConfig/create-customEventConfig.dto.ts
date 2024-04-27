@@ -1,5 +1,4 @@
-import { IsString, IsOptional, IsInt, IsNotEmpty } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, IsOptional, IsNotEmpty } from 'class-validator';
 
 export class CreateCustomEventConfigDto {
 	@IsString()
@@ -11,16 +10,10 @@ export class CreateCustomEventConfigDto {
 	@IsNotEmpty()
 	description?: string;
 
-	@Type(() => Number)
-	@IsInt()
-	eventId: number;
-
 	constructor(
-		eventId: number,
 		title: string,
 		description?: string,
 	) {
-		this.eventId = eventId;
 		this.title = title;
 		this.description = description;
 	}

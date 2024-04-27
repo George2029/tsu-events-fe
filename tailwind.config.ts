@@ -2,14 +2,34 @@ import type { Config } from "tailwindcss";
 import formsPlugin from '@tailwindcss/forms';
 
 const config: Config = {
+	darkMode: 'selector',
 	content: [
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
 		extend: {
 			colors: {
-				'selected': 'rgb(var(--selected-rgb))',
-				'bgColor': 'rgb(var(--background-rgb))'
+				'text': "#000000",
+				'background': "#ADD8E6",
+				'active': "#2563EB",
+				'title': '#000000',
+				"cardBG": '#E3FAFF',
+				'border': '#000000',
+				'genreBarBG': '#FFFFFF',
+				'themeTogglerBG': '#FFFFFF',
+				'specialIcons': '#802626',
+				'button': '#FFFFFF',
+
+				'darktext': "#EEEFF0",
+				'darkbackground': "#090A29",
+				'darkactive': "#BDBFFD",
+				'darkcardBG': '#131329',
+				'darktitle': '#0EA5E9',
+				'darkborder': '#46477E',
+				'darkgenreBarBG': '#202253',
+				'darkthemeTogglerBG': '#1D1D29',
+				'darkspecialIcons': '#EAB308',
+				'darkbutton': '#202253',
 			},
 			fontFamily: {
 				'display': ['Grenze_Gotisch']

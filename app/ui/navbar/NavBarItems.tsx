@@ -34,7 +34,7 @@ export default function NavBarItems() {
 				href={navItem.href}
 				key={navItem.title}
 				className={
-					`flex flex-col md:gap-4 align-center md:flex-row ${checkPath(navItem.href) && 'text-selected'}`
+					`flex flex-col hover:text-active dark:hover:text-darkactive md:gap-4 align-center md:flex-row ${checkPath(navItem.href) && 'font-bold'}`
 				}
 			>
 				<div className="self-center">{navItem.icon}</div>

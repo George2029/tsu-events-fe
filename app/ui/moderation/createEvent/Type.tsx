@@ -1,63 +1,63 @@
+import { MovieIcon, BoardGamesIcon, ContestIcon, CustomIcon } from '@/app/ui/eventTypeIcons';
+
 export default function Type({ props }: { props: { onTypeChange: (e: React.FormEvent<HTMLInputElement>) => void } }) {
 	const { onTypeChange } = props;
 	return (
-		<div>
-			<legend className="text-sm font-semibold leading-8">Type</legend>
-			<div className="mt-2 space-y-2">
-				<div className="flex items-center gap-x-3">
-					<input
-						value="MOVIE_EVENT"
-						onChange={onTypeChange}
-						id="MOVIE_EVENT"
-						name="type"
-						type="radio"
-						className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-						required
-					/>
-					<label htmlFor="MOVIE_EVENT" className="text-sm leading-8">
-						Movie Event
-					</label>
-				</div>
-				<div className="flex items-center gap-x-3">
-					<input
-						value="BOARD_GAMES_EVENT"
-						onChange={onTypeChange}
-						id="BOARD_GAMES_EVENT"
-						name="type"
-						type="radio"
-						className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-					/>
-					<label htmlFor="BOARD_GAMES_EVENT" className="text-sm leading-8">
-						Board Games Event
-					</label>
-				</div>
-				<div className="flex items-center gap-x-3">
-					<input
-						value="CONTEST_EVENT"
-						onChange={onTypeChange}
-						id="CONTEST_EVENT"
-						name="type"
-						type="radio"
-						className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-					/>
-					<label htmlFor="CONTEST_EVENT" className="text-sm leading-8">
-						Contest Event
-					</label>
-				</div>
-				<div className="flex items-center gap-x-3">
-					<input
-						value="CUSTOM_EVENT"
-						onChange={onTypeChange}
-						id="CUSTOM_EVENT"
-						name="type"
-						type="radio"
-						className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-					/>
-					<label htmlFor="CUSTOM_EVENT" className="text-sm leading-8">
-						Custom Event
-					</label>
-				</div>
-			</div>
-		</div>
+		<fieldset className="">
+			<legend className="text-sm font-semibold leading-8 after:content-['*'] after:ml-0.5 after:text-red-500">Type</legend>
+			<input
+				id={"MOVIE_EVENT"}
+				value={"MOVIE_EVENT"}
+				onChange={onTypeChange}
+				name="type"
+				type="radio"
+				className={`hidden peer/MOVIE_EVENT`}
+				required
+			/>
+			<label htmlFor={"MOVIE_EVENT"} className={`inline-block peer-checked/MOVIE_EVENT:text-selected text-sm leading-8`}>
+				{MovieIcon}
+			</label>
+			<input
+				id={"BOARD_GAMES_EVENT"}
+				value={"BOARD_GAMES_EVENT"}
+				onChange={onTypeChange}
+				name="type"
+				type="radio"
+				className={`hidden peer/BOARD_GAMES_EVENT`}
+				required
+			/>
+			<label htmlFor={"BOARD_GAMES_EVENT"} className={`ml-2 inline-block peer-checked/BOARD_GAMES_EVENT:text-selected text-sm leading-8`}>
+				{BoardGamesIcon}
+			</label>
+			<input
+				id={"CONTEST_EVENT"}
+				value={"CONTEST_EVENT"}
+				onChange={onTypeChange}
+				name="type"
+				type="radio"
+				className={`hidden peer/CONTEST_EVENT`}
+				required
+			/>
+			<label htmlFor={"CONTEST_EVENT"} className={`ml-2 inline-block peer-checked/CONTEST_EVENT:text-selected text-sm leading-8`}>
+				{ContestIcon}
+			</label>
+			<input
+				id={"CUSTOM_EVENT"}
+				value={"CUSTOM_EVENT"}
+				onChange={onTypeChange}
+				name="type"
+				type="radio"
+				className={`hidden peer/CUSTOM_EVENT`}
+				required
+			/>
+			<label htmlFor={"CUSTOM_EVENT"} className={`ml-2 inline-block peer-checked/CUSTOM_EVENT:text-selected text-sm leading-8`}>
+				{CustomIcon}
+			</label>
+			<div className="hidden peer-checked/MOVIE_EVENT:block">There will be movies</div>
+			<div className="hidden peer-checked/BOARD_GAMES_EVENT:block">There will be board games</div>
+			<div className="hidden peer-checked/CONTEST_EVENT:block">There will be some kind of contest</div>
+			<div className="hidden peer-checked/CUSTOM_EVENT:block">Custom. If no other option is suitable.</div>
+		</fieldset>
 	)
 }
+

@@ -18,7 +18,7 @@ export default function MovieEventConfig({ props }: { props: { eventType: string
 	let [movieEventConfigState, setMovieEventConfigState] = useState(arr);
 
 	return (
-		<div className={`font-bold leading-6 ${props.eventType === EventType.MOVIE_EVENT ? '' : 'hidden'} `}>
+		<div className={`leading-6 ${props.eventType === EventType.MOVIE_EVENT ? '' : 'hidden'} `}>
 			<div
 				onClick={
 					() => setMovieEventConfigState((e) => {

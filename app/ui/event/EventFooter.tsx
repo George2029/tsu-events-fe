@@ -7,7 +7,7 @@ export default function EventFooter({ props }: { props: { createdAtTime: string,
 			<div className="text-sm italic text-center">{createdAtTime}</div>
 			<div className="flex gap-1">
 				<div>{rating}</div>
-				<div className="text-yellow-500 hover:animate-pulse">{Star}</div>
+				<div className="cursor-pointer text-specialIcons dark:text-darkspecialIcons hover:animate-pulse">{Star}</div>
 			</div>
 		</div>
 	)

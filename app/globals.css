@@ -3,23 +3,69 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 173, 216, 230;
-	--selected-rgb: 37, 99, 235;
+	--text: 0, 0, 0, 1;
+	--background: 173, 216, 230, 1;
+	--active: 37, 99, 235, 1;
+	--title: 0, 0, 0, 1;
+	--cardBG: 255, 255, 255, 1;
+	--border: 0, 0, 0, 1;
+	--genreBarBG: 255, 255, 255, 1;
+	--themeTogglerBG: 255, 255, 255, 1;
+	--themeTogglerHover: 100, 100, 100, 1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 10, 20, 10;
-	--selected-rgb: 202, 138, 4;
+    --text: 238, 239, 240, 1;
+    --background: 9, 10, 41, 1;
+	--active: 189, 191, 253, 1;
+	--cardBG: 19, 19, 41, 1;
+	--title: 14, 165, 233, 1;
+	--border: 187, 188, 211, 1;
+	--darkgenreBarBG: 32, 34, 83, 1;
+	--darkthemeTogglerBG: 29, 29, 41, 1;
+	--darkthemeTogglerHover: 39, 39, 41, 1;
   }
 }
 
+.toggle input[type=checkbox] {
+	display: none;
+}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb))
+.toggle label {
+	background-color: #fa9de1;
+	border: 2px solid #555;
+	border-radius: 30px;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: all ease-in-out 0.3s;
+	width: 60px;
+	height: 30px;
+}
+
+.toggle label::after {
+	background-color: #b21b89;
+	border-radius: 50%;
+	content: ' ';
+	cursor: pointer;
+	display: inline-block;
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	transition: all ease-in-out 0.3s;
+	width: 22px;
+	height: 22px;
+}
+
+.toggle input[type=checkbox]:checked ~ label {
+	border-color: #006dc9;
+	background-color: #b21b89;
+}
+
+.toggle input[type=checkbox]:checked ~ label::after {
+	background-color: #fa9de1;
+	transform: translateX(30px);
 }
 
 @layer base {
