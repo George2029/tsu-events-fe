@@ -38,9 +38,9 @@ export default function BookStatus({ props }: {
 
 
 	return (
-		<details className="ring-1 ring-border dark:ring-darkborder select-none bg-button dark:bg-darkgenreBarBG text-sm relative self-center rounded-lg">
+		<details className="relative">
 
-			<summary className="flex hover:ring-1 hover:ring-active dark:hover:ring-darkactive gap-2 cursor-pointer p-2 rounded-lg"
+			<summary className="md:active:scale-90 ring-1 ring-border dark:ring-darkborder active:scale-50 duration-300 select-none text-sm bg-button dark:bg-darkgenreBarBG flex hover:ring-active dark:hover:ring-darkactive gap-2 cursor-pointer p-2 rounded-lg"
 
 			>
 				<div>{faceTitle}</div>

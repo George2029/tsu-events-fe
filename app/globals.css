@@ -2,70 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--text: 0, 0, 0, 1;
-	--background: 173, 216, 230, 1;
-	--active: 37, 99, 235, 1;
-	--title: 0, 0, 0, 1;
-	--cardBG: 255, 255, 255, 1;
-	--border: 0, 0, 0, 1;
-	--genreBarBG: 255, 255, 255, 1;
-	--themeTogglerBG: 255, 255, 255, 1;
-	--themeTogglerHover: 100, 100, 100, 1;
+summary::-webkit-details-marker {
+ display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: 238, 239, 240, 1;
-    --background: 9, 10, 41, 1;
-	--active: 189, 191, 253, 1;
-	--cardBG: 19, 19, 41, 1;
-	--title: 14, 165, 233, 1;
-	--border: 187, 188, 211, 1;
-	--darkgenreBarBG: 32, 34, 83, 1;
-	--darkthemeTogglerBG: 29, 29, 41, 1;
-	--darkthemeTogglerHover: 39, 39, 41, 1;
-  }
-}
-
-.toggle input[type=checkbox] {
-	display: none;
-}
-
-.toggle label {
-	background-color: #fa9de1;
-	border: 2px solid #555;
-	border-radius: 30px;
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
-	transition: all ease-in-out 0.3s;
-	width: 60px;
-	height: 30px;
-}
-
-.toggle label::after {
-	background-color: #b21b89;
-	border-radius: 50%;
-	content: ' ';
-	cursor: pointer;
-	display: inline-block;
-	position: absolute;
-	left: 2px;
-	top: 2px;
-	transition: all ease-in-out 0.3s;
-	width: 22px;
-	height: 22px;
-}
-
-.toggle input[type=checkbox]:checked ~ label {
-	border-color: #006dc9;
-	background-color: #b21b89;
-}
-
-.toggle input[type=checkbox]:checked ~ label::after {
-	background-color: #fa9de1;
-	transform: translateX(30px);
+summary {
+ list-style: none;
 }
 
 @layer base {
@@ -80,3 +22,364 @@
     text-wrap: balance;
   }
 }
+
+.avatar-bg-0 {background:linear-gradient(hsl(0 100% 45%),hsl(0 100% 30%))}
+.avatar-bg-1 {background:linear-gradient(hsl(1 100% 45%),hsl(1 100% 30%))}
+.avatar-bg-2 {background:linear-gradient(hsl(2 100% 45%),hsl(2 100% 30%))}
+.avatar-bg-3 {background:linear-gradient(hsl(3 100% 45%),hsl(3 100% 30%))}
+.avatar-bg-4 {background:linear-gradient(hsl(4 100% 45%),hsl(4 100% 30%))}
+.avatar-bg-5 {background:linear-gradient(hsl(5 100% 45%),hsl(5 100% 30%))}
+.avatar-bg-6 {background:linear-gradient(hsl(6 100% 45%),hsl(6 100% 30%))}
+.avatar-bg-7 {background:linear-gradient(hsl(7 100% 45%),hsl(7 100% 30%))}
+.avatar-bg-8 {background:linear-gradient(hsl(8 100% 45%),hsl(8 100% 30%))}
+.avatar-bg-9 {background:linear-gradient(hsl(9 100% 45%),hsl(9 100% 30%))}
+.avatar-bg-10 {background:linear-gradient(hsl(10 100% 45%),hsl(10 100% 30%))}
+.avatar-bg-11 {background:linear-gradient(hsl(11 100% 45%),hsl(11 100% 30%))}
+.avatar-bg-12 {background:linear-gradient(hsl(12 100% 45%),hsl(12 100% 30%))}
+.avatar-bg-13 {background:linear-gradient(hsl(13 100% 45%),hsl(13 100% 30%))}
+.avatar-bg-14 {background:linear-gradient(hsl(14 100% 45%),hsl(14 100% 30%))}
+.avatar-bg-15 {background:linear-gradient(hsl(15 100% 45%),hsl(15 100% 30%))}
+.avatar-bg-16 {background:linear-gradient(hsl(16 100% 45%),hsl(16 100% 30%))}
+.avatar-bg-17 {background:linear-gradient(hsl(17 100% 45%),hsl(17 100% 30%))}
+.avatar-bg-18 {background:linear-gradient(hsl(18 100% 45%),hsl(18 100% 30%))}
+.avatar-bg-19 {background:linear-gradient(hsl(19 100% 45%),hsl(19 100% 30%))}
+.avatar-bg-20 {background:linear-gradient(hsl(20 100% 45%),hsl(20 100% 30%))}
+.avatar-bg-21 {background:linear-gradient(hsl(21 100% 45%),hsl(21 100% 30%))}
+.avatar-bg-22 {background:linear-gradient(hsl(22 100% 45%),hsl(22 100% 30%))}
+.avatar-bg-23 {background:linear-gradient(hsl(23 100% 45%),hsl(23 100% 30%))}
+.avatar-bg-24 {background:linear-gradient(hsl(24 100% 45%),hsl(24 100% 30%))}
+.avatar-bg-25 {background:linear-gradient(hsl(25 100% 45%),hsl(25 100% 30%))}
+.avatar-bg-26 {background:linear-gradient(hsl(26 100% 45%),hsl(26 100% 30%))}
+.avatar-bg-27 {background:linear-gradient(hsl(27 100% 45%),hsl(27 100% 30%))}
+.avatar-bg-28 {background:linear-gradient(hsl(28 100% 45%),hsl(28 100% 30%))}
+.avatar-bg-29 {background:linear-gradient(hsl(29 100% 45%),hsl(29 100% 30%))}
+.avatar-bg-30 {background:linear-gradient(hsl(30 100% 45%),hsl(30 100% 30%))}
+.avatar-bg-31 {background:linear-gradient(hsl(31 100% 45%),hsl(31 100% 30%))}
+.avatar-bg-32 {background:linear-gradient(hsl(32 100% 45%),hsl(32 100% 30%))}
+.avatar-bg-33 {background:linear-gradient(hsl(33 100% 45%),hsl(33 100% 30%))}
+.avatar-bg-34 {background:linear-gradient(hsl(34 100% 45%),hsl(34 100% 30%))}
+.avatar-bg-35 {background:linear-gradient(hsl(35 100% 45%),hsl(35 100% 30%))}
+.avatar-bg-36 {background:linear-gradient(hsl(36 100% 45%),hsl(36 100% 30%))}
+.avatar-bg-37 {background:linear-gradient(hsl(37 100% 45%),hsl(37 100% 30%))}
+.avatar-bg-38 {background:linear-gradient(hsl(38 100% 45%),hsl(38 100% 30%))}
+.avatar-bg-39 {background:linear-gradient(hsl(39 100% 45%),hsl(39 100% 30%))}
+.avatar-bg-40 {background:linear-gradient(hsl(40 100% 45%),hsl(40 100% 30%))}
+.avatar-bg-41 {background:linear-gradient(hsl(41 100% 45%),hsl(41 100% 30%))}
+.avatar-bg-42 {background:linear-gradient(hsl(42 100% 45%),hsl(42 100% 30%))}
+.avatar-bg-43 {background:linear-gradient(hsl(43 100% 45%),hsl(43 100% 30%))}
+.avatar-bg-44 {background:linear-gradient(hsl(44 100% 45%),hsl(44 100% 30%))}
+.avatar-bg-45 {background:linear-gradient(hsl(45 100% 45%),hsl(45 100% 30%))}
+.avatar-bg-46 {background:linear-gradient(hsl(46 100% 45%),hsl(46 100% 30%))}
+.avatar-bg-47 {background:linear-gradient(hsl(47 100% 45%),hsl(47 100% 30%))}
+.avatar-bg-48 {background:linear-gradient(hsl(48 100% 45%),hsl(48 100% 30%))}
+.avatar-bg-49 {background:linear-gradient(hsl(49 100% 45%),hsl(49 100% 30%))}
+.avatar-bg-50 {background:linear-gradient(hsl(50 100% 45%),hsl(50 100% 30%))}
+.avatar-bg-51 {background:linear-gradient(hsl(51 100% 45%),hsl(51 100% 30%))}
+.avatar-bg-52 {background:linear-gradient(hsl(52 100% 45%),hsl(52 100% 30%))}
+.avatar-bg-53 {background:linear-gradient(hsl(53 100% 45%),hsl(53 100% 30%))}
+.avatar-bg-54 {background:linear-gradient(hsl(54 100% 45%),hsl(54 100% 30%))}
+.avatar-bg-55 {background:linear-gradient(hsl(55 100% 45%),hsl(55 100% 30%))}
+.avatar-bg-56 {background:linear-gradient(hsl(56 100% 45%),hsl(56 100% 30%))}
+.avatar-bg-57 {background:linear-gradient(hsl(57 100% 45%),hsl(57 100% 30%))}
+.avatar-bg-58 {background:linear-gradient(hsl(58 100% 45%),hsl(58 100% 30%))}
+.avatar-bg-59 {background:linear-gradient(hsl(59 100% 45%),hsl(59 100% 30%))}
+.avatar-bg-60 {background:linear-gradient(hsl(60 100% 45%),hsl(60 100% 30%))}
+.avatar-bg-61 {background:linear-gradient(hsl(61 100% 45%),hsl(61 100% 30%))}
+.avatar-bg-62 {background:linear-gradient(hsl(62 100% 45%),hsl(62 100% 30%))}
+.avatar-bg-63 {background:linear-gradient(hsl(63 100% 45%),hsl(63 100% 30%))}
+.avatar-bg-64 {background:linear-gradient(hsl(64 100% 45%),hsl(64 100% 30%))}
+.avatar-bg-65 {background:linear-gradient(hsl(65 100% 45%),hsl(65 100% 30%))}
+.avatar-bg-66 {background:linear-gradient(hsl(66 100% 45%),hsl(66 100% 30%))}
+.avatar-bg-67 {background:linear-gradient(hsl(67 100% 45%),hsl(67 100% 30%))}
+.avatar-bg-68 {background:linear-gradient(hsl(68 100% 45%),hsl(68 100% 30%))}
+.avatar-bg-69 {background:linear-gradient(hsl(69 100% 45%),hsl(69 100% 30%))}
+.avatar-bg-70 {background:linear-gradient(hsl(70 100% 45%),hsl(70 100% 30%))}
+.avatar-bg-71 {background:linear-gradient(hsl(71 100% 45%),hsl(71 100% 30%))}
+.avatar-bg-72 {background:linear-gradient(hsl(72 100% 45%),hsl(72 100% 30%))}
+.avatar-bg-73 {background:linear-gradient(hsl(73 100% 45%),hsl(73 100% 30%))}
+.avatar-bg-74 {background:linear-gradient(hsl(74 100% 45%),hsl(74 100% 30%))}
+.avatar-bg-75 {background:linear-gradient(hsl(75 100% 45%),hsl(75 100% 30%))}
+.avatar-bg-76 {background:linear-gradient(hsl(76 100% 45%),hsl(76 100% 30%))}
+.avatar-bg-77 {background:linear-gradient(hsl(77 100% 45%),hsl(77 100% 30%))}
+.avatar-bg-78 {background:linear-gradient(hsl(78 100% 45%),hsl(78 100% 30%))}
+.avatar-bg-79 {background:linear-gradient(hsl(79 100% 45%),hsl(79 100% 30%))}
+.avatar-bg-80 {background:linear-gradient(hsl(80 100% 45%),hsl(80 100% 30%))}
+.avatar-bg-81 {background:linear-gradient(hsl(81 100% 45%),hsl(81 100% 30%))}
+.avatar-bg-82 {background:linear-gradient(hsl(82 100% 45%),hsl(82 100% 30%))}
+.avatar-bg-83 {background:linear-gradient(hsl(83 100% 45%),hsl(83 100% 30%))}
+.avatar-bg-84 {background:linear-gradient(hsl(84 100% 45%),hsl(84 100% 30%))}
+.avatar-bg-85 {background:linear-gradient(hsl(85 100% 45%),hsl(85 100% 30%))}
+.avatar-bg-86 {background:linear-gradient(hsl(86 100% 45%),hsl(86 100% 30%))}
+.avatar-bg-87 {background:linear-gradient(hsl(87 100% 45%),hsl(87 100% 30%))}
+.avatar-bg-88 {background:linear-gradient(hsl(88 100% 45%),hsl(88 100% 30%))}
+.avatar-bg-89 {background:linear-gradient(hsl(89 100% 45%),hsl(89 100% 30%))}
+.avatar-bg-90 {background:linear-gradient(hsl(90 100% 45%),hsl(90 100% 30%))}
+.avatar-bg-91 {background:linear-gradient(hsl(91 100% 45%),hsl(91 100% 30%))}
+.avatar-bg-92 {background:linear-gradient(hsl(92 100% 45%),hsl(92 100% 30%))}
+.avatar-bg-93 {background:linear-gradient(hsl(93 100% 45%),hsl(93 100% 30%))}
+.avatar-bg-94 {background:linear-gradient(hsl(94 100% 45%),hsl(94 100% 30%))}
+.avatar-bg-95 {background:linear-gradient(hsl(95 100% 45%),hsl(95 100% 30%))}
+.avatar-bg-96 {background:linear-gradient(hsl(96 100% 45%),hsl(96 100% 30%))}
+.avatar-bg-97 {background:linear-gradient(hsl(97 100% 45%),hsl(97 100% 30%))}
+.avatar-bg-98 {background:linear-gradient(hsl(98 100% 45%),hsl(98 100% 30%))}
+.avatar-bg-99 {background:linear-gradient(hsl(99 100% 45%),hsl(99 100% 30%))}
+.avatar-bg-100 {background:linear-gradient(hsl(100 100% 45%),hsl(100 100% 30%))}
+.avatar-bg-101 {background:linear-gradient(hsl(101 100% 45%),hsl(101 100% 30%))}
+.avatar-bg-102 {background:linear-gradient(hsl(102 100% 45%),hsl(102 100% 30%))}
+.avatar-bg-103 {background:linear-gradient(hsl(103 100% 45%),hsl(103 100% 30%))}
+.avatar-bg-104 {background:linear-gradient(hsl(104 100% 45%),hsl(104 100% 30%))}
+.avatar-bg-105 {background:linear-gradient(hsl(105 100% 45%),hsl(105 100% 30%))}
+.avatar-bg-106 {background:linear-gradient(hsl(106 100% 45%),hsl(106 100% 30%))}
+.avatar-bg-107 {background:linear-gradient(hsl(107 100% 45%),hsl(107 100% 30%))}
+.avatar-bg-108 {background:linear-gradient(hsl(108 100% 45%),hsl(108 100% 30%))}
+.avatar-bg-109 {background:linear-gradient(hsl(109 100% 45%),hsl(109 100% 30%))}
+.avatar-bg-110 {background:linear-gradient(hsl(110 100% 45%),hsl(110 100% 30%))}
+.avatar-bg-111 {background:linear-gradient(hsl(111 100% 45%),hsl(111 100% 30%))}
+.avatar-bg-112 {background:linear-gradient(hsl(112 100% 45%),hsl(112 100% 30%))}
+.avatar-bg-113 {background:linear-gradient(hsl(113 100% 45%),hsl(113 100% 30%))}
+.avatar-bg-114 {background:linear-gradient(hsl(114 100% 45%),hsl(114 100% 30%))}
+.avatar-bg-115 {background:linear-gradient(hsl(115 100% 45%),hsl(115 100% 30%))}
+.avatar-bg-116 {background:linear-gradient(hsl(116 100% 45%),hsl(116 100% 30%))}
+.avatar-bg-117 {background:linear-gradient(hsl(117 100% 45%),hsl(117 100% 30%))}
+.avatar-bg-118 {background:linear-gradient(hsl(118 100% 45%),hsl(118 100% 30%))}
+.avatar-bg-119 {background:linear-gradient(hsl(119 100% 45%),hsl(119 100% 30%))}
+.avatar-bg-120 {background:linear-gradient(hsl(120 100% 45%),hsl(120 100% 30%))}
+.avatar-bg-121 {background:linear-gradient(hsl(121 100% 45%),hsl(121 100% 30%))}
+.avatar-bg-122 {background:linear-gradient(hsl(122 100% 45%),hsl(122 100% 30%))}
+.avatar-bg-123 {background:linear-gradient(hsl(123 100% 45%),hsl(123 100% 30%))}
+.avatar-bg-124 {background:linear-gradient(hsl(124 100% 45%),hsl(124 100% 30%))}
+.avatar-bg-125 {background:linear-gradient(hsl(125 100% 45%),hsl(125 100% 30%))}
+.avatar-bg-126 {background:linear-gradient(hsl(126 100% 45%),hsl(126 100% 30%))}
+.avatar-bg-127 {background:linear-gradient(hsl(127 100% 45%),hsl(127 100% 30%))}
+.avatar-bg-128 {background:linear-gradient(hsl(128 100% 45%),hsl(128 100% 30%))}
+.avatar-bg-129 {background:linear-gradient(hsl(129 100% 45%),hsl(129 100% 30%))}
+.avatar-bg-130 {background:linear-gradient(hsl(130 100% 45%),hsl(130 100% 30%))}
+.avatar-bg-131 {background:linear-gradient(hsl(131 100% 45%),hsl(131 100% 30%))}
+.avatar-bg-132 {background:linear-gradient(hsl(132 100% 45%),hsl(132 100% 30%))}
+.avatar-bg-133 {background:linear-gradient(hsl(133 100% 45%),hsl(133 100% 30%))}
+.avatar-bg-134 {background:linear-gradient(hsl(134 100% 45%),hsl(134 100% 30%))}
+.avatar-bg-135 {background:linear-gradient(hsl(135 100% 45%),hsl(135 100% 30%))}
+.avatar-bg-136 {background:linear-gradient(hsl(136 100% 45%),hsl(136 100% 30%))}
+.avatar-bg-137 {background:linear-gradient(hsl(137 100% 45%),hsl(137 100% 30%))}
+.avatar-bg-138 {background:linear-gradient(hsl(138 100% 45%),hsl(138 100% 30%))}
+.avatar-bg-139 {background:linear-gradient(hsl(139 100% 45%),hsl(139 100% 30%))}
+.avatar-bg-140 {background:linear-gradient(hsl(140 100% 45%),hsl(140 100% 30%))}
+.avatar-bg-141 {background:linear-gradient(hsl(141 100% 45%),hsl(141 100% 30%))}
+.avatar-bg-142 {background:linear-gradient(hsl(142 100% 45%),hsl(142 100% 30%))}
+.avatar-bg-143 {background:linear-gradient(hsl(143 100% 45%),hsl(143 100% 30%))}
+.avatar-bg-144 {background:linear-gradient(hsl(144 100% 45%),hsl(144 100% 30%))}
+.avatar-bg-145 {background:linear-gradient(hsl(145 100% 45%),hsl(145 100% 30%))}
+.avatar-bg-146 {background:linear-gradient(hsl(146 100% 45%),hsl(146 100% 30%))}
+.avatar-bg-147 {background:linear-gradient(hsl(147 100% 45%),hsl(147 100% 30%))}
+.avatar-bg-148 {background:linear-gradient(hsl(148 100% 45%),hsl(148 100% 30%))}
+.avatar-bg-149 {background:linear-gradient(hsl(149 100% 45%),hsl(149 100% 30%))}
+.avatar-bg-150 {background:linear-gradient(hsl(150 100% 45%),hsl(150 100% 30%))}
+.avatar-bg-151 {background:linear-gradient(hsl(151 100% 45%),hsl(151 100% 30%))}
+.avatar-bg-152 {background:linear-gradient(hsl(152 100% 45%),hsl(152 100% 30%))}
+.avatar-bg-153 {background:linear-gradient(hsl(153 100% 45%),hsl(153 100% 30%))}
+.avatar-bg-154 {background:linear-gradient(hsl(154 100% 45%),hsl(154 100% 30%))}
+.avatar-bg-155 {background:linear-gradient(hsl(155 100% 45%),hsl(155 100% 30%))}
+.avatar-bg-156 {background:linear-gradient(hsl(156 100% 45%),hsl(156 100% 30%))}
+.avatar-bg-157 {background:linear-gradient(hsl(157 100% 45%),hsl(157 100% 30%))}
+.avatar-bg-158 {background:linear-gradient(hsl(158 100% 45%),hsl(158 100% 30%))}
+.avatar-bg-159 {background:linear-gradient(hsl(159 100% 45%),hsl(159 100% 30%))}
+.avatar-bg-160 {background:linear-gradient(hsl(160 100% 45%),hsl(160 100% 30%))}
+.avatar-bg-161 {background:linear-gradient(hsl(161 100% 45%),hsl(161 100% 30%))}
+.avatar-bg-162 {background:linear-gradient(hsl(162 100% 45%),hsl(162 100% 30%))}
+.avatar-bg-163 {background:linear-gradient(hsl(163 100% 45%),hsl(163 100% 30%))}
+.avatar-bg-164 {background:linear-gradient(hsl(164 100% 45%),hsl(164 100% 30%))}
+.avatar-bg-165 {background:linear-gradient(hsl(165 100% 45%),hsl(165 100% 30%))}
+.avatar-bg-166 {background:linear-gradient(hsl(166 100% 45%),hsl(166 100% 30%))}
+.avatar-bg-167 {background:linear-gradient(hsl(167 100% 45%),hsl(167 100% 30%))}
+.avatar-bg-168 {background:linear-gradient(hsl(168 100% 45%),hsl(168 100% 30%))}
+.avatar-bg-169 {background:linear-gradient(hsl(169 100% 45%),hsl(169 100% 30%))}
+.avatar-bg-170 {background:linear-gradient(hsl(170 100% 45%),hsl(170 100% 30%))}
+.avatar-bg-171 {background:linear-gradient(hsl(171 100% 45%),hsl(171 100% 30%))}
+.avatar-bg-172 {background:linear-gradient(hsl(172 100% 45%),hsl(172 100% 30%))}
+.avatar-bg-173 {background:linear-gradient(hsl(173 100% 45%),hsl(173 100% 30%))}
+.avatar-bg-174 {background:linear-gradient(hsl(174 100% 45%),hsl(174 100% 30%))}
+.avatar-bg-175 {background:linear-gradient(hsl(175 100% 45%),hsl(175 100% 30%))}
+.avatar-bg-176 {background:linear-gradient(hsl(176 100% 45%),hsl(176 100% 30%))}
+.avatar-bg-177 {background:linear-gradient(hsl(177 100% 45%),hsl(177 100% 30%))}
+.avatar-bg-178 {background:linear-gradient(hsl(178 100% 45%),hsl(178 100% 30%))}
+.avatar-bg-179 {background:linear-gradient(hsl(179 100% 45%),hsl(179 100% 30%))}
+.avatar-bg-180 {background:linear-gradient(hsl(180 100% 45%),hsl(180 100% 30%))}
+.avatar-bg-181 {background:linear-gradient(hsl(181 100% 45%),hsl(181 100% 30%))}
+.avatar-bg-182 {background:linear-gradient(hsl(182 100% 45%),hsl(182 100% 30%))}
+.avatar-bg-183 {background:linear-gradient(hsl(183 100% 45%),hsl(183 100% 30%))}
+.avatar-bg-184 {background:linear-gradient(hsl(184 100% 45%),hsl(184 100% 30%))}
+.avatar-bg-185 {background:linear-gradient(hsl(185 100% 45%),hsl(185 100% 30%))}
+.avatar-bg-186 {background:linear-gradient(hsl(186 100% 45%),hsl(186 100% 30%))}
+.avatar-bg-187 {background:linear-gradient(hsl(187 100% 45%),hsl(187 100% 30%))}
+.avatar-bg-188 {background:linear-gradient(hsl(188 100% 45%),hsl(188 100% 30%))}
+.avatar-bg-189 {background:linear-gradient(hsl(189 100% 45%),hsl(189 100% 30%))}
+.avatar-bg-190 {background:linear-gradient(hsl(190 100% 45%),hsl(190 100% 30%))}
+.avatar-bg-191 {background:linear-gradient(hsl(191 100% 45%),hsl(191 100% 30%))}
+.avatar-bg-192 {background:linear-gradient(hsl(192 100% 45%),hsl(192 100% 30%))}
+.avatar-bg-193 {background:linear-gradient(hsl(193 100% 45%),hsl(193 100% 30%))}
+.avatar-bg-194 {background:linear-gradient(hsl(194 100% 45%),hsl(194 100% 30%))}
+.avatar-bg-195 {background:linear-gradient(hsl(195 100% 45%),hsl(195 100% 30%))}
+.avatar-bg-196 {background:linear-gradient(hsl(196 100% 45%),hsl(196 100% 30%))}
+.avatar-bg-197 {background:linear-gradient(hsl(197 100% 45%),hsl(197 100% 30%))}
+.avatar-bg-198 {background:linear-gradient(hsl(198 100% 45%),hsl(198 100% 30%))}
+.avatar-bg-199 {background:linear-gradient(hsl(199 100% 45%),hsl(199 100% 30%))}
+.avatar-bg-200 {background:linear-gradient(hsl(200 100% 45%),hsl(200 100% 30%))}
+.avatar-bg-201 {background:linear-gradient(hsl(201 100% 45%),hsl(201 100% 30%))}
+.avatar-bg-202 {background:linear-gradient(hsl(202 100% 45%),hsl(202 100% 30%))}
+.avatar-bg-203 {background:linear-gradient(hsl(203 100% 45%),hsl(203 100% 30%))}
+.avatar-bg-204 {background:linear-gradient(hsl(204 100% 45%),hsl(204 100% 30%))}
+.avatar-bg-205 {background:linear-gradient(hsl(205 100% 45%),hsl(205 100% 30%))}
+.avatar-bg-206 {background:linear-gradient(hsl(206 100% 45%),hsl(206 100% 30%))}
+.avatar-bg-207 {background:linear-gradient(hsl(207 100% 45%),hsl(207 100% 30%))}
+.avatar-bg-208 {background:linear-gradient(hsl(208 100% 45%),hsl(208 100% 30%))}
+.avatar-bg-209 {background:linear-gradient(hsl(209 100% 45%),hsl(209 100% 30%))}
+.avatar-bg-210 {background:linear-gradient(hsl(210 100% 45%),hsl(210 100% 30%))}
+.avatar-bg-211 {background:linear-gradient(hsl(211 100% 45%),hsl(211 100% 30%))}
+.avatar-bg-212 {background:linear-gradient(hsl(212 100% 45%),hsl(212 100% 30%))}
+.avatar-bg-213 {background:linear-gradient(hsl(213 100% 45%),hsl(213 100% 30%))}
+.avatar-bg-214 {background:linear-gradient(hsl(214 100% 45%),hsl(214 100% 30%))}
+.avatar-bg-215 {background:linear-gradient(hsl(215 100% 45%),hsl(215 100% 30%))}
+.avatar-bg-216 {background:linear-gradient(hsl(216 100% 45%),hsl(216 100% 30%))}
+.avatar-bg-217 {background:linear-gradient(hsl(217 100% 45%),hsl(217 100% 30%))}
+.avatar-bg-218 {background:linear-gradient(hsl(218 100% 45%),hsl(218 100% 30%))}
+.avatar-bg-219 {background:linear-gradient(hsl(219 100% 45%),hsl(219 100% 30%))}
+.avatar-bg-220 {background:linear-gradient(hsl(220 100% 45%),hsl(220 100% 30%))}
+.avatar-bg-221 {background:linear-gradient(hsl(221 100% 45%),hsl(221 100% 30%))}
+.avatar-bg-222 {background:linear-gradient(hsl(222 100% 45%),hsl(222 100% 30%))}
+.avatar-bg-223 {background:linear-gradient(hsl(223 100% 45%),hsl(223 100% 30%))}
+.avatar-bg-224 {background:linear-gradient(hsl(224 100% 45%),hsl(224 100% 30%))}
+.avatar-bg-225 {background:linear-gradient(hsl(225 100% 45%),hsl(225 100% 30%))}
+.avatar-bg-226 {background:linear-gradient(hsl(226 100% 45%),hsl(226 100% 30%))}
+.avatar-bg-227 {background:linear-gradient(hsl(227 100% 45%),hsl(227 100% 30%))}
+.avatar-bg-228 {background:linear-gradient(hsl(228 100% 45%),hsl(228 100% 30%))}
+.avatar-bg-229 {background:linear-gradient(hsl(229 100% 45%),hsl(229 100% 30%))}
+.avatar-bg-230 {background:linear-gradient(hsl(230 100% 45%),hsl(230 100% 30%))}
+.avatar-bg-231 {background:linear-gradient(hsl(231 100% 45%),hsl(231 100% 30%))}
+.avatar-bg-232 {background:linear-gradient(hsl(232 100% 45%),hsl(232 100% 30%))}
+.avatar-bg-233 {background:linear-gradient(hsl(233 100% 45%),hsl(233 100% 30%))}
+.avatar-bg-234 {background:linear-gradient(hsl(234 100% 45%),hsl(234 100% 30%))}
+.avatar-bg-235 {background:linear-gradient(hsl(235 100% 45%),hsl(235 100% 30%))}
+.avatar-bg-236 {background:linear-gradient(hsl(236 100% 45%),hsl(236 100% 30%))}
+.avatar-bg-237 {background:linear-gradient(hsl(237 100% 45%),hsl(237 100% 30%))}
+.avatar-bg-238 {background:linear-gradient(hsl(238 100% 45%),hsl(238 100% 30%))}
+.avatar-bg-239 {background:linear-gradient(hsl(239 100% 45%),hsl(239 100% 30%))}
+.avatar-bg-240 {background:linear-gradient(hsl(240 100% 45%),hsl(240 100% 30%))}
+.avatar-bg-241 {background:linear-gradient(hsl(241 100% 45%),hsl(241 100% 30%))}
+.avatar-bg-242 {background:linear-gradient(hsl(242 100% 45%),hsl(242 100% 30%))}
+.avatar-bg-243 {background:linear-gradient(hsl(243 100% 45%),hsl(243 100% 30%))}
+.avatar-bg-244 {background:linear-gradient(hsl(244 100% 45%),hsl(244 100% 30%))}
+.avatar-bg-245 {background:linear-gradient(hsl(245 100% 45%),hsl(245 100% 30%))}
+.avatar-bg-246 {background:linear-gradient(hsl(246 100% 45%),hsl(246 100% 30%))}
+.avatar-bg-247 {background:linear-gradient(hsl(247 100% 45%),hsl(247 100% 30%))}
+.avatar-bg-248 {background:linear-gradient(hsl(248 100% 45%),hsl(248 100% 30%))}
+.avatar-bg-249 {background:linear-gradient(hsl(249 100% 45%),hsl(249 100% 30%))}
+.avatar-bg-250 {background:linear-gradient(hsl(250 100% 45%),hsl(250 100% 30%))}
+.avatar-bg-251 {background:linear-gradient(hsl(251 100% 45%),hsl(251 100% 30%))}
+.avatar-bg-252 {background:linear-gradient(hsl(252 100% 45%),hsl(252 100% 30%))}
+.avatar-bg-253 {background:linear-gradient(hsl(253 100% 45%),hsl(253 100% 30%))}
+.avatar-bg-254 {background:linear-gradient(hsl(254 100% 45%),hsl(254 100% 30%))}
+.avatar-bg-255 {background:linear-gradient(hsl(255 100% 45%),hsl(255 100% 30%))}
+.avatar-bg-256 {background:linear-gradient(hsl(256 100% 45%),hsl(256 100% 30%))}
+.avatar-bg-257 {background:linear-gradient(hsl(257 100% 45%),hsl(257 100% 30%))}
+.avatar-bg-258 {background:linear-gradient(hsl(258 100% 45%),hsl(258 100% 30%))}
+.avatar-bg-259 {background:linear-gradient(hsl(259 100% 45%),hsl(259 100% 30%))}
+.avatar-bg-260 {background:linear-gradient(hsl(260 100% 45%),hsl(260 100% 30%))}
+.avatar-bg-261 {background:linear-gradient(hsl(261 100% 45%),hsl(261 100% 30%))}
+.avatar-bg-262 {background:linear-gradient(hsl(262 100% 45%),hsl(262 100% 30%))}
+.avatar-bg-263 {background:linear-gradient(hsl(263 100% 45%),hsl(263 100% 30%))}
+.avatar-bg-264 {background:linear-gradient(hsl(264 100% 45%),hsl(264 100% 30%))}
+.avatar-bg-265 {background:linear-gradient(hsl(265 100% 45%),hsl(265 100% 30%))}
+.avatar-bg-266 {background:linear-gradient(hsl(266 100% 45%),hsl(266 100% 30%))}
+.avatar-bg-267 {background:linear-gradient(hsl(267 100% 45%),hsl(267 100% 30%))}
+.avatar-bg-268 {background:linear-gradient(hsl(268 100% 45%),hsl(268 100% 30%))}
+.avatar-bg-269 {background:linear-gradient(hsl(269 100% 45%),hsl(269 100% 30%))}
+.avatar-bg-270 {background:linear-gradient(hsl(270 100% 45%),hsl(270 100% 30%))}
+.avatar-bg-271 {background:linear-gradient(hsl(271 100% 45%),hsl(271 100% 30%))}
+.avatar-bg-272 {background:linear-gradient(hsl(272 100% 45%),hsl(272 100% 30%))}
+.avatar-bg-273 {background:linear-gradient(hsl(273 100% 45%),hsl(273 100% 30%))}
+.avatar-bg-274 {background:linear-gradient(hsl(274 100% 45%),hsl(274 100% 30%))}
+.avatar-bg-275 {background:linear-gradient(hsl(275 100% 45%),hsl(275 100% 30%))}
+.avatar-bg-276 {background:linear-gradient(hsl(276 100% 45%),hsl(276 100% 30%))}
+.avatar-bg-277 {background:linear-gradient(hsl(277 100% 45%),hsl(277 100% 30%))}
+.avatar-bg-278 {background:linear-gradient(hsl(278 100% 45%),hsl(278 100% 30%))}
+.avatar-bg-279 {background:linear-gradient(hsl(279 100% 45%),hsl(279 100% 30%))}
+.avatar-bg-280 {background:linear-gradient(hsl(280 100% 45%),hsl(280 100% 30%))}
+.avatar-bg-281 {background:linear-gradient(hsl(281 100% 45%),hsl(281 100% 30%))}
+.avatar-bg-282 {background:linear-gradient(hsl(282 100% 45%),hsl(282 100% 30%))}
+.avatar-bg-283 {background:linear-gradient(hsl(283 100% 45%),hsl(283 100% 30%))}
+.avatar-bg-284 {background:linear-gradient(hsl(284 100% 45%),hsl(284 100% 30%))}
+.avatar-bg-285 {background:linear-gradient(hsl(285 100% 45%),hsl(285 100% 30%))}
+.avatar-bg-286 {background:linear-gradient(hsl(286 100% 45%),hsl(286 100% 30%))}
+.avatar-bg-287 {background:linear-gradient(hsl(287 100% 45%),hsl(287 100% 30%))}
+.avatar-bg-288 {background:linear-gradient(hsl(288 100% 45%),hsl(288 100% 30%))}
+.avatar-bg-289 {background:linear-gradient(hsl(289 100% 45%),hsl(289 100% 30%))}
+.avatar-bg-290 {background:linear-gradient(hsl(290 100% 45%),hsl(290 100% 30%))}
+.avatar-bg-291 {background:linear-gradient(hsl(291 100% 45%),hsl(291 100% 30%))}
+.avatar-bg-292 {background:linear-gradient(hsl(292 100% 45%),hsl(292 100% 30%))}
+.avatar-bg-293 {background:linear-gradient(hsl(293 100% 45%),hsl(293 100% 30%))}
+.avatar-bg-294 {background:linear-gradient(hsl(294 100% 45%),hsl(294 100% 30%))}
+.avatar-bg-295 {background:linear-gradient(hsl(295 100% 45%),hsl(295 100% 30%))}
+.avatar-bg-296 {background:linear-gradient(hsl(296 100% 45%),hsl(296 100% 30%))}
+.avatar-bg-297 {background:linear-gradient(hsl(297 100% 45%),hsl(297 100% 30%))}
+.avatar-bg-298 {background:linear-gradient(hsl(298 100% 45%),hsl(298 100% 30%))}
+.avatar-bg-299 {background:linear-gradient(hsl(299 100% 45%),hsl(299 100% 30%))}
+.avatar-bg-300 {background:linear-gradient(hsl(300 100% 45%),hsl(300 100% 30%))}
+.avatar-bg-301 {background:linear-gradient(hsl(301 100% 45%),hsl(301 100% 30%))}
+.avatar-bg-302 {background:linear-gradient(hsl(302 100% 45%),hsl(302 100% 30%))}
+.avatar-bg-303 {background:linear-gradient(hsl(303 100% 45%),hsl(303 100% 30%))}
+.avatar-bg-304 {background:linear-gradient(hsl(304 100% 45%),hsl(304 100% 30%))}
+.avatar-bg-305 {background:linear-gradient(hsl(305 100% 45%),hsl(305 100% 30%))}
+.avatar-bg-306 {background:linear-gradient(hsl(306 100% 45%),hsl(306 100% 30%))}
+.avatar-bg-307 {background:linear-gradient(hsl(307 100% 45%),hsl(307 100% 30%))}
+.avatar-bg-308 {background:linear-gradient(hsl(308 100% 45%),hsl(308 100% 30%))}
+.avatar-bg-309 {background:linear-gradient(hsl(309 100% 45%),hsl(309 100% 30%))}
+.avatar-bg-310 {background:linear-gradient(hsl(310 100% 45%),hsl(310 100% 30%))}
+.avatar-bg-311 {background:linear-gradient(hsl(311 100% 45%),hsl(311 100% 30%))}
+.avatar-bg-312 {background:linear-gradient(hsl(312 100% 45%),hsl(312 100% 30%))}
+.avatar-bg-313 {background:linear-gradient(hsl(313 100% 45%),hsl(313 100% 30%))}
+.avatar-bg-314 {background:linear-gradient(hsl(314 100% 45%),hsl(314 100% 30%))}
+.avatar-bg-315 {background:linear-gradient(hsl(315 100% 45%),hsl(315 100% 30%))}
+.avatar-bg-316 {background:linear-gradient(hsl(316 100% 45%),hsl(316 100% 30%))}
+.avatar-bg-317 {background:linear-gradient(hsl(317 100% 45%),hsl(317 100% 30%))}
+.avatar-bg-318 {background:linear-gradient(hsl(318 100% 45%),hsl(318 100% 30%))}
+.avatar-bg-319 {background:linear-gradient(hsl(319 100% 45%),hsl(319 100% 30%))}
+.avatar-bg-320 {background:linear-gradient(hsl(320 100% 45%),hsl(320 100% 30%))}
+.avatar-bg-321 {background:linear-gradient(hsl(321 100% 45%),hsl(321 100% 30%))}
+.avatar-bg-322 {background:linear-gradient(hsl(322 100% 45%),hsl(322 100% 30%))}
+.avatar-bg-323 {background:linear-gradient(hsl(323 100% 45%),hsl(323 100% 30%))}
+.avatar-bg-324 {background:linear-gradient(hsl(324 100% 45%),hsl(324 100% 30%))}
+.avatar-bg-325 {background:linear-gradient(hsl(325 100% 45%),hsl(325 100% 30%))}
+.avatar-bg-326 {background:linear-gradient(hsl(326 100% 45%),hsl(326 100% 30%))}
+.avatar-bg-327 {background:linear-gradient(hsl(327 100% 45%),hsl(327 100% 30%))}
+.avatar-bg-328 {background:linear-gradient(hsl(328 100% 45%),hsl(328 100% 30%))}
+.avatar-bg-329 {background:linear-gradient(hsl(329 100% 45%),hsl(329 100% 30%))}
+.avatar-bg-330 {background:linear-gradient(hsl(330 100% 45%),hsl(330 100% 30%))}
+.avatar-bg-331 {background:linear-gradient(hsl(331 100% 45%),hsl(331 100% 30%))}
+.avatar-bg-332 {background:linear-gradient(hsl(332 100% 45%),hsl(332 100% 30%))}
+.avatar-bg-333 {background:linear-gradient(hsl(333 100% 45%),hsl(333 100% 30%))}
+.avatar-bg-334 {background:linear-gradient(hsl(334 100% 45%),hsl(334 100% 30%))}
+.avatar-bg-335 {background:linear-gradient(hsl(335 100% 45%),hsl(335 100% 30%))}
+.avatar-bg-336 {background:linear-gradient(hsl(336 100% 45%),hsl(336 100% 30%))}
+.avatar-bg-337 {background:linear-gradient(hsl(337 100% 45%),hsl(337 100% 30%))}
+.avatar-bg-338 {background:linear-gradient(hsl(338 100% 45%),hsl(338 100% 30%))}
+.avatar-bg-339 {background:linear-gradient(hsl(339 100% 45%),hsl(339 100% 30%))}
+.avatar-bg-340 {background:linear-gradient(hsl(340 100% 45%),hsl(340 100% 30%))}
+.avatar-bg-341 {background:linear-gradient(hsl(341 100% 45%),hsl(341 100% 30%))}
+.avatar-bg-342 {background:linear-gradient(hsl(342 100% 45%),hsl(342 100% 30%))}
+.avatar-bg-343 {background:linear-gradient(hsl(343 100% 45%),hsl(343 100% 30%))}
+.avatar-bg-344 {background:linear-gradient(hsl(344 100% 45%),hsl(344 100% 30%))}
+.avatar-bg-345 {background:linear-gradient(hsl(345 100% 45%),hsl(345 100% 30%))}
+.avatar-bg-346 {background:linear-gradient(hsl(346 100% 45%),hsl(346 100% 30%))}
+.avatar-bg-347 {background:linear-gradient(hsl(347 100% 45%),hsl(347 100% 30%))}
+.avatar-bg-348 {background:linear-gradient(hsl(348 100% 45%),hsl(348 100% 30%))}
+.avatar-bg-349 {background:linear-gradient(hsl(349 100% 45%),hsl(349 100% 30%))}
+.avatar-bg-350 {background:linear-gradient(hsl(350 100% 45%),hsl(350 100% 30%))}
+.avatar-bg-351 {background:linear-gradient(hsl(351 100% 45%),hsl(351 100% 30%))}
+.avatar-bg-352 {background:linear-gradient(hsl(352 100% 45%),hsl(352 100% 30%))}
+.avatar-bg-353 {background:linear-gradient(hsl(353 100% 45%),hsl(353 100% 30%))}
+.avatar-bg-354 {background:linear-gradient(hsl(354 100% 45%),hsl(354 100% 30%))}
+.avatar-bg-355 {background:linear-gradient(hsl(355 100% 45%),hsl(355 100% 30%))}
+.avatar-bg-356 {background:linear-gradient(hsl(356 100% 45%),hsl(356 100% 30%))}
+.avatar-bg-357 {background:linear-gradient(hsl(357 100% 45%),hsl(357 100% 30%))}
+.avatar-bg-358 {background:linear-gradient(hsl(358 100% 45%),hsl(358 100% 30%))}
+.avatar-bg-359 {background:linear-gradient(hsl(359 100% 45%),hsl(359 100% 30%))}

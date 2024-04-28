@@ -57,7 +57,7 @@ export default async function EventParticipantsPage({ params }: { params: { id: 
 					</div>
 				</div>
 			</div>
-			<Link href={`/${eventId}`} className="bg-button dark:hover:text-darkactive dark:bg-darkcardBG ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+			<Link href={`/${eventId}`} className="md:active:scale-90 active:scale-50 duration-300 bg-button dark:hover:text-darkactive dark:bg-darkcardBG ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
 		</>
 	)
 }

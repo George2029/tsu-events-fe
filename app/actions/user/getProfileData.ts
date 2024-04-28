@@ -1,8 +1,8 @@
 'use server'
 
-import type { SafeUser } from '@/app/types/user/safeUser.type';
+import type { UserSession } from '@/app/types/user/userSession.type';
 
-export default async function getProfileData({ name, value }: { name: string, value: string }): Promise<SafeUser | boolean> {
+export default async function getProfileData({ name, value }: { name: string, value: string }): Promise<UserSession | boolean> {
 
 	let response: any;
 
@@ -21,7 +21,7 @@ export default async function getProfileData({ name, value }: { name: string, va
 
 	if (response.ok) {
 		console.log(`getProfileData: success`);
-		let json: SafeUser = await response.json();
+		let json = await response.json() as UserSession;
 		return json;
 	} else {
 		console.log(`getProfileData: failure`);

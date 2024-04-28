@@ -5,17 +5,7 @@ import logOut from '@/app/actions/user/logOut';
 import getProfileData from '@/app/actions/user/getProfileData';
 import { VerifiedIcon, UnverifiedIcon, VisitsIcon, LevelIcon, Trophy, UserDataIcon, LogOutIcon, EditIcon } from '@/app/ui/icons';
 import { UserStatus } from '@/app/types/user/enums/userStatus.enum';
-
-function EventSimpleField({ props }: { props: { title: string, value: string } }) {
-	let { title, value } = props;
-	return (
-		<div className="p-2 rounded-lg">
-			<div className="text-sm font-semibold">{title}</div>
-			<div>{value}</div>
-		</div>
-	)
-}
-
+import EventSimpleField from './EventSimpleField';
 
 export default async function AccountPage() {
 
@@ -25,40 +15,50 @@ export default async function AccountPage() {
 
 	if (!sid) redirect('/signin');
 
+	let t1 = performance.now();
+
 	let user = await getProfileData(sid);
+
+	let t2 = performance.now();
+
+	console.log(t2 - t1);
 
 	if (user === false || user === true) redirect('/signin');
 
-	const { id, username, email, fullName, status, role, visits, level, wins } = user;
-	let icon = status === UserStatus.VERIFIED ? VerifiedIcon : UnverifiedIcon;
+	const { hue, username, email, fullName, status, role, visits, level, wins } = user;
+	let letter = username[0].toUpperCase();
+	console.log(hue);
+
+	let verifiedEmailIcon = status === UserStatus.VERIFIED ? VerifiedIcon : UnverifiedIcon;
 
 	return (
-		<div className="px-5 mt-5 w-full max-w-2xl flex flex-col item-center">
-			<div className="ring-1 ring-border dark:ring-darkborder p-4 w-full gap-2 flex flex-col shadow-lg rounded-md bg-cardBG dark:bg-darkcardBG">
-				<div className="rounded-full bg-slate-400 w-20 h-20"></div>
+		<div className="px-5 md:mt-5 mt-16 w-full max-w-2xl flex flex-col item-center">
+			<div className="ring-1 md:items-center md:grid gap-y-4 md:grid-cols-2 ring-border dark:ring-darkborder p-4 w-full gap-2 flex flex-col shadow-lg rounded-md bg-cardBG dark:bg-darkcardBG">
+				<div id="avatar" className={`rounded-full avatar-bg-${hue} ring-1 ring-border dark:ring-darkborder w-20 h-20 text-3xl font-bold flex justify-center items-center`}><span className="drop-shadow-md">{letter}</span></div>
+				<div></div>
+				<div className="p-2 flex gap-3 rounded-lg">
+					<div className="flex gap-1">
+						<div>{level}</div>
+						<div className="dark:text-darkspecialIcons text-specialIcons">{LevelIcon}</div>
+					</div>
+					<div className="flex gap-1">
+						<div>{wins}</div>
+						<div className="dark:text-darkspecialIcons text-specialIcons">{Trophy}</div>
+					</div>
+					<div className="flex gap-1">
+						<div>{visits}</div>
+						<div className="dark:text-darkspecialIcons text-specialIcons">{VisitsIcon}</div>
+					</div>
+				</div>
 				<EventSimpleField props={{ title: "Username", value: username }} />
 				<div className="p-2 flex align-center justify-between rounded-lg">
 					<div>
 						<div className="text-sm font-semibold">Email</div>
 						<div>{email}</div>
 					</div>
-					<div className="self-center">{icon}</div>
+					<div className="text-specialIcons dark:text-darkspecialIcons self-center">{verifiedEmailIcon}</div>
 				</div>
 				<EventSimpleField props={{ title: "Full Name", value: fullName || 'N/A' }} />
-				<div className="p-2 flex gap-3 rounded-lg">
-					<div className="flex gap-1">
-						<div>{level}</div>
-						<div>{LevelIcon}</div>
-					</div>
-					<div className="flex gap-1">
-						<div>{wins}</div>
-						<div>{Trophy}</div>
-					</div>
-					<div className="flex gap-1">
-						<div>{visits}</div>
-						<div>{VisitsIcon}</div>
-					</div>
-				</div>
 			</div>
 			<div className="text-sm space-y-4">
 				<div className="mt-4">

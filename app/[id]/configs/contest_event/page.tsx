@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import getAllConfigsByEventType from '@/app/actions/configs/getAllConfigsByEventType';
+import Link from 'next/link';
+import { GoBackIcon } from '@/app/ui/icons';
 
 export default async function ContestEventConfigsPage({ params }: { params: { id: string } }) {
 	let eventId = +params.id;
@@ -8,7 +10,7 @@ export default async function ContestEventConfigsPage({ params }: { params: { id
 	let configs = await getAllConfigsByEventType(eventId, EventType.CONTEST_EVENT);
 	console.log(configs);
 	return (
-		<div className="mt-20 px-6 max-w-xl w-full">
+		<>
 			<div className="p-3 ring-1 ring-border dark:ring-darkborder bg-cardBG dark:bg-darkcardBG rounded-lg">
 				<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
 					<div className="text-center grow overflow-scroll">Information about contest(s) of the event</div>
@@ -18,6 +20,7 @@ export default async function ContestEventConfigsPage({ params }: { params: { id
 					}
 				</div>
 			</div>
-		</div>
+			<Link href={`/${eventId}`} className="w-fit md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+		</>
 	)
 }

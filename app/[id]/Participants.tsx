@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { UserGroup } from '@/app/ui/icons';
 
 const NumberOfParticipants = dynamic(() => import('./NumberOfParticipants'), {
-	loading: () => <div className="w-6 h-6 rounded-lg animate-pulse bg-neutral-800"></div>
+	loading: () => <div className="w-6 h-6 rounded-lg animate-pulse bg-sky-200 dark:bg-neutral-800"></div>
 })
 
 const Book = dynamic(() => import('./Book'), {
-	loading: () => <div className="w-10 h-7 rounded-lg animate-pulse bg-neutral-800"></div>
+	loading: () => <div className="w-10 h-7 rounded-lg animate-pulse bg-sky-200 dark:bg-neutral-800"></div>
 })
 
 export default function Participants({ props }: { props: { placesTotal: number, eventId: number } }) {
@@ -28,7 +28,7 @@ export default function Participants({ props }: { props: { placesTotal: number, 
 						<div className="self-center">
 							<NumberOfParticipants props={{ eventId }} />
 						</div>
-						<Link href={`/${eventId}/participants`} className="text-specialIcons dark:text-darkspecialIcons cursor-pointer self-center">{UserGroup}</Link>
+						<Link href={`/${eventId}/participants`} className="md:active:scale-90 active:scale-50 duration-300 text-specialIcons dark:text-darkspecialIcons cursor-pointer self-center">{UserGroup}</Link>
 					</div>
 				</div>
 				<Book props={{ eventId }} />
