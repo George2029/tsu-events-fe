@@ -38,7 +38,7 @@ export default async function Page(
 		type,
 		title,
 		location,
-		moderator,
+		moderatorId,
 		placesTotal,
 		status,
 		startTime,
@@ -78,9 +78,9 @@ export default async function Page(
 	}
 
 	return (
-		<>
-			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder px-3 max-w-xl w-full">
-				<div className="p-3 rounded-lg">
+		<div className="px-5 flex flex-col">
+			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2 max-w-xl w-full">
+				<div className="">
 					<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
 						<div className="text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
 						<div className="flex gap-2 self-center">
@@ -92,7 +92,6 @@ export default async function Page(
 						<EventSimpleField props={{ title: 'Location', value: location }} />
 						{description && <EventSimpleField props={{ title: 'Description', value: description }} />}
 						<EventSimpleField props={{ title: 'Starts at', value: eventStartTime }} />
-						<EventSimpleField props={{ title: 'Moderator', value: moderator }} />
 						<Participants props={{ placesTotal, eventId: id }} />
 						<Feedbacks props={{ eventId: id }} />
 						<EventConfigs props={{ eventId: id, type }} />
@@ -100,8 +99,8 @@ export default async function Page(
 					</div>
 				</div>
 			</div>
-			<Link href="/" className="md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
-		</>
+			<Link href="/" className="w-fit self-end md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+		</div>
 	)
 }
 

@@ -42,8 +42,8 @@ export default async function EventParticipantsPage({ params }: { params: { id: 
 	let participants = await getAllParticipants(eventId);
 	console.log(participants);
 	return (
-		<>
-			<div className="rounded-lg mt-20 px-6 max-w-xl w-full dark:bg-darkcardBG bg-cardBG ring-1 ring-border dark:ring-darkborder">
+		<div className="px-5 max-w-xl w-full mt-20 flex flex-col">
+			<div className="rounded-lg dark:bg-darkcardBG bg-cardBG ring-1 ring-border dark:ring-darkborder">
 				<div className="p-3">
 					<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
 						<div className="text-center grow overflow-scroll">{title}</div>
@@ -57,7 +57,7 @@ export default async function EventParticipantsPage({ params }: { params: { id: 
 					</div>
 				</div>
 			</div>
-			<Link href={`/${eventId}`} className="md:active:scale-90 active:scale-50 duration-300 bg-button dark:hover:text-darkactive dark:bg-darkcardBG ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
-		</>
+			<Link href={`/${eventId}`} className="self-end md:active:scale-90 active:scale-50 duration-300 bg-button dark:hover:text-darkactive dark:bg-darkcardBG ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+		</div>
 	)
 }

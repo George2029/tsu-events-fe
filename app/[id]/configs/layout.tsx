@@ -5,7 +5,7 @@ export default function({
 
 }>) {
 	return (
-		<div className="mt-20 px-6 max-w-xl w-full">
+		<div className="mt-20 px-5 max-w-xl w-full">
 			{children}
 		</div>
 	)
