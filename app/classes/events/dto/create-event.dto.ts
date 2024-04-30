@@ -18,10 +18,6 @@ export class CreateEventDto {
 	@IsString()
 	description?: string;
 
-	@IsString()
-	@IsNotEmpty()
-	moderator: string;
-
 	@IsInt()
 	placesTotal: number = 10;
 
@@ -37,7 +33,6 @@ export class CreateEventDto {
 		title: string,
 		type: EventType,
 		location: string,
-		moderator: string,
 		placesTotal: number,
 		startTime: Date,
 		endTime: Date,
@@ -47,7 +42,6 @@ export class CreateEventDto {
 		this.type = type;
 		this.location = location;
 		this.description = description;
-		this.moderator = moderator;
 		this.placesTotal = placesTotal;
 		this.startTime = startTime;
 		this.endTime = endTime;

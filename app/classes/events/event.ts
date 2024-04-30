@@ -1,4 +1,5 @@
 import { EventType } from '@/app/ui/events/enums/eventType.enum';
+import { Type } from 'class-transformer';
 import { EventStatus } from '@/app/ui/events/enums/eventStatus.enum';
 
 export class Event {
@@ -6,14 +7,24 @@ export class Event {
 	type: EventType;
 	title: string;
 	location: string;
-	moderator: string;
+	moderatorId: number;
 	placesTotal: number;
 	status: EventStatus;
+
+	@Type(() => Date)
 	startTime: Date;
+
+	@Type(() => Date)
 	endTime: Date;
+
 	rating: number;
+
+	@Type(() => Date)
 	createdAt: Date;
+
+	@Type(() => Date)
 	updatedAt: Date;
+
 	description?: string;
 
 	constructor(
@@ -21,7 +32,7 @@ export class Event {
 		type: EventType,
 		title: string,
 		location: string,
-		moderator: string,
+		moderatorId: number,
 		placesTotal: number,
 		status: EventStatus,
 		startTime: Date,
@@ -35,7 +46,7 @@ export class Event {
 		this.type = type;
 		this.title = title;
 		this.location = location;
-		this.moderator = moderator;
+		this.moderatorId = moderatorId;
 		this.placesTotal = placesTotal;
 		this.status = status;
 		this.startTime = startTime;
@@ -44,6 +55,42 @@ export class Event {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.description = description;
+	}
+}
+
+export class EventPreview {
+	id: number;
+
+	userId: number;
+
+	type: EventType;
+
+	title: string;
+
+	location: string;
+
+	@Type(() => Date)
+	createdAt: Date;
+
+	@Type(() => Date)
+	startTime: Date;
+
+	constructor(
+		id: number,
+		userId: number,
+		type: EventType,
+		title: string,
+		location: string,
+		startTime: Date,
+		createdAt: Date,
+	) {
+		this.id = id;
+		this.userId = userId;
+		this.type = type;
+		this.title = title;
+		this.location = location;
+		this.startTime = startTime;
+		this.createdAt = createdAt;
 	}
 }
 

@@ -10,8 +10,8 @@ export class CreateMovieEventConfigDto {
 	title: string;
 
 	@IsOptional()
-	@IsString()
 	@IsNotEmpty()
+	@IsString()
 	description?: string;
 
 	@IsString()

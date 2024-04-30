@@ -16,7 +16,6 @@ import Description from './createEvent/Description';
 import Location from './createEvent/Location';
 import Type from './createEvent/Type';
 import EndTime from './createEvent/EndTime';
-import Moderator from './createEvent/Moderator';
 import PlacesTotal from './createEvent/PlacesTotal';
 import StartTime from './createEvent/StartTime';
 
@@ -42,7 +41,6 @@ export default function CreateOneEvent() {
 				<CustomEventConfig props={{ eventType }} />
 				<Location />
 				<PlacesTotal />
-				<Moderator />
 				<StartTime props={{ normalizedTimeString }} />
 				<EndTime props={{ normalizedTimeString }} />
 			</div>

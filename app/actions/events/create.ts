@@ -25,7 +25,6 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 	let location = formData.get('location')?.toString().trim();
 	let description = formData.get('description')?.toString().trim();
 	let type = formData.get('type')?.toString().trim();
-	let moderator = formData.get('moderator')?.toString().trim();
 	let placesTotal = Number(formData.get('placesTotal'));
 	let startTime = formData.get('startTime')?.toString().trim();
 	let endTime = formData.get('endTime')?.toString().trim();
@@ -35,7 +34,6 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 		location,
 		type,
 		description,
-		moderator,
 		placesTotal,
 		startTime,
 		endTime

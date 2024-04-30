@@ -8,7 +8,7 @@ let Title = ({ props }: { props: { id: number } }) => {
 				name={`movieConfigTitle-${id}`}
 				type="text"
 				autoComplete="title"
-				className="mt-1 rounded-md dark:bg-gray-700"
+				className="mt-1 rounded-md"
 				placeholder="Some Event"
 				maxLength={50}
 				required

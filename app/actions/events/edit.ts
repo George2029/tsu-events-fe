@@ -41,11 +41,6 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 		updateEventDto.type = type;
 	}
 
-	let moderator = formData.get('moderator')?.toString().trim();
-	if (moderator) {
-		updateEventDto.moderator = moderator;
-	}
-
 	let placesTotal = Number(formData.get('placesTotal'));
 	if (placesTotal) {
 		updateEventDto.placesTotal = placesTotal;

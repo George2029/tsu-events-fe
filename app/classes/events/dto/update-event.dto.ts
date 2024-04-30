@@ -24,11 +24,6 @@ export class UpdateEventDto {
 	description?: string;
 
 	@IsOptional()
-	@IsNotEmpty()
-	@IsString()
-	moderator?: string;
-
-	@IsOptional()
 	@IsInt()
 	placesTotal?: number;
 
@@ -51,7 +46,6 @@ export class UpdateEventDto {
 		description?: string,
 		location?: string,
 		type?: EventType,
-		moderator?: string,
 		placesTotal?: number,
 		status?: EventStatus,
 		startTime?: Date,
@@ -60,7 +54,6 @@ export class UpdateEventDto {
 		this.title = title;
 		this.description = description;
 		this.location = location;
-		this.moderator = moderator;
 		this.type = type;
 		this.placesTotal = placesTotal;
 		this.status = status;

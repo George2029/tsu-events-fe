@@ -1,9 +1,23 @@
 'use client'
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { signIn } from '@/app/actions/user/signin';
+import Link from 'next/link';
 
 const initState = {
 	message: ''
+}
+
+function SignInButton() {
+	const { pending } = useFormStatus();
+	return (
+		<button
+			type="submit"
+			disabled={pending}
+			className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+		>
+			{pending ? "Loading..." : "Sign in"}
+		</button>
+	)
 }
 
 export default function SignInPage() {
@@ -45,9 +59,9 @@ export default function SignInPage() {
 									Password
 								</label>
 								<div className="text-sm">
-									<a href="/account/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+									<Link href="/account/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
 										Forgot password?
-									</a>
+									</Link>
 								</div>
 							</div>
 							<div className="mt-2">
@@ -66,12 +80,7 @@ export default function SignInPage() {
 							<div className="p-2">
 								{state?.message}
 							</div>
-							<button
-								type="submit"
-								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-							>
-								Sign in
-							</button>
+							<SignInButton />
 						</div>
 					</form>
 					<div className="text-sm mt-5">

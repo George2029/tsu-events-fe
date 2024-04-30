@@ -56,9 +56,9 @@ export default async function Page(
 		minute: "2-digit"
 	}
 
-	let eventStartTime = DateTime.fromJSDate(new Date(startTime)).toLocaleString(myTimeConfig)
-	let createdAtTime = DateTime.fromJSDate(new Date(createdAt)).toLocaleString(DateTime.DATE_SHORT);
-	let eventEndTime = DateTime.fromJSDate(new Date(endTime)).toLocaleString(myTimeConfig);
+	let eventStartTime = DateTime.fromJSDate(startTime).toLocaleString(myTimeConfig)
+	let createdAtTime = DateTime.fromJSDate(createdAt).toLocaleString(DateTime.DATE_SHORT);
+	let eventEndTime = DateTime.fromJSDate(endTime).toLocaleString(myTimeConfig);
 
 	let eventIcon: any;
 

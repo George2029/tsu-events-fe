@@ -13,7 +13,7 @@ export default function Type({ props }: { props: { existingValue: EventType } })
 				type="radio"
 				className={`hidden peer/MOVIE_EVENT`}
 			/>
-			<label htmlFor={"MOVIE_EVENT"} className={`mt-1 inline-block peer-checked/MOVIE_EVENT:text-selected text-sm leading-8`}>
+			<label htmlFor={"MOVIE_EVENT"} className={`ml-2 inline-block peer-checked/MOVIE_EVENT:text-specialIcons dark:peer-checked/MOVIE_EVENT:text-darkspecialIcons text-sm leading-8`}>
 				{MovieIcon}
 			</label>
 			<input
@@ -23,7 +23,7 @@ export default function Type({ props }: { props: { existingValue: EventType } })
 				type="radio"
 				className={`hidden peer/BOARD_GAMES_EVENT`}
 			/>
-			<label htmlFor={"BOARD_GAMES_EVENT"} className={`ml-2 inline-block peer-checked/BOARD_GAMES_EVENT:text-selected text-sm leading-8`}>
+			<label htmlFor={"BOARD_GAMES_EVENT"} className={`ml-2 inline-block peer-checked/BOARD_GAMES_EVENT:text-specialIcons dark:peer-checked/BOARD_GAMES_EVENT:text-darkspecialIcons text-sm leading-8`}>
 				{BoardGamesIcon}
 			</label>
 			<input
@@ -33,7 +33,7 @@ export default function Type({ props }: { props: { existingValue: EventType } })
 				type="radio"
 				className={`hidden peer/CONTEST_EVENT`}
 			/>
-			<label htmlFor={"CONTEST_EVENT"} className={`ml-2 inline-block peer-checked/CONTEST_EVENT:text-selected text-sm leading-8`}>
+			<label htmlFor={"CUSTOM_EVENT"} className={`ml-2 inline-block peer-checked/CUSTOM_EVENT:text-specialIcons dark:peer-checked/CUSTOM_EVENT:text-darkspecialIcons text-sm leading-8`}>
 				{ContestIcon}
 			</label>
 			<input

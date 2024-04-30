@@ -14,8 +14,8 @@ export class CreateContestEventConfigDto {
 	prize: string;
 
 	@IsOptional()
-	@IsString()
 	@IsNotEmpty()
+	@IsString()
 	description?: string;
 
 	constructor(

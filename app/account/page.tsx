@@ -1,85 +1,95 @@
 import { cookies } from 'next/headers';
+import { DateTime } from "luxon";
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import logOut from '@/app/actions/user/logOut';
 import getProfileData from '@/app/actions/user/getProfileData';
-import { VerifiedIcon, UnverifiedIcon, VisitsIcon, LevelIcon, Trophy, UserDataIcon, LogOutIcon, EditIcon } from '@/app/ui/icons';
+import { VisitsIcon, LevelIcon, Trophy, LogOutIcon, EditIcon } from '@/app/ui/icons';
+import { PencilMicro, CheckBadgeMicro, QuestionMarkMicro } from '@/app/ui/microIcons';
 import { UserStatus } from '@/app/types/user/enums/userStatus.enum';
-import EventSimpleField from './EventSimpleField';
 
 export default async function AccountPage() {
 
-	console.log('AccountPage');
-
 	const sid = cookies().get('connect.sid');
-
 	if (!sid) redirect('/signin');
 
 	let t1 = performance.now();
-
 	let user = await getProfileData(sid);
-
 	let t2 = performance.now();
 
 	console.log(t2 - t1);
 
 	if (user === false || user === true) redirect('/signin');
 
-	const { hue, username, email, fullName, status, role, visits, level, wins } = user;
-	let letter = username[0].toUpperCase();
+	const { hue, username, email, firstName, status, role, visits, level, wins, createdAt } = user;
+	let registrationDateString = DateTime.fromJSDate(createdAt).toLocaleString(DateTime.DATE_SHORT);
+	let letter = firstName[0].toUpperCase();
 	console.log(hue);
 
-	let verifiedEmailIcon = status === UserStatus.VERIFIED ? VerifiedIcon : UnverifiedIcon;
+	let verifiedEmailIcon = status === UserStatus.VERIFIED ? CheckBadgeMicro : QuestionMarkMicro;
 
 	return (
-		<div className="px-5 md:mt-5 mt-16 w-full max-w-2xl flex flex-col item-center">
-			<div className="ring-1 md:items-center md:grid gap-y-4 md:grid-cols-2 ring-border dark:ring-darkborder p-4 w-full gap-2 flex flex-col shadow-lg rounded-md bg-cardBG dark:bg-darkcardBG">
-				<div id="avatar" className={`rounded-full avatar-bg-${hue} ring-1 ring-border dark:ring-darkborder w-20 h-20 text-3xl font-bold flex justify-center items-center`}><span className="drop-shadow-md">{letter}</span></div>
-				<div></div>
-				<div className="p-2 flex gap-3 rounded-lg">
-					<div className="flex gap-1">
-						<div>{level}</div>
-						<div className="dark:text-darkspecialIcons text-specialIcons">{LevelIcon}</div>
-					</div>
-					<div className="flex gap-1">
-						<div>{wins}</div>
-						<div className="dark:text-darkspecialIcons text-specialIcons">{Trophy}</div>
-					</div>
-					<div className="flex gap-1">
-						<div>{visits}</div>
-						<div className="dark:text-darkspecialIcons text-specialIcons">{VisitsIcon}</div>
+		<div className="w-full flex flex-col">
+			<div className="flex flex-col ring-1 space-y-4 ring-border dark:ring-darkborder p-4 w-full shadow-lg rounded-md bg-cardBG dark:bg-darkcardBG">
+				<div className="flex justify-between">
+					<div className={`rounded-full avatar-bg-${hue} ring-1 ring-border dark:ring-darkborder w-20 h-20 text-3xl font-bold flex justify-center items-center`}><span className="text-white drop-shadow-md">{letter}</span></div>
+					<div className="p-2 space-y-2 rounded-lg">
+						<div className="flex items-center gap-1">
+							<div className="dark:text-darkspecialIcons text-specialIcons">{LevelIcon}</div>
+							<span className="w-12 text-sm font-semibold ">Level:</span>
+							<span>{level}</span>
+						</div>
+						<div className="flex gap-1 items-center">
+							<div className="dark:text-darkspecialIcons text-specialIcons">{Trophy}</div>
+							<span className="w-12 text-sm font-semibold ">Wins:</span>
+							<span>{wins}</span>
+						</div>
+						<div className="flex gap-1 items-center">
+							<div className="dark:text-darkspecialIcons text-specialIcons">{VisitsIcon}</div>
+							<span className="w-12 text-sm font-semibold ">Visits:</span>
+							<span>{visits}</span>
+						</div>
 					</div>
 				</div>
-				<EventSimpleField props={{ title: "Username", value: username }} />
-				<div className="p-2 flex align-center justify-between rounded-lg">
-					<div>
-						<div className="text-sm font-semibold">Email</div>
-						<div>{email}</div>
+				<div className="p-2 border rounded-md border-inputBorder">
+					<div className="flex justify-between text-sm font-semibold">
+						<div>Username</div>
+						<Link className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-75 duration-300" href="/account/username">{PencilMicro}</Link>
 					</div>
-					<div className="text-specialIcons dark:text-darkspecialIcons self-center">{verifiedEmailIcon}</div>
+					<div className="overflow-scroll">{username}</div>
 				</div>
-				<EventSimpleField props={{ title: "Full Name", value: fullName || 'N/A' }} />
+				<div className="p-2 border rounded-md border-inputBorder">
+					<div className="flex justify-between text-sm font-semibold">
+						<div className="flex gap-2">
+							<div>Email</div>
+							<div className="text-specialIcons dark:text-darkspecialIcons self-center">{verifiedEmailIcon}</div>
+						</div>
+						<Link className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-75 duration-300" href="/account/email">{PencilMicro}</Link>
+					</div>
+					<div className="overflow-scroll">{email}</div>
+				</div>
+				<div className="p-2 border rounded-md border-inputBorder">
+					<div className="flex justify-between text-sm font-semibold">
+						<div>First Name</div>
+						<Link className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-75 duration-300" href="/account/firstName">{PencilMicro}</Link>
+					</div>
+					<div className="overflow-scroll whitespace-nowrap">{firstName}</div>
+				</div>
+				<span className="font-light text-sm self-end">Member since {registrationDateString}</span>
 			</div>
-			<div className="text-sm space-y-4">
-				<div className="mt-4">
-					<Link href="/account/update" className="px-4 py-2 w-fit flex gap-4 hover:text-active dark:hover:text-darkactive ring-1 rounded-md dark:ring-darkborder ring-border font-bold bg-button dark:bg-darkbutton">
-						<span>Change Userdata</span>
-						<span>{UserDataIcon}</span>
-					</Link>
-				</div>
-				<div>
-					<form action={logOut}>
-						<button className="px-4 py-2 flex gap-4 rounded-md shadow-lg ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkbutton font-bold hover:text-active dark:hover:text-darkactive">
-							<span>Log Out</span>
-							<span>{LogOutIcon}</span>
-						</button>
-					</form>
-				</div>
-				{(role === 'ADMINISTRATOR' || role === 'MODERATOR') && <Link href="/mod" className="bg-button dark:bg-darkbutton px-4 py-2 flex gap-4 rounded-md shadow-lg w-fit font-bold hover:text-active dark:hover:text-darkactive ring-1 ring-border dark:ring-darkborder">
-					<span>Mod</span>
-					<span>{EditIcon}</span>
-				</Link>}
-			</div>
+			<Link href="/account/password" className="self-end mt-5 px-4 py-2 w-fit flex gap-4 hover:text-active dark:hover:text-darkactive ring-1 rounded-md dark:ring-darkborder ring-border font-bold bg-button dark:bg-darkbutton">
+				<span className="text-sm">Change Password</span>
+			</Link>
+			<form action={logOut} className="self-end mt-5 ">
+				<button className="px-4 py-2 flex gap-4 rounded-md shadow-lg ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkbutton font-bold hover:text-active dark:hover:text-darkactive">
+					<span className="text-sm">Log Out</span>
+					<span>{LogOutIcon}</span>
+				</button>
+			</form>
+			{(role === 'ADMINISTRATOR' || role === 'MODERATOR') && <Link href="/mod" className="self-end mt-5 bg-button dark:bg-darkbutton px-4 py-2 flex gap-4 rounded-md shadow-lg w-fit font-bold hover:text-active dark:hover:text-darkactive ring-1 ring-border dark:ring-darkborder">
+				<span className="text-sm">Mod</span>
+				<span>{EditIcon}</span>
+			</Link>}
 
 		</div>
 	)

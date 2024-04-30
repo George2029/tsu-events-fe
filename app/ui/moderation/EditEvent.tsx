@@ -13,7 +13,6 @@ import Status from './editEvent/Status';
 import Description from './editEvent/Description';
 import Location from './editEvent/Location';
 import EndTime from './editEvent/EndTime';
-import Moderator from './editEvent/Moderator';
 import PlacesTotal from './editEvent/PlacesTotal';
 import StartTime from './editEvent/StartTime';
 
@@ -24,7 +23,6 @@ export default function EditOneEvent({ props }: {
 		existingStatus: EventStatus,
 		existingLocation: string,
 		existingType: EventType,
-		existingModerator: string;
 		existingPlacesTotal: number,
 		existingStartTime: string;
 		existingEndTime: string;
@@ -39,7 +37,6 @@ export default function EditOneEvent({ props }: {
 		existingLocation,
 		existingStatus,
 		existingType,
-		existingModerator,
 		existingPlacesTotal,
 		existingStartTime,
 		existingEndTime,
@@ -56,7 +53,6 @@ export default function EditOneEvent({ props }: {
 				<Description props={{ existingValue: existingDescription }} />
 				<Location props={{ existingValue: existingLocation }} />
 				<PlacesTotal props={{ existingValue: existingPlacesTotal }} />
-				<Moderator props={{ existingValue: existingModerator }} />
 				<Status props={{ existingValue: existingStatus }} />
 				<Type props={{ existingValue: existingType }} />
 				<StartTime props={{ existingValue: existingStartTime }} />

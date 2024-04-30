@@ -2,38 +2,32 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export default async function updateFullName(prevState: any, formData: FormData) {
+export default async function updateFirstName(prevState: any, formData: FormData) {
 
 	let sid = cookies().get('connect.sid');
 
 	if (!sid) redirect('/signin');
 
-	let fullName = formData.get('fullName')?.toString().trim();
+	let firstName = formData.get('firstName')?.toString().trim();
 
-	if (!fullName) {
+	if (!firstName) {
 		return {
-			message: 'fullName should not be empty'
+			message: 'First name should not be empty'
 		}
 	}
 
-	let onlyLatinLettersRegex = /[^A-Za-z]/;
+	let onlyLatinLettersRegex = /^[A-Za-z][A-Za-z\s]{0,50}$/;
 
-	if (!fullName.match(onlyLatinLettersRegex)) {
+	if (!firstName.match(onlyLatinLettersRegex)) {
 		return {
-			message: 'fullName should contain only latin letters'
-		}
-	}
-
-	if (fullName.length < 6 || fullName.length > 50) {
-		return {
-			message: 'fullName should not be less than 6 characters or greater than 50 characters'
+			message: 'Latin letters only, no more than 50'
 		}
 	}
 
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/user/fullName',
+		res = await fetch('http://localhost:3000/user/firstName',
 			{
 				method: 'PUT',
 				headers: {
@@ -41,7 +35,7 @@ export default async function updateFullName(prevState: any, formData: FormData)
 					Cookie: `${sid.name}=${sid.value}`
 				},
 				body: JSON.stringify({
-					fullName: fullName
+					firstName: firstName
 				})
 			})
 	} catch (error) {
