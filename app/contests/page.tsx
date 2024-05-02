@@ -32,7 +32,7 @@ export default async function BoardGameEventsPage() {
 			<div className="w-full mx-2 md:w-auto absolute md:static md:max-w-3xl py-4">
 				<Genre {...data} />
 			</div>
-			<div className="mt-20 md:mt-0 grow m-5">
+			<div className="mt-20 md:mt-0 grow p-5">
 				{events.map((event) => <EventPreviewCard key={event.id} {...event} />)}
 			</div>
 		</div>

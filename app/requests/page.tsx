@@ -1,11 +1,10 @@
 import Genre from '@/app/ui/Genre';
 import RequestPreviewUI from '@/app/ui/requests/RequestPreviewUI';
-import { getRequests } from './getRequests';
+import { getRequests } from '@/app/actions/requests/getRequests';
 import { genresBarConfig } from './genresBarConfig';
 
 export default async function Requests() {
 	let requests = await getRequests();
-	console.log(requests);
 
 	return (
 		<div className="flex w-full">

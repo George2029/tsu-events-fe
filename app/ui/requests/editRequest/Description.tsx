@@ -2,7 +2,7 @@
 import { useState, useRef } from 'react';
 import { XIconMicro, PencilMicro } from '@/app/ui/microIcons';
 
-export default function Description({ props }: { props: { existingValue?: string } }) {
+export default function Description({ props }: { props: { existingValue?: string | null } }) {
 	let inputRef = useRef<HTMLTextAreaElement | null>(null);
 	let { existingValue } = props;
 	const [state, setState] = useState(!!existingValue);

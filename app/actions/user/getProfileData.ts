@@ -25,6 +25,8 @@ export default async function getProfileData({ name, value }: { name: string, va
 		user.createdAt = new Date(user.createdAt);
 		return user;
 	} else {
+		let res = await response.json();
+		console.log(res);
 		console.log(`getProfileData: failure`);
 		return false
 	}

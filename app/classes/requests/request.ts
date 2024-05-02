@@ -2,7 +2,6 @@ import { EventType } from '@/app/ui/events/enums/eventType.enum';
 import { RequestStatus } from '@/app/classes/requests/enums/requestStatus.enum';
 import { Type } from 'class-transformer';
 
-
 export class Request {
 	id: number;
 
@@ -31,7 +30,7 @@ export class Request {
 	@Type(() => Date)
 	endOfRequestTime: Date;
 
-	description?: string;
+	description?: string | null;
 
 	constructor(
 		id: number,
@@ -45,7 +44,7 @@ export class Request {
 		createdAt: Date,
 		updatedAt: Date,
 		endOfRequestTime: Date,
-		description?: string,
+		description?: string | null,
 	) {
 		this.id = id;
 		this.userId = userId;

@@ -17,7 +17,7 @@ import Participants from './Participants';
 import EventSimpleField from '@/app/ui/event/EventSimpleField';
 import EventConfigs from './EventConfigs';
 
-const ModEventIcon = dynamic(() => import('./ModEventIcon'));
+const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'));
 
 export default async function Page(
 	{ params }: { params: { id: string } }

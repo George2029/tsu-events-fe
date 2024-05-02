@@ -1,19 +1,11 @@
 import EditRequest from '@/app/ui/requests/EditRequest';
-import { notFound } from 'next/navigation'
-import { plainToInstance } from 'class-transformer';
-import { Request } from '@/app/classes/requests/request';
+import { getRequest } from '@/app/actions/requests/getRequest';
 
 export default async function RequestPage(
 	{ params }: { params: { id: string } }) {
 
-	if (isNaN(+params.id)) notFound();
-	let res = await fetch(`http://localhost:3000/requests/${params.id}`, { cache: 'no-store' });
+	let request = await getRequest(params.id);
 
-	if (!res.ok) notFound()
-
-	let requestJson = await res.json();
-	let request = plainToInstance(Request, requestJson);
-	if (!(request instanceof Request)) notFound();
 	let {
 		id,
 		type,
@@ -23,8 +15,6 @@ export default async function RequestPage(
 		endTime,
 		description,
 	} = request;
-	startTime = new Date(startTime);
-	endTime = new Date(endTime);
 
 	console.log(request);
 

@@ -22,7 +22,7 @@ export default function EditRequest({ props }: {
 		existingType: EventType,
 		existingStartTime: string;
 		existingEndTime: string;
-		existingDescription?: string;
+		existingDescription?: string | null;
 	}
 }
 ) {
