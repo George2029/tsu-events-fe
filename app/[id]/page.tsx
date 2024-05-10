@@ -38,7 +38,7 @@ export default async function Page(
 		type,
 		title,
 		location,
-		moderatorId,
+		userId,
 		placesTotal,
 		status,
 		startTime,
@@ -78,8 +78,8 @@ export default async function Page(
 	}
 
 	return (
-		<div className="px-5 flex flex-col">
-			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2 max-w-xl w-full">
+		<div className="px-5 flex flex-col max-w-xl w-full">
+			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
 				<div className="">
 					<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
 						<div className="text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>

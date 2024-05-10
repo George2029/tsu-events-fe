@@ -4,6 +4,7 @@ import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
 import { useFormState } from 'react-dom';
 import editEvent from '@/app/actions/events/edit';
+import deleteEvent from '@/app/actions/events/delete';
 
 import EditEventButton from './editEvent/EditEventButton';
 
@@ -43,26 +44,37 @@ export default function EditOneEvent({ props }: {
 	} = props;
 
 	let [formState, setFormState] = useFormState(editEvent, { message: '' });
+	let removeEvent = deleteEvent.bind(null, id);
 
 	return (
-		<form className="" action={setFormState}>
+		<div>
 			<h2 className="font-semibold text-center pb-6">Edit Event</h2>
-			<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-green-950/60 pb-12">
-				<input type="hidden" name="id" value={id} />
-				<Title props={{ existingValue: existingTitle }} />
-				<Description props={{ existingValue: existingDescription }} />
-				<Location props={{ existingValue: existingLocation }} />
-				<PlacesTotal props={{ existingValue: existingPlacesTotal }} />
-				<Status props={{ existingValue: existingStatus }} />
-				<Type props={{ existingValue: existingType }} />
-				<StartTime props={{ existingValue: existingStartTime }} />
-				<EndTime props={{ existingValue: existingEndTime }} />
-			</div>
-			<div className="mt-6 flex flex-col items-end">
-				<div>{formState?.message}</div>
-				<EditEventButton />
-			</div>
-		</form>
+			<form action={setFormState}>
+				<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-green-950/60 pb-12">
+					<input type="hidden" name="id" value={id} />
+					<Title props={{ existingValue: existingTitle }} />
+					<Description props={{ existingValue: existingDescription }} />
+					<Location props={{ existingValue: existingLocation }} />
+					<PlacesTotal props={{ existingValue: existingPlacesTotal }} />
+					<Status props={{ existingValue: existingStatus }} />
+					<Type props={{ existingValue: existingType }} />
+					<StartTime props={{ existingValue: existingStartTime }} />
+					<EndTime props={{ existingValue: existingEndTime }} />
+				</div>
+				<div className="flex justify-end">
+					<div>{formState?.message}</div>
+					<EditEventButton />
+				</div>
+			</form>
+			<form className="mt-2" action={removeEvent}>
+				<button
+					type="submit"
+					className="p-2 rounded-md text-sm bg-indigo-600 font-semibold text-white shadow-sm hover:bg-indigo-500"
+				>
+					Delete
+				</button>
+			</form>
+		</div>
 	)
 }
 

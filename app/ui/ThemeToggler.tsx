@@ -6,7 +6,6 @@ import { SunIcon, MoonIcon, PCIcon } from '@/app/ui/icons';
 
 export default function ThemeToggler() {
 	const { theme, setTheme, systemTheme } = useTheme()
-	console.log('active theme: ', theme, 'system theme: ', systemTheme);
 	const [expanded, setExpanded] = useState(false);
 	let currentThemeIcon: any;
 	if (systemTheme === theme) {
@@ -34,7 +33,6 @@ export default function ThemeToggler() {
 							document.getElementById(theme)?.focus()
 						}
 					}
-					console.log(document.activeElement);
 				}
 			}} >
 				<summary id="themeSummary" tabIndex={0} className="dark:text-darktitle cursor-pointer">{currentThemeIcon}</summary>

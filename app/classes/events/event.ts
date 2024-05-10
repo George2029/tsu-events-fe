@@ -7,7 +7,7 @@ export class Event {
 	type: EventType;
 	title: string;
 	location: string;
-	moderatorId: number;
+	userId: number;
 	placesTotal: number;
 	status: EventStatus;
 
@@ -32,7 +32,7 @@ export class Event {
 		type: EventType,
 		title: string,
 		location: string,
-		moderatorId: number,
+		userId: number,
 		placesTotal: number,
 		status: EventStatus,
 		startTime: Date,
@@ -46,7 +46,7 @@ export class Event {
 		this.type = type;
 		this.title = title;
 		this.location = location;
-		this.moderatorId = moderatorId;
+		this.userId = userId;
 		this.placesTotal = placesTotal;
 		this.status = status;
 		this.startTime = startTime;

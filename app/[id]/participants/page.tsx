@@ -3,18 +3,18 @@ import { DateTime } from "luxon";
 import { LockMicro } from '@/app/ui/microIcons';
 import { GoBackIcon } from '@/app/ui/icons';
 import Link from 'next/link';
-//import { ParticipantStatus } from '@/app/classes/participants/enums/participantStatus.enum';
 import getAllParticipants from '@/app/actions/events/event/getAllParticipants';
 
 let title = 'Participants of the event';
 
 type ParticipantUser = {
 	username: string,
-	fullName?: string,
+	firstName: string,
+	hue: number,
 }
 
-function ParticipantCard({ props }: { props: { id: number, serialNumber: number, createdAt: string, user: ParticipantUser } }) {
-	let { id, serialNumber, createdAt, user } = props;
+function ParticipantCard({ props }: { props: { id: number, userId: number, serialNumber: number, createdAt: string, user: ParticipantUser } }) {
+	let { id, userId, serialNumber, createdAt, user } = props;
 	let dt = DateTime.fromJSDate(new Date(createdAt));
 	let time = dt.toLocaleString({
 		day: 'numeric',
@@ -22,13 +22,22 @@ function ParticipantCard({ props }: { props: { id: number, serialNumber: number,
 		hour: 'numeric',
 		minute: '2-digit'
 	})
-	let { username, fullName } = user;
+	let { username, firstName, hue } = user;
+	let letter = firstName[0];
 	return (
 		<div className="p-2  rounded-lg">
 			<div className="flex justify-between">
-				<div className="text-sm font-semibold">{serialNumber}. {fullName === null ? username : `${fullName} aka ${username}`}</div>
-				<div className="flex gap-1">
-					<div className="italic text-sm">{time}</div>
+				<div className="item-center text-sm font-semibold flex gap-2">
+					<div>{serialNumber}.</div>
+					<Link href={`/user/${userId}`} className={`self-center block hover:text-active dark:hover:text-darkactive active:scale-90 duration-300 rounded-full avatar-bg-${hue} ring-1 ring-border dark:ring-darkborder w-4 h-4 font-bold flex justify-center items-center`}>
+						<span className="text-white text-xs drop-shadow-md">
+							{letter}
+						</span>
+					</Link>
+					<div>@{username}</div>
+				</div>
+				<div className="items-center flex gap-1">
+					<div className="font-light italic text-xs">{time}</div>
 					<div>{LockMicro}</div>
 				</div>
 			</div>
@@ -51,8 +60,8 @@ export default async function EventParticipantsPage({ params }: { params: { id: 
 					<div className="space-y-4 mt-4">
 						{
 							participants.map(
-								({ id, createdAt, user }: { id: number, createdAt: string, user: ParticipantUser }, index: number) =>
-									<ParticipantCard key={id} props={{ id, serialNumber: index + 1, createdAt, user }} />)
+								({ id, createdAt, userId, user }: { id: number, userId: number, createdAt: string, user: ParticipantUser }, index: number) =>
+									<ParticipantCard key={id} props={{ id, serialNumber: index + 1, createdAt, user, userId }} />)
 						}
 					</div>
 				</div>
