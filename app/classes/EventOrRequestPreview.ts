@@ -1,8 +1,7 @@
 import { EventType } from '@/app/ui/events/enums/eventType.enum';
-import { RequestStatus } from '@/app/classes/requests/enums/requestStatus.enum';
 import { Type } from 'class-transformer';
 
-export class Request {
+export class EventOrRequestPreview {
 	id: number;
 
 	userId: number;
@@ -13,24 +12,11 @@ export class Request {
 
 	location: string;
 
-	status: RequestStatus;
-
-	@Type(() => Date)
-	startTime: Date;
-
-	@Type(() => Date)
-	endTime: Date;
-
 	@Type(() => Date)
 	createdAt: Date;
 
 	@Type(() => Date)
-	updatedAt: Date;
-
-	@Type(() => Date)
-	endOfRequestTime: Date;
-
-	description?: string | null;
+	startTime: Date;
 
 	constructor(
 		id: number,
@@ -38,25 +24,16 @@ export class Request {
 		type: EventType,
 		title: string,
 		location: string,
-		status: RequestStatus,
 		startTime: Date,
-		endTime: Date,
 		createdAt: Date,
-		updatedAt: Date,
-		endOfRequestTime: Date,
-		description?: string | null,
 	) {
 		this.id = id;
 		this.userId = userId;
 		this.type = type;
 		this.title = title;
 		this.location = location;
-		this.status = status;
 		this.startTime = startTime;
-		this.endTime = endTime;
 		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.description = description;
-		this.endOfRequestTime = endOfRequestTime;
 	}
 }
+

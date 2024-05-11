@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import dynamic from 'next/dynamic';
 import Link from "next/link";
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
-import { EventPreview } from '@/app/classes/events/event';
+import { EventOrRequestPreview } from '@/app/classes/EventOrRequestPreview';
 
 const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), {
 	loading: () => <div className="w-full h-5 items-center flex justify-between">
@@ -11,9 +11,9 @@ const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), {
 	</div>
 });
 
-export default function EventPreviewCard({ ...eventPreview }: EventPreview) {
+export default function EventOrRequestPreviewCard({ props }: { props: { eventOrRequestPreview: EventOrRequestPreview } }) {
 
-	let { id, title, type, location, startTime, userId, createdAt } = eventPreview;
+	let { id, title, type, location, startTime, userId, createdAt } = props.eventOrRequestPreview;
 
 	let eventIcon: any;
 

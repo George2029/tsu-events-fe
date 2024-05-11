@@ -1,8 +1,13 @@
-import EventPreviewCard from '@/app/ui/events/EventPreviewCard';
-import getAllEvents from '@/app/actions/events/getAllEvents';
+import EventAndRequestPreviewCard from '@/app/ui/EventAndRequestPreviewCard';
+import getEventsOrRequestsPreviewData from '@/app/actions/getEventsOrRequestsPreviewData';
 
 export default async function Events() {
-	const events = await getAllEvents();
-	return events.map((event) => <EventPreviewCard key={event.id} {...event} />)
+	const events = await getEventsOrRequestsPreviewData();
+	return events.map((event) => {
+		let { id, userId, title, type, location, startTime, createdAt } = event;
+		let eventOrRequestPreview = { id, userId, title, type, location, startTime, createdAt };
+		return <EventAndRequestPreviewCard key={event.id} props={{ eventOrRequestPreview }} />
+	}
+	);
 
 }

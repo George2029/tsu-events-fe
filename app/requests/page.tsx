@@ -1,9 +1,15 @@
 import Genre from '@/app/ui/Genre';
-import RequestPreviewUI from '@/app/ui/requests/RequestPreviewUI';
+import dynamic from 'next/dynamic';
 import { getRequests } from '@/app/actions/requests/getRequests';
 import { genresBarConfig } from './genresBarConfig';
 
-export default async function Requests() {
+import EventsLoadingSkeleton from '@/app/EventsLoadingSkeleton';
+
+const Requests = dynamic(() => import('./Requests'), {
+	loading: () => <EventsLoadingSkeleton />
+});
+
+export default async function RequestsPage() {
 	let requests = await getRequests();
 
 	return (
@@ -12,7 +18,7 @@ export default async function Requests() {
 				<Genre {...genresBarConfig} />
 			</div>
 			<div className="md:mt-0 mt-20 grow p-5">
-				{requests.map(requestPreview => <RequestPreviewUI key={requestPreview.id} props={{ requestPreview }} />)}
+				<Requests />
 			</div>
 		</div>
 	)

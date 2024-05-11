@@ -1,10 +1,13 @@
 import Genre from '@/app/ui/Genre';
-import RequestPreviewUI from '@/app/ui/requests/RequestPreviewUI';
-import { getBoardGameRequests } from '@/app/actions/requests/getBoardGameRequests';
+import dynamic from 'next/dynamic';
+import EventsLoadingSkeleton from '@/app/EventsLoadingSkeleton';
 import { genresBarConfig } from './genresBarConfig';
 
-export default async function Requests() {
-	let requests = await getBoardGameRequests();
+const Requests = dynamic(() => import('./Requests'), {
+	loading: () => <EventsLoadingSkeleton />
+});
+
+export default async function RequestsPage() {
 
 	return (
 		<div className="flex w-full">
@@ -12,7 +15,7 @@ export default async function Requests() {
 				<Genre {...genresBarConfig} />
 			</div>
 			<div className="md:mt-0 mt-20 grow p-5">
-				{requests.map(requestPreview => <RequestPreviewUI key={requestPreview.id} props={{ requestPreview }} />)}
+				<Requests />
 			</div>
 		</div>
 	)

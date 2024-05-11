@@ -1,8 +1,8 @@
-import getAllEvents from '@/app/actions/events/getAllEvents';
+import getEventsOrRequestsPreviewData from '@/app/actions/getEventsOrRequestsPreviewData';
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
-import EventPreviewCard from '@/app/ui/events/EventPreviewCard';
+import EventAndRequestPreviewCard from '@/app/ui/EventAndRequestPreviewCard';
 
 export default async function Movies() {
-	let movies = await getAllEvents(EventType.MOVIE_EVENT);
-	return movies.map((movie) => <EventPreviewCard key={movie.id} {...movie} />)
+	let movies = await getEventsOrRequestsPreviewData({ eventType: EventType.MOVIE_EVENT });
+	return movies.map((movie) => <EventAndRequestPreviewCard key={movie.id} props={{ eventOrRequestPreview: { ...movie } }} />)
 }
