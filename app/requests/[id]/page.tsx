@@ -1,22 +1,28 @@
 import dynamic from 'next/dynamic';
+import { CheckIcon, XIcon } from '@/app/ui/icons';
+import Back from '@/app/ui/Back';
 import { getRequest } from '@/app/actions/requests/getRequest';
 import { DateTime, DateTimeFormatOptions } from "luxon";
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
 
 const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'));
 
+const Vote = dynamic(() => import('./Vote'), { loading: () => <div className="h-[1.625rem] w-full bg-loading dark:bg-darkloading rounded-lg"></div> });
+
+const VotesPlaceholder = () => <div className="h-4 w-8 bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
+const CreatorPlaceholder = () => <div className="h-5 w-full bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
+
+const YesVotesCount = dynamic(() => import('./YesVotesCount'), {
+	loading: () => <VotesPlaceholder />
+});
+
+const NoVotesCount = dynamic(() => import('./NoVotesCount'), {
+	loading: () => <VotesPlaceholder />
+});
+
 const RequestorEditIcon = dynamic(() => import('@/app/ui/exp/RequestorEditIcon'));
 
-const Votes = dynamic(() => import('./VotesFetch'), {
-	loading: () => <div className="h-4 w-6 animate-pulse rounded-md bg-loading dark:bg-darkloading"></div>
-});
-
-const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), {
-	loading: () => <div className="w-full h-5 items-center flex justify-between">
-		<div className="h-5 w-32 animate-pulse bg-loading dark:bg-darkloading"></div>
-		<div className="h-5 w-32 animate-pulse bg-loading dark:bg-darkloading"></div>
-	</div>
-});
+const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), { loading: () => <CreatorPlaceholder /> });
 
 export default async function RequestPage({ params }: {
 	params: {
@@ -41,7 +47,6 @@ export default async function RequestPage({ params }: {
 		endOfRequestTime,
 		status,
 	} = request;
-
 
 	let eventIcon: any;
 
@@ -97,12 +102,23 @@ export default async function RequestPage({ params }: {
 						<div className="text-sm font-semibold">Start Time</div>
 						<div>{startTimeString}</div>
 					</div>
-					<Votes props={{ requestId: id }} />
+					<div>
+						<span>
+							<span className="text-sm font-semibold">Votes</span>
+							<span className={`text-green-500 flex items-center`}>{CheckIcon}: <YesVotesCount props={{ id }} /></span>
+							<span className={`text-red-500 flex items-center`}>{XIcon}: <NoVotesCount props={{ id }} /></span>
+						</span>
+						<div className="flex gap-2 mt-1">
+							<Vote props={{ id }} />
+						</div>
+					</div>
+
 					<CreatorPreview props={{ userId, createdAtString }} />
 					<span className="text-center font-light text-sm">till {endOfRequestString}</span>
 
 				</div>
 			</div>
+			<Back />
 		</div>
 	)
 }

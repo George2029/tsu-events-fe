@@ -17,7 +17,6 @@ const ThemeToggler = dynamic(() => import('@/app/ui/ThemeToggler'), {
 });
 
 import NavBar from './ui/navbar/NavBar';
-import Content from './ui/Content';
 
 export default function RootLayout({
 	children,
@@ -33,7 +32,9 @@ export default function RootLayout({
 							<ThemeToggler />
 							<div className="absolute top-4 right-14 z-50 font-bold text-xl select-none self-center">Uni Events</div>
 							<NavBar />
-							<Content children={children} />
+							<div className="pb-40 w-full items-center justify-between flex flex-col">
+								{children}
+							</div>
 						</main>
 					</div>
 				</ThemeProvider>

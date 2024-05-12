@@ -10,19 +10,6 @@ summary {
  list-style: none;
 }
 
-@layer base {
-  @font-face {
-    font-family: 'Grenze_Gotisch';
-    src: url('./fonts/GrenzeGotisch-VariableFont_wght.ttf');
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 .avatar-bg-0 {background:linear-gradient(hsl(0 100% 45%),hsl(0 100% 30%))}
 .avatar-bg-1 {background:linear-gradient(hsl(1 100% 45%),hsl(1 100% 30%))}
 .avatar-bg-2 {background:linear-gradient(hsl(2 100% 45%),hsl(2 100% 30%))}

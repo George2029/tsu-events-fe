@@ -11,9 +11,17 @@ const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), {
 	</div>
 });
 
-export default function EventOrRequestPreviewCard({ props }: { props: { eventOrRequestPreview: EventOrRequestPreview } }) {
+export default function EventOrRequestPreviewCard({ props }: { props: { requests?: boolean, eventOrRequestPreview: EventOrRequestPreview } }) {
 
 	let { id, title, type, location, startTime, userId, createdAt } = props.eventOrRequestPreview;
+	let { requests } = props;
+
+	let link = `/`;
+	if (requests) {
+		link = link + `requests/${id}`;
+	} else {
+		link = link + id;
+	}
 
 	let eventIcon: any;
 
@@ -45,7 +53,7 @@ export default function EventOrRequestPreviewCard({ props }: { props: { eventOrR
 	return (
 		<div className="space-y-2 mt-6 dark:bg-darkcardBG bg-cardBG p-4 rounded-lg ring-border dark:ring-darkborder hover:ring-active dark:hover:ring-darkactive ring-1 shadow-lg">
 			<div className="flex justify-between gap-2">
-				<Link href={'/' + id} className="md:active:scale-90 active:scale-75 duration-300 hover:text-active dark:hover:text-darkactive text-title dark:text-darktitle font-bold text-balance">{title}</Link>
+				<Link href={link} className="md:active:scale-90 active:scale-75 duration-300 hover:text-active dark:hover:text-darkactive text-title dark:text-darktitle font-bold text-balance">{title}</Link>
 				<div>{eventIcon}</div>
 			</div>
 			<div>{startTimeString}</div>

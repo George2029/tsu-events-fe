@@ -19,6 +19,7 @@ export default async function getProfileData({ name, value }: { name: string, va
 		}
 	}
 
+
 	if (response.ok) {
 		console.log(`getProfileData: success`);
 		let user = await response.json();
