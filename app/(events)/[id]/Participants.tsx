@@ -16,13 +16,14 @@ export default function Participants({ props }: { props: { placesTotal: number, 
 	let { placesTotal, eventId } = props;
 
 	return (
-		<div className="p-2 rounded-lg flex flex-col gap-4">
+		<div className="flex flex-col gap-4">
 			<div className=" flex gap-2 justify-between">
 				<div className="flex gap-4">
 					<div>
 						<div className="text-sm font-semibold">Participants</div>
-						<div className="mt-2">
-							Places: {placesTotal}
+						<div className="mt-2 flex items-center w-24 gap-1">
+							<span className="text-sm font-semibold">Places:</span>
+							<span>{placesTotal}</span>
 						</div>
 					</div>
 					<div className="flex gap-2">

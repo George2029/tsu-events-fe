@@ -12,6 +12,8 @@ export default async function getAllEventsOrRequestsPreviewData(options?: { requ
 	const res = await fetch(url, {
 		cache: 'no-store'
 	});
+	let b = new Promise((res, rej) => setTimeout(() => res(1), 2000));
+	await b;
 	let eventsJSON = await res.json();
 	return eventsJSON.map((eventJSON: any) => plainToInstance(EventOrRequestPreview, eventJSON));
 }

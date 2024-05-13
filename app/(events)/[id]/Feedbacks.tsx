@@ -8,7 +8,7 @@ const NumberOfFeedbacks = dynamic(() => import('./NumberOfFeedbacks'), {
 export default function Feedbacks({ props }: { props: { eventId: number } }) {
 	let { eventId } = props;
 	return (
-		<div className="flex rounded-lg  justify-between p-2">
+		<div className="flex justify-between">
 			<div className="text-sm font-semibold">Feedbacks</div>
 			<div className="flex gap-2">
 				<div>

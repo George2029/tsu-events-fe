@@ -1,8 +1,6 @@
 'use client'
-import Link from 'next/link';
 
 import { useFormStatus } from 'react-dom';
-import { GoBackIcon } from '@/app/ui/icons';
 import { useFormState } from 'react-dom';
 import updateEmail from '@/app/actions/user/update/updateEmail';
 
@@ -28,7 +26,7 @@ function UpdateEmailButton() {
 export default function UpdateEmail() {
 	const [updateEmailState, updateEmailAction] = useFormState(updateEmail, emailFormInitialState);
 	return (
-		<form className="gap-2 max-w-xs mx-auto flex flex-col" action={updateEmailAction} >
+		<form className="gap-2 flex flex-col" action={updateEmailAction} >
 			<label htmlFor="email" className="after:text-red-500 after:content-['*'] after:ml-0.5 block text-sm font-semibold leading-6">
 				New Email
 			</label>
@@ -45,10 +43,7 @@ export default function UpdateEmail() {
 			<div className="text-sm">
 				{updateEmailState?.message}
 			</div>
-			<div className="flex justify-between items-center">
-				<Link href="/account" className="w-fit md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder flex p-2 gap-2 rounded-lg"><span className="text-sm font-semibold">Back</span>{GoBackIcon}</Link>
-				<UpdateEmailButton />
-			</div>
+			<UpdateEmailButton />
 		</form>
 	)
 }

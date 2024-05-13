@@ -1,5 +1,7 @@
 'use client'
 
+import Back from '@/app/ui/Back';
+
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
 import { useFormState } from 'react-dom';
@@ -47,7 +49,7 @@ export default function EditOneEvent({ props }: {
 	let removeEvent = deleteEvent.bind(null, id);
 
 	return (
-		<div>
+		<div className="flex flex-col">
 			<h2 className="font-semibold text-center pb-6">Edit Event</h2>
 			<form action={setFormState}>
 				<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-green-950/60 pb-12">
@@ -74,6 +76,7 @@ export default function EditOneEvent({ props }: {
 					Delete
 				</button>
 			</form>
+			<Back />
 		</div>
 	)
 }

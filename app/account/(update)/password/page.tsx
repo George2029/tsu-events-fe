@@ -1,6 +1,4 @@
 'use client'
-import Link from 'next/link';
-import { GoBackIcon } from '@/app/ui/icons';
 import { useFormState, useFormStatus } from 'react-dom';
 import updatePassword from '@/app/actions/user/update/updatePassword';
 
@@ -26,7 +24,7 @@ function UpdatePasswordButton() {
 export default function UpdatePassword() {
 	const [updatePasswordState, updatePasswordAction] = useFormState(updatePassword, passwordFormInitialState);
 	return (
-		<form className="gap-2 max-w-xs mx-auto flex flex-col" action={updatePasswordAction} >
+		<form className="gap-2 flex flex-col" action={updatePasswordAction} >
 			<label htmlFor="oldPassword" className="after:text-red-500 after:content-['*'] after:ml-0.5 block text-sm font-semibold leading-6 ">
 				Old password
 			</label>
@@ -53,10 +51,7 @@ export default function UpdatePassword() {
 			<div className="text-sm">
 				{updatePasswordState?.message}
 			</div>
-			<div className="flex justify-between">
-				<Link href="/account" className="w-fit md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
-				<UpdatePasswordButton />
-			</div>
+			<UpdatePasswordButton />
 		</form>
 
 	)

@@ -1,16 +1,22 @@
 import dynamic from 'next/dynamic';
+import { ChevronDownMicro } from '@/app/ui/microIcons';
 import { CheckIcon, XIcon } from '@/app/ui/icons';
 import Back from '@/app/ui/Back';
 import { getRequest } from '@/app/actions/requests/getRequest';
 import { DateTime, DateTimeFormatOptions } from "luxon";
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
 
-const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'));
+const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'), { loading: () => <div className="order-2"></div> });
 
 const Vote = dynamic(() => import('./Vote'), { loading: () => <div className="h-[1.625rem] w-full bg-loading dark:bg-darkloading rounded-lg"></div> });
 
 const VotesPlaceholder = () => <div className="h-4 w-8 bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
-const CreatorPlaceholder = () => <div className="h-5 w-full bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
+const CreatorPlaceholder = () =>
+	<div className="flex justify-between">
+		<div className="h-5 w-20 bg-loading dark:bg-darkloading rounded-md "></div>
+		<div className="h-5 w-12 bg-loading dark:bg-darkloading rounded-md "></div>
+	</div>
+
 
 const YesVotesCount = dynamic(() => import('./YesVotesCount'), {
 	loading: () => <VotesPlaceholder />
@@ -20,7 +26,7 @@ const NoVotesCount = dynamic(() => import('./NoVotesCount'), {
 	loading: () => <VotesPlaceholder />
 });
 
-const RequestorEditIcon = dynamic(() => import('@/app/ui/exp/RequestorEditIcon'));
+const RequestorEditIcon = dynamic(() => import('@/app/ui/exp/RequestorEditIcon'), { loading: () => <div className="order-1"></div> });
 
 const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), { loading: () => <CreatorPlaceholder /> });
 
@@ -31,6 +37,8 @@ export default async function RequestPage({ params }: {
 }) {
 
 	let request = await getRequest(params.id);
+	let b = new Promise((res, rej) => setTimeout(() => res(1), 3000));
+	await b;
 
 	console.log(request);
 
@@ -49,19 +57,24 @@ export default async function RequestPage({ params }: {
 	} = request;
 
 	let eventIcon: any;
+	let iconCaption = '';
 
 	switch (type) {
 		case "CUSTOM_EVENT":
 			eventIcon = OtherEventIcon;
+			iconCaption = 'Custom event';
 			break;
 		case "MOVIE_EVENT":
 			eventIcon = MovieIcon;
+			iconCaption = 'Movie event';
 			break;
 		case "BOARD_GAMES_EVENT":
 			eventIcon = BoardGameIcon;
+			iconCaption = 'Board games event';
 			break;
 		case "CONTEST_EVENT":
 			eventIcon = ContestIcon;
+			iconCaption = 'Contest event';
 			break;
 	}
 
@@ -77,38 +90,45 @@ export default async function RequestPage({ params }: {
 	let endOfRequestString = DateTime.fromJSDate(endOfRequestTime).toLocaleString(DateTime.DATE_SHORT);
 
 	return (
-		<div className="px-5 w-full max-w-xl flex flex-col">
-			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2 max-w-xl w-full">
-				<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
-					<div className="text-center dark:text-darktitle text-title grow overflow-scroll">
-						{title}
-					</div>
-					<div className="flex items-center gap-1 self-center">
-						<RequestorEditIcon props={{ id }} />
-						<ModEventIcon props={{ id, request: true }} />
-						{eventIcon}
+		<div className="mx-auto px-5 w-full max-w-xl flex flex-col">
+			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
+				<div className="p-2">
+					<div className="h-[4.5rem] flex justify-between text-center text-balance gap-4 text-lg">
+						<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
+						<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
 					</div>
 				</div>
 				<div className="flex flex-col mt-4 gap-3 p-2">
 					<div>
-						<div className="text-sm font-semibold">Location</div>
-						<div>{location}</div>
-					</div>
-					<div>
-						<div className="text-sm font-semibold">Description</div>
-						<div>{description ? description : 'this request has no description'}</div>
-					</div>
-					<div>
-						<div className="text-sm font-semibold">Start Time</div>
+						<div className="text-sm font-semibold">Starts at</div>
 						<div>{startTimeString}</div>
 					</div>
 					<div>
+						<div className="text-sm font-semibold">Location</div>
+						<div>{location}</div>
+					</div>
+					<details>
+						<summary className="flex gap-1 cursor-pointer text-sm font-semibold">
+							<span>Description</span>
+							<span className="self-center">{ChevronDownMicro}</span>
+						</summary>
+						<div>{description ? description : 'No description for this request'}</div>
+					</details>
+					<div>
 						<span>
 							<span className="text-sm font-semibold">Votes</span>
-							<span className={`text-green-500 flex items-center`}>{CheckIcon}: <YesVotesCount props={{ id }} /></span>
-							<span className={`text-red-500 flex items-center`}>{XIcon}: <NoVotesCount props={{ id }} /></span>
+							<span className={`text-green-500 flex gap-2 items-center`}>
+								<span>{CheckIcon}</span>
+								<span>:</span>
+								<span><YesVotesCount props={{ id }} /></span>
+							</span>
+							<span className={`text-red-500 flex gap-2 items-center`}>
+								<span>{XIcon}</span>
+								<span>:</span>
+								<span><NoVotesCount props={{ id }} /></span>
+							</span>
 						</span>
-						<div className="flex gap-2 mt-1">
+						<div className="flex gap-4 mt-3">
 							<Vote props={{ id }} />
 						</div>
 					</div>
@@ -118,7 +138,15 @@ export default async function RequestPage({ params }: {
 
 				</div>
 			</div>
-			<Back />
+			<div className="flex justify-between">
+				<div>
+					<RequestorEditIcon props={{ id }} />
+				</div>
+				<div>
+					<ModEventIcon props={{ id, request: true }} />
+				</div>
+				<Back />
+			</div>
 		</div>
 	)
 }

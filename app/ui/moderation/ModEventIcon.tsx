@@ -14,5 +14,5 @@ export default async function ModEventIcon({ props }: { props: { id: number, req
 	} else {
 		entityToMod = 'events';
 	}
-	return <Link href={`/mod/${entityToMod}/edit/${id}`}>{EditIcon}</Link>
+	return <Link className="block mt-4 outline-none md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder p-2 rounded-lg" href={`/mod/${entityToMod}/edit/${id}`}>{EditIcon}</Link>
 }

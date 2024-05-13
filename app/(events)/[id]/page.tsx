@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link';
+//import Skeleton from '@/app/ui/event/Skeleton';
+
 import dynamic from 'next/dynamic';
 import { DateTime, DateTimeFormatOptions } from "luxon";
 
@@ -7,18 +8,21 @@ import { plainToInstance } from 'class-transformer';
 
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
 
+import { ChevronDownMicro } from '@/app/ui/microIcons';
+
 import { Event } from '@/app/classes/events/event';
 import type { EventJSON } from '@/app/types/events/eventTypes';
 
-import EventFooter from '@/app/ui/event/EventFooter';
-import Feedbacks from './Feedbacks';
 import Participants from './Participants';
-import EventSimpleField from '@/app/ui/event/EventSimpleField';
 import EventConfigs from './EventConfigs';
 
 import Back from '@/app/ui/Back';
 
-const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'));
+const CreatorPlaceholder = () => <div className="h-5 w-full bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
+
+const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), { loading: () => <CreatorPlaceholder /> });
+
+const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'), { loading: () => <div></div> });
 
 export default async function Page(
 	{ params }: { params: { id: string } }
@@ -29,6 +33,8 @@ export default async function Page(
 	let res = await fetch(`http://localhost:3000/events/${params.id}`, { cache: 'no-store' });
 
 	if (!res.ok) notFound()
+	let b = new Promise((res, rej) => setTimeout(() => res(1), 3000));
+	await b;
 
 	let eventJSON: EventJSON = await res.json();
 
@@ -58,48 +64,65 @@ export default async function Page(
 	}
 
 	let eventStartTime = DateTime.fromJSDate(startTime).toLocaleString(myTimeConfig)
-	let createdAtTime = DateTime.fromJSDate(createdAt).toLocaleString(DateTime.DATE_SHORT);
+	let createdAtString = DateTime.fromJSDate(createdAt).toLocaleString(DateTime.DATE_SHORT);
 	let eventEndTime = DateTime.fromJSDate(endTime).toLocaleString(myTimeConfig);
 
 	let eventIcon: any;
+	let iconCaption = '';
 
 	switch (type) {
 		case "CUSTOM_EVENT":
 			eventIcon = OtherEventIcon;
+			iconCaption = 'Custom event';
 			break;
 		case "MOVIE_EVENT":
 			eventIcon = MovieIcon;
+			iconCaption = 'Movie event';
 			break;
 		case "BOARD_GAMES_EVENT":
 			eventIcon = BoardGameIcon;
+			iconCaption = 'Board games event';
 			break;
 		case "CONTEST_EVENT":
 			eventIcon = ContestIcon;
+			iconCaption = 'Contest event';
 			break;
 	}
 
 	return (
-		<div className="px-5 flex flex-col max-w-xl w-full">
-			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
-				<div className="flex font-bold justify-between text-center text-balance gap-4 text-lg">
-					<div className="text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
-					<div className="flex gap-2 self-center">
-						<div>{eventIcon}</div>
-						<ModEventIcon props={{ id }} />
+		<>
+			<div className="mx-auto px-5 flex flex-col max-w-xl w-full">
+				<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
+					<div className="p-2">
+						<div className="h-[4.5rem] flex justify-between text-center text-balance gap-4 text-lg">
+							<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
+							<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
+						</div>
+					</div>
+					<div className="flex flex-col mt-4 gap-3 p-2">
+						<div>
+							<div title="asdf" className="text-sm font-semibold">Starts at</div>
+							<div>{eventStartTime}</div>
+						</div>
+						<div>
+							<div className="text-sm font-semibold">Location</div>
+							<div>{location}</div>
+						</div>
+						<details>
+							<summary className="flex gap-1 cursor-pointer text-sm font-semibold"><span>Description</span><span className="self-center">{ChevronDownMicro}</span></summary>
+							<div>{description ? description : 'No description for this event'}</div>
+						</details>
+						<Participants props={{ placesTotal, eventId: id }} />
+						<EventConfigs props={{ eventId: id, type }} />
+						<CreatorPreview props={{ userId, createdAtString }} />
 					</div>
 				</div>
-				<div className="space-y-4 mt-4">
-					<EventSimpleField props={{ title: 'Location', value: location }} />
-					{description && <EventSimpleField props={{ title: 'Description', value: description }} />}
-					<EventSimpleField props={{ title: 'Starts at', value: eventStartTime }} />
-					<Participants props={{ placesTotal, eventId: id }} />
-					<Feedbacks props={{ eventId: id }} />
-					<EventConfigs props={{ eventId: id, type }} />
-					<EventFooter props={{ createdAtTime, rating }} />
+				<div className="flex justify-between">
+					<ModEventIcon props={{ id }} />
+					<Back />
 				</div>
 			</div>
-			<Back />
-		</div>
+		</>
 	)
 }
 

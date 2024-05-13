@@ -8,6 +8,7 @@ import getProfileData from '@/app/actions/user/getProfileData';
 import { VisitsIcon, LevelIcon, Trophy, LogOutIcon, EditIcon, PencilIcon } from '@/app/ui/icons';
 import { PencilMicro, CheckBadgeMicro, QuestionMarkMicro } from '@/app/ui/microIcons';
 import { UserStatus } from '@/app/types/user/enums/userStatus.enum';
+import Back from '@/app/ui/Back';
 
 export default async function AccountPage() {
 
@@ -77,6 +78,9 @@ export default async function AccountPage() {
 					<div className="overflow-scroll whitespace-nowrap">{firstName}</div>
 				</div>
 				<span className="font-light text-sm self-end">Member since {registrationDateString}</span>
+			</div>
+			<div className="self-end">
+				<Back />
 			</div>
 			<Link href="/account/password" className="self-end mt-5 px-4 py-2 w-fit flex gap-4 hover:text-active dark:hover:text-darkactive ring-1 rounded-md dark:ring-darkborder ring-border font-bold bg-button dark:bg-darkbutton">
 				<span className="text-sm">Change Password</span>

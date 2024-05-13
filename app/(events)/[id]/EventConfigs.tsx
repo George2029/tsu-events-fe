@@ -10,7 +10,7 @@ const AmountOfConfigs = dynamic(() => import('./NumberOfConfigs'), {
 export default async function EventConfigs({ props }: { props: { eventId: number, type: EventType } }) {
 	let { eventId, type } = props;
 	return (
-		<div className="flex rounded-lg  justify-between p-2">
+		<div className="flex justify-between">
 			<div className="text-sm font-semibold">Event Configs</div>
 			<div className="flex gap-2">
 				<div>

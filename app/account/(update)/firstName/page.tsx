@@ -1,6 +1,4 @@
 'use client'
-import Link from 'next/link';
-import { GoBackIcon } from '@/app/ui/icons';
 
 import { useFormState, useFormStatus } from 'react-dom';
 import updateFirstName from '@/app/actions/user/update/updateFirstName';
@@ -27,7 +25,7 @@ function UpdateFirstNameButton() {
 export default function UpdateFirstName() {
 	const [updateFirstNameState, updateFirstNameAction] = useFormState(updateFirstName, firstNameFormInitialState);
 	return (
-		<form className="gap-2 max-w-xs mx-auto flex flex-col" action={updateFirstNameAction} >
+		<form className="gap-2 flex flex-col" action={updateFirstNameAction} >
 			<label htmlFor="firstName" className="after:text-red-500 after:content-['*'] after:ml-0.5 block text-sm font-semibold leading-6 ">
 				New first name
 			</label>
@@ -44,10 +42,7 @@ export default function UpdateFirstName() {
 			<div className="text-sm">
 				{updateFirstNameState?.message}
 			</div>
-			<div className="flex justify-between">
-				<Link href="/account" className="w-fit md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
-				<UpdateFirstNameButton />
-			</div>
+			<UpdateFirstNameButton />
 		</form>
 
 	)
