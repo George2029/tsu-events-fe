@@ -20,7 +20,7 @@ import Back from '@/app/ui/Back';
 
 const CreatorPlaceholder = () => <div className="h-5 w-full bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
 
-const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), { loading: () => <CreatorPlaceholder /> });
+const CreatorPreview = dynamic(() => import('@/app/ui/user/FetchCreatorPreviewAndDisplay'), { loading: () => <CreatorPlaceholder /> });
 
 const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'), { loading: () => <div></div> });
 

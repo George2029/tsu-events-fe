@@ -1,5 +1,5 @@
-import EventsOrRequests from '@/app/ui/EventsOrRequests';
+import FetchPreviews from '@/app/fetches/FetchPreviews';
 
-export default async function RequestsPage() {
-	return <EventsOrRequests props={{}} />
+export default async function EventsPage() {
+	return <FetchPreviews props={{}} />
 }

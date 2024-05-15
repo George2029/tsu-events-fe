@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import getUserPreview from '@/app/actions/user/getUserPreview';
 
-export default async function CreatorPreview({ props }: { props: { userId: number, firstName: string, hue: number, createdAtString: string } }) {
+export default async function FetchCreatorPreviewAndDisplay({ props }: { props: { userId: number, createdAtString: string } }) {
 
-	let { userId, firstName, hue, createdAtString } = props;
+	let { userId, createdAtString } = props;
+	let { firstName, hue } = await getUserPreview(userId);
 	let letter = firstName[0].toUpperCase();
 
 	return (

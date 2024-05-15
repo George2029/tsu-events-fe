@@ -28,7 +28,7 @@ const NoVotesCount = dynamic(() => import('./NoVotesCount'), {
 
 const RequestorEditIcon = dynamic(() => import('@/app/ui/exp/RequestorEditIcon'), { loading: () => <div className="order-1"></div> });
 
-const CreatorPreview = dynamic(() => import('@/app/ui/user/CreatorPreview'), { loading: () => <CreatorPlaceholder /> });
+const CreatorPreview = dynamic(() => import('@/app/ui/user/FetchCreatorPreviewAndDisplay'), { loading: () => <CreatorPlaceholder /> });
 
 export default async function RequestPage({ params }: {
 	params: {

@@ -1,18 +1,18 @@
+'use client'
+import { useEffect } from 'react';
+
 import { DateTime } from "luxon";
-// import Skeleton from '@/app/ui/globals/EventsOrRequestsLoadingSkeleton';
 import Link from "next/link";
 import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
 import { EventOrRequestPreview } from '@/app/classes/EventOrRequestPreview';
 
-import CreatorPreview from '@/app/ui/user/CreatorPreview';
-import type { CreatorPreviewType } from '@/app/types/user/CreatorPreview';
+export default function EventOrRequestPreviewCard({ props }: { props: { requests?: boolean, eventOrRequestPreview: EventOrRequestPreview, previewData: { hue: number, firstName: string } } }) {
 
-type EventOrRequestWithUserPreview = EventOrRequestPreview & CreatorPreviewType;
-
-export default function EventOrRequestPreviewCard({ props }: { props: { requests?: boolean, eventOrRequestWithUserPreview: EventOrRequestWithUserPreview } }) {
-
-	let { id, title, type, location, startTime, userId, createdAt, hue, firstName } = props.eventOrRequestWithUserPreview;
+	let { id, title, type, location, startTime, userId, createdAt } = props.eventOrRequestPreview;
+	let { hue, firstName } = props.previewData;
+	let letter = firstName[0].toUpperCase();
 	let { requests } = props;
+
 
 	let link = `/`;
 	if (requests) {
@@ -23,14 +23,14 @@ export default function EventOrRequestPreviewCard({ props }: { props: { requests
 
 	let eventIcon: any;
 
-	let startTimeString = DateTime.fromJSDate(new Date(startTime)).toLocaleString({
+	let startTimeString = DateTime.fromJSDate(startTime).toLocaleString({
 		day: 'numeric',
 		month: 'long',
 		hour: 'numeric',
 		minute: '2-digit'
 	})
 
-	let createdAtString = DateTime.fromJSDate(new Date(createdAt)).toLocaleString(DateTime.DATETIME_SHORT);
+	let createdAtString = DateTime.fromJSDate(createdAt).toLocaleString(DateTime.DATETIME_SHORT);
 
 	let iconCaption = '';
 
@@ -52,6 +52,12 @@ export default function EventOrRequestPreviewCard({ props }: { props: { requests
 			iconCaption = 'Contest event';
 			break;
 	}
+	useEffect(() => {
+		window.visualViewport?.addEventListener('scroll', (event) => {
+			let target = event.target as VisualViewport;
+			console.log(target.pageTop);
+		});
+	}, []);
 
 
 	return (
@@ -62,7 +68,18 @@ export default function EventOrRequestPreviewCard({ props }: { props: { requests
 			</div>
 			<div>{startTimeString}</div>
 			<div>{location}</div>
-			<CreatorPreview props={{ userId, firstName, hue, createdAtString }} />
+			<div className="flex justify-between items-center text-sm gap-2">
+				<div className="flex gap-1 items-center">
+					<Link href={`/user/${userId}`} className={`hover:text-active dark:hover:text-darkactive active:scale-90 duration-300 rounded-full avatar-bg-${hue} ring-1 ring-border dark:ring-darkborder w-4 h-4 font-bold flex justify-center items-center`}>
+						<span className="text-white text-xs drop-shadow-md">
+							{letter}
+						</span>
+					</Link>
+					<span>by</span>
+					<Link href={`/user/${userId}`} className="hover:text-active dark:hover:text-darkactive active:scale-90 duration-300">{firstName}</Link>
+				</div>
+				<div className="font-light text-xs">{createdAtString}</div>
+			</div>
 		</div>
 	)
 }

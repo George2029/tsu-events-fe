@@ -1,6 +1,6 @@
-import EventsOrRequests from '@/app/ui/EventsOrRequests';
+import FetchPreviews from '@/app/fetches/FetchPreviews';
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
 
 export default async function EventsOrRequestsPage() {
-	return <EventsOrRequests props={{ requests: true, eventType: EventType.BOARD_GAMES_EVENT }} />
+	return <FetchPreviews props={{ requests: true, eventType: EventType.BOARD_GAMES_EVENT }} />
 }
