@@ -32,7 +32,7 @@ export default function RootLayout({
 							<ThemeToggler />
 							<div className="absolute top-4 right-14 z-50 font-bold text-xl select-none self-center">Uni Events</div>
 							<NavBar />
-							<div className="pb-40 w-full items-center flex flex-col">
+							<div className="md:pb-10 md-20 w-full items-center flex flex-col">
 								{children}
 							</div>
 						</main>
