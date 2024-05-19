@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronDownIcon } from './icons';
+import { ChevronDownIcon } from '@/app/ui/icons/icons';
 import { useState } from 'react';
 import Link from 'next/link';
 

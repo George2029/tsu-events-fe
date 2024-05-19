@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidateTag } from 'next/cache';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { cookies } from 'next/headers';
@@ -16,10 +17,13 @@ type PrevState = {
 export default async function EditEvent(prevState: PrevState, formData: FormData) {
 	let sid = cookies().get('connect.sid');
 	if (!sid) return redirect('/signin');
-	let updateEventDto: UpdateEventDto = {};
 
-	let id = formData.get('id')?.toString();
-	console.log(`id: `, id);
+	let previousType = formData.get('previousType');
+	let id = String(formData.get('id'));
+
+
+
+	let updateEventDto: UpdateEventDto = {};
 
 	let title = formData.get('title')?.toString().trim();
 	if (title) {
@@ -36,7 +40,7 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 		updateEventDto.description = description;
 	}
 
-	let type = formData.get('type')?.toString().trim() as EventType;
+	let type = formData.get('type') as EventType;
 	if (type) {
 		updateEventDto.type = type;
 	}
@@ -46,27 +50,34 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 		updateEventDto.placesTotal = placesTotal;
 	}
 
-	let startTime = formData.get('startTime')?.toString().trim();
-	if (startTime) {
+	let startTime = new Date(String(formData.get('startTime')));
+	if (!isNaN(startTime.getTime())) {
 		updateEventDto.startTime = new Date(startTime);
 	}
 
-	let endTime = formData.get('endTime')?.toString().trim();
-	if (endTime) {
+	let endTime = new Date(String(formData.get('endTime')));
+	if (!isNaN(endTime.getTime())) {
 		updateEventDto.endTime = new Date(endTime);
 	}
 
-	let status = formData.get('status')?.toString().trim() as EventStatus;
+	let status = formData.get('status') as EventStatus;
 	if (status) {
 		updateEventDto.status = status;
+	}
+
+	if (!Object.keys(updateEventDto).length) {
+		console.log(`redirecting bc of empty dto`);
+		redirect(`/` + id);
 	}
 
 	let event = plainToInstance(UpdateEventDto, updateEventDto);
 
 	let valid = await validate(event);
 
-	if (valid.length) return { message: JSON.stringify(valid) };
-	console.log(event);
+	if (valid.length) {
+		console.log(`Event editing has failed: `, valid);
+		return { message: String(valid[0]) };
+	}
 
 	let res = await fetch(`http://localhost:3000/mod/events/${id}`, {
 		method: "PUT",
@@ -85,7 +96,20 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 		}
 	}
 
-	let newEvent = await res.json();
-	console.log(`updated event: `, newEvent);
+	let editedEvent = await res.json();
+	console.log(`The moderator has edited an event: `, id);
+
+	if (type !== previousType) {
+		revalidateTag('event' + id);
+		revalidateTag('events' + type);
+		revalidateTag('events' + previousType); // if type is changed, then route with events of the previous type has to be revalidated as well.
+	} else {
+		if (title || status || startTime || location) {
+			revalidateTag('event' + id);
+			revalidateTag('events' + type);
+		} else {
+			revalidateTag('event' + id);
+		}
+	}
 	return redirect(`/${id}`);
 }

@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidateTag } from 'next/cache';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { cookies } from 'next/headers';
@@ -244,6 +245,8 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 		};
 	}
 
+	revalidateTag('events' + type);
+	revalidateTag('events');
 	redirect(`/${newEvent.id}`);
 
 }

@@ -1,4 +1,4 @@
-import { EventType } from '@/app/ui/events/enums/eventType.enum';
+import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import { RequestStatus } from '@/app/classes/requests/enums/requestStatus.enum';
 import { Type } from 'class-transformer';
 

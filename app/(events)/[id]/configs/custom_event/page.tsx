@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import getAllConfigsByEventType from '@/app/actions/configs/getAllConfigsByEventType';
-import Link from 'next/link';
-import { GoBackIcon } from '@/app/ui/icons';
+import BackButton from '@/app/ui/buttons/Back';
 
 export default async function CustomEventConfigsPage({ params }: { params: { id: string } }) {
 	let eventId = +params.id;
@@ -20,8 +19,7 @@ export default async function CustomEventConfigsPage({ params }: { params: { id:
 					}
 				</div>
 			</div>
-			<Link href={`/${eventId}`} className="w-fit md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
-
+			<BackButton />
 		</>
 	)
 }

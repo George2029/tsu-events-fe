@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
-import Link from 'next/link';
-import { GoBackIcon } from '@/app/ui/icons';
+import BackButton from '@/app/ui/buttons/Back';
 import getAllConfigsByEventType from '@/app/actions/configs/getAllConfigsByEventType';
 
 export default async function BoardGamesEventConfigsPage({ params }: { params: { id: string } }) {
@@ -20,7 +19,7 @@ export default async function BoardGamesEventConfigsPage({ params }: { params: {
 					}
 				</div>
 			</div>
-			<Link href={`/${eventId}`} className="w-fit md:active:scale-90 active:scale-50 duration-300 dark:bg-darkbutton bg-button dark:hover:text-darkactive hover:text-active ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+			<BackButton />
 		</>
 	)
 }

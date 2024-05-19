@@ -10,6 +10,71 @@ summary {
  list-style: none;
 }
 
+@layer components {
+
+	.btn {
+		@apply flex;
+		@apply w-fit;
+		@apply gap-2;
+		@apply outline-none;
+		@apply p-2;
+		@apply mt-4;
+		@apply rounded-lg;
+
+		@apply ring-1;
+		@apply ring-black;
+		@apply dark:ring-[#46477E]; 
+		@apply bg-white;
+		@apply dark:bg-[#202253];
+		@apply hover:ring-[#2563EB];
+		@apply dark:hover:ring-[#BDBFFD];
+
+		@apply duration-300;
+		@apply active:scale-50;
+		@apply md:active:scale-90;
+
+	}
+	.required {
+			@apply after:content-['*'] ;
+			@apply after:ml-0.5 ;
+			@apply after:text-red-500;
+	}
+
+	.custom-label {
+
+		@apply block;
+		@apply text-sm;
+		@apply leading-6;
+
+		> span {
+			@apply block;
+			@apply font-semibold;
+		}
+
+		&:has(input[required]) > span {
+				@apply after:content-['*'] ;
+				@apply after:ml-0.5 ;
+				@apply after:text-red-500;
+		}
+
+
+		> input, textarea {
+			@apply block;
+			@apply mt-1;
+			@apply border;
+			@apply shadow-sm;
+			@apply border-slate-300;
+			@apply placeholder-slate-400;
+			@apply focus:outline-none;
+			@apply focus:border-sky-500;
+			@apply focus:ring-sky-500;
+			@apply rounded-md;
+			@apply focus:ring-1;
+			@apply dark:bg-gray-700;
+		}
+	}
+}
+
 .avatar-bg-0 {background:linear-gradient(hsl(0 100% 45%),hsl(0 100% 30%))}
 .avatar-bg-1 {background:linear-gradient(hsl(1 100% 45%),hsl(1 100% 30%))}
 .avatar-bg-2 {background:linear-gradient(hsl(2 100% 45%),hsl(2 100% 30%))}

@@ -1,4 +1,4 @@
-import { VisitsIcon, LevelIcon, Trophy } from '@/app/ui/icons';
+import { VisitsIcon, LevelIcon, Trophy } from '@/app/ui/icons/icons';
 
 export default function Loading() {
 	return (

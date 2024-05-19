@@ -5,10 +5,10 @@ import { redirect } from 'next/navigation';
 import logOutAll from '@/app/actions/user/logOutAll';
 import logOut from '@/app/actions/user/logOut';
 import getProfileData from '@/app/actions/user/getProfileData';
-import { VisitsIcon, LevelIcon, Trophy, LogOutIcon, EditIcon, PencilIcon } from '@/app/ui/icons';
-import { PencilMicro, CheckBadgeMicro, QuestionMarkMicro } from '@/app/ui/microIcons';
+import { VisitsIcon, LevelIcon, Trophy, LogOutIcon, EditIcon, PencilIcon } from '@/app/ui/icons/icons';
+import { PencilMicro, CheckBadgeMicro, QuestionMarkMicro } from '@/app/ui/icons/microIcons';
 import { UserStatus } from '@/app/types/user/enums/userStatus.enum';
-import Back from '@/app/ui/Back';
+import BackButton from '@/app/ui/buttons/Back';
 
 export default async function AccountPage() {
 
@@ -46,11 +46,11 @@ export default async function AccountPage() {
 							<span className="w-12 text-sm font-semibold ">Wins:</span>
 							<span>{wins}</span>
 						</div>
-						<div className="flex gap-1 items-center">
+						<Link href="/account/visits" className="flex gap-1 items-center">
 							<div className="dark:text-darkspecialIcons text-specialIcons">{VisitsIcon}</div>
 							<span className="w-12 text-sm font-semibold ">Visits:</span>
 							<span>{visits}</span>
-						</div>
+						</Link>
 					</div>
 				</div>
 				<div className="p-2 border rounded-md border-inputBorder">
@@ -79,29 +79,31 @@ export default async function AccountPage() {
 				</div>
 				<span className="font-light text-sm self-end">Member since {registrationDateString}</span>
 			</div>
-			<div className="self-end">
-				<Back />
+			<div>
+				<BackButton />
 			</div>
-			<Link href="/account/password" className="self-end mt-5 px-4 py-2 w-fit flex gap-4 hover:text-active dark:hover:text-darkactive ring-1 rounded-md dark:ring-darkborder ring-border font-bold bg-button dark:bg-darkbutton">
-				<span className="text-sm">Change Password</span>
+			<Link href="/account/password" className="btn">
+				<span>Change Password</span>
 			</Link>
-			{(role !== 'REGULAR') && <Link href="/exp/request" className="self-end mt-5 bg-button dark:bg-darkbutton px-4 py-2 flex gap-4 rounded-md shadow-lg w-fit hover:text-active dark:hover:text-darkactive ring-1 ring-border dark:ring-darkborder">
-				<span className="font-bold text-sm">Post a Request</span>
-				<span>{PencilIcon}</span>
-			</Link>}
-			{(role === 'ADMINISTRATOR' || role === 'MODERATOR') && <Link href="/mod" className="self-end mt-5 bg-button dark:bg-darkbutton px-4 py-2 flex gap-4 rounded-md shadow-lg w-fit hover:text-active dark:hover:text-darkactive ring-1 ring-border dark:ring-darkborder">
-				<span className="font-bold text-sm">Mod</span>
-				<span>{EditIcon}</span>
-			</Link>}
-			<form action={logOut} className="self-end mt-5 ">
-				<button className="px-4 py-2 flex gap-4 rounded-md shadow-lg ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkbutton font-bold hover:text-active dark:hover:text-darkactive">
-					<span className="font-bold text-sm">Log Out</span>
+			{(role !== 'REGULAR') &&
+				<Link href="/request" className="btn">
+					<span>Post a Request</span>
+					<span>{PencilIcon}</span>
+				</Link>}
+			{(role === 'ADMINISTRATOR' || role === 'MODERATOR') &&
+				<Link href="/event" className="btn">
+					<span>Post an Event</span>
+					<span>{EditIcon}</span>
+				</Link>}
+			<form action={logOut}>
+				<button className="btn">
+					<span>Log Out</span>
 					<span>{LogOutIcon}</span>
 				</button>
 			</form>
-			<form action={logOutAll} className="self-end mt-5 ">
-				<button className="px-4 py-2 flex gap-4 rounded-md shadow-lg ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkbutton hover:text-active dark:hover:text-darkactive">
-					<span className="font-bold text-sm">Log Out from all devices</span>
+			<form action={logOutAll}>
+				<button className="btn">
+					<span>Log Out from all devices</span>
 					<span>{LogOutIcon}</span>
 				</button>
 			</form>

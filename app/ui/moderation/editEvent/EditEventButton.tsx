@@ -7,7 +7,7 @@ export default function EditEventButton() {
 		<button
 			type="submit"
 			disabled={pending}
-			className="p-2 rounded-md text-sm bg-indigo-600 font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:bg-indigo-400"
+			className="btn mb-2"
 		>
 			{pending ? "Updating..." : "Update"}
 		</button>

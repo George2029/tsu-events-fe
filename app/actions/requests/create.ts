@@ -5,6 +5,7 @@ import { validate } from 'class-validator';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
+import { revalidateTag } from 'next/cache';
 
 import { CreateRequestDto } from '@/app/classes/requests/dto/create-request.dto';
 
@@ -20,7 +21,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 	let title = formData.get('title')?.toString().trim() as string;
 	let location = formData.get('location')?.toString().trim() as string;
 	let description = formData.get('description')?.toString().trim();
-	let type = formData.get('type')?.toString().trim() as EventType;
+	let type = formData.get('type') as EventType;
 	let startTime = new Date(String(formData.get('startTime')));
 	let endTime = new Date(String(formData.get('endTime')));
 
@@ -51,10 +52,11 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 	}
 
 	let newRequest = await res.json();
-	console.log(newRequest);
+	console.log(`a new request has been created: `, newRequest);
 
-	return {
-		message: 'all good'
-	}
+	revalidateTag('requests');
+	revalidateTag('requests' + type);
+
+	redirect('/requests/' + newRequest.id);
 
 }

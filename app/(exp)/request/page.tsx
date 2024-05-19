@@ -1,10 +1,9 @@
 import CreateRequest from '@/app/ui/request/CreateRequest';
-import canMod from '@/app/actions/moderation/canMod'
+import canRequest from '@/app/actions/requests/canRequest'
 import { notFound } from 'next/navigation';
 
-
 export default async function CreateRequestPage() {
-	let res = await canMod();
+	let res = await canRequest();
 	if (!res) return notFound();
 	return (
 		<>

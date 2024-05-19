@@ -1,4 +1,4 @@
-import { Feedback } from '@/app/ui/icons';
+import { Feedback } from '@/app/ui/icons/icons';
 import dynamic from 'next/dynamic';
 
 const NumberOfFeedbacks = dynamic(() => import('./NumberOfFeedbacks'), {

@@ -1,7 +1,5 @@
 'use client'
 
-import Back from '@/app/ui/Back';
-
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
 import { useFormState } from 'react-dom';
@@ -46,13 +44,12 @@ export default function EditOneEvent({ props }: {
 	} = props;
 
 	let [formState, setFormState] = useFormState(editEvent, { message: '' });
-	let removeEvent = deleteEvent.bind(null, id);
+	let removeEvent = deleteEvent.bind(null, id, existingType);
 
 	return (
-		<div className="flex flex-col">
-			<h2 className="font-semibold text-center pb-6">Edit Event</h2>
+		<>
 			<form action={setFormState}>
-				<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-green-950/60 pb-12">
+				<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-blue-800/30 pb-6">
 					<input type="hidden" name="id" value={id} />
 					<Title props={{ existingValue: existingTitle }} />
 					<Description props={{ existingValue: existingDescription }} />
@@ -68,16 +65,15 @@ export default function EditOneEvent({ props }: {
 					<EditEventButton />
 				</div>
 			</form>
-			<form className="mt-2" action={removeEvent}>
+			<form className="absolute bottom-5" action={removeEvent}>
 				<button
 					type="submit"
-					className="p-2 rounded-md text-sm bg-indigo-600 font-semibold text-white shadow-sm hover:bg-indigo-500"
+					className="btn"
 				>
 					Delete
 				</button>
 			</form>
-			<Back />
-		</div>
+		</>
 	)
 }
 

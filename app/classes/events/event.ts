@@ -1,6 +1,6 @@
-import { EventType } from '@/app/ui/events/enums/eventType.enum';
+import { EventType } from '@/app/classes/events/enums/eventType.enum';
 import { Type } from 'class-transformer';
-import { EventStatus } from '@/app/ui/events/enums/eventStatus.enum';
+import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
 
 export class Event {
 	id: number;

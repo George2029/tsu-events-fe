@@ -23,7 +23,10 @@ export default function CreateOneEvent() {
 
 	let [formState, setFormState] = useFormState(createEvent, { message: '' });
 	let [eventType, setEventType] = useState<string>('');
-	const onTypeChange = (e: React.FormEvent<HTMLInputElement>) => setEventType(e.currentTarget.value);
+	const onTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		console.log(e.target.value);
+		setEventType(e.target.value);
+	}
 	let now = new Date();
 	now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 	let normalizedTimeString = now.toISOString().slice(0, 16);
@@ -31,7 +34,7 @@ export default function CreateOneEvent() {
 	return (
 		<form className="" action={setFormState}>
 			<h2 className="font-semibold text-center pb-6">New Event</h2>
-			<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-green-950/60 pb-12">
+			<div className="mt-4 space-y-4 border-b border-gray-900/10 dark:border-blue-800/30 pb-6">
 				<Title />
 				<Description />
 				<Type props={{ onTypeChange }} />
@@ -44,7 +47,7 @@ export default function CreateOneEvent() {
 				<StartTime props={{ normalizedTimeString }} />
 				<EndTime props={{ normalizedTimeString }} />
 			</div>
-			<div className="mt-6 flex flex-col items-end">
+			<div className="flex flex-col items-center">
 				<div>{formState?.message}</div>
 				<CreateEventButton />
 			</div>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { RequestIcon, UsersIcon, EventIcon } from '@/app/ui/icons';
+import { RequestIcon, UsersIcon, EventIcon } from '@/app/ui/icons/icons';
 
 let navBarItems = [
 	{

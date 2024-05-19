@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import { DateTime } from "luxon";
-import { LockMicro } from '@/app/ui/microIcons';
-import { GoBackIcon } from '@/app/ui/icons';
+import { LockMicro } from '@/app/ui/icons/microIcons';
 import Link from 'next/link';
 import getAllParticipants from '@/app/actions/events/event/getAllParticipants';
+import BackButton from '@/app/ui/buttons/Back';
 
 let title = 'Participants of the event';
 
@@ -66,7 +66,7 @@ export default async function EventParticipantsPage({ params }: { params: { id: 
 					</div>
 				</div>
 			</div>
-			<Link href={`/${eventId}`} className="self-end md:active:scale-90 active:scale-50 duration-300 bg-button dark:hover:text-darkactive dark:bg-darkcardBG ring-1 ring-border dark:ring-darkborder mt-4 flex p-2 gap-2 rounded-lg"><span>Back</span> {GoBackIcon}</Link>
+			<BackButton />
 		</div>
 	)
 }

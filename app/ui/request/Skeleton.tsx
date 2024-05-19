@@ -1,6 +1,6 @@
-import Back from '@/app/ui/Back';
-import { ThumbsUpMini, ThumbsDownMini } from '@/app/ui/miniIcons';
-import { CheckIcon, XIcon } from '@/app/ui/icons';
+import Back from '@/app/ui/buttons/Back';
+import { ThumbsUpMini, ThumbsDownMini } from '@/app/ui/icons/miniIcons';
+import { CheckIcon, XIcon } from '@/app/ui/icons/icons';
 
 export default function Event() {
 	return (

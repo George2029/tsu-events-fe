@@ -1,4 +1,4 @@
-import Back from '@/app/ui/Back';
+import Back from '@/app/ui/buttons/Back';
 
 export default function UserPublicPageLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (

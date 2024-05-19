@@ -1,10 +1,10 @@
 import EditRequest from '@/app/ui/request/EditRequest';
-import { getRequest } from '@/app/actions/requests/getRequest';
+import { getRequestAsOwner } from '@/app/actions/requests/getRequestAsOwner';
 
 export default async function RequestPage(
 	{ params }: { params: { id: string } }) {
 
-	let request = await getRequest(params.id);
+	let request = await getRequestAsOwner(params.id);
 
 	let {
 		id,
@@ -15,8 +15,6 @@ export default async function RequestPage(
 		endTime,
 		description,
 	} = request;
-
-	console.log(request);
 
 	startTime.setMinutes(startTime.getMinutes() - startTime.getTimezoneOffset());
 	let normalizedStartTime = startTime.toISOString().slice(0, 16);

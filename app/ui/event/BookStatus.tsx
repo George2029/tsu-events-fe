@@ -1,3 +1,7 @@
+'use client'
+
+import { useState } from 'react'
+
 import { ParticipantStatus } from '@/app/classes/participants/enums/participantStatus.enum';
 
 export default function BookStatus({ props }: {
@@ -36,20 +40,21 @@ export default function BookStatus({ props }: {
 		actionIcon2,
 	} = props;
 
+	let [open, setOpen] = useState(false);
 
 	return (
-		<details className="relative">
+		<div className="relative">
 
-			<summary className="md:active:scale-90 ring-1 ring-border dark:ring-darkborder active:scale-50 duration-300 select-none text-sm bg-button dark:bg-darkgenreBarBG flex hover:ring-active dark:hover:ring-darkactive gap-2 cursor-pointer p-2 rounded-lg"
+			<div onClick={() => setOpen(e => !e)} className="md:active:scale-90 ring-1 ring-border dark:ring-darkborder active:scale-50 duration-300 select-none text-sm bg-button dark:bg-darkgenreBarBG flex hover:ring-active dark:hover:ring-darkactive gap-2 cursor-pointer p-2 rounded-lg"
 
 			>
 				<div>{faceTitle}</div>
 				<div className="text-green-500">{faceIcon}</div>
 				{notificationIcon && <div>{notificationIcon}</div>}
-			</summary>
+			</div>
 
-			<div className={`ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkgenreBarBG text-nowrap absolute right-0 top-10 rounded-lg`}>
-				<form action={action}>
+			<div className={`${!open && 'hidden'} ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkgenreBarBG text-nowrap absolute right-0 top-10 rounded-lg`}>
+				<form onClick={() => setOpen(false)} action={action}>
 					<input name="eventId" type="hidden" value={eventId} />
 					<input name="id" type="hidden" value={id} />
 					{notifiedInputField !== null && <input name="notified" type="hidden" value={Number(notifiedInputField)} />}
@@ -60,7 +65,7 @@ export default function BookStatus({ props }: {
 						<div>{actionIcon}</div>
 					</button>
 				</form>
-				<form action={action}>
+				<form onClick={() => setOpen(false)} action={action}>
 					<input name="id" type="hidden" value={id} />
 					<input name="eventId" type="hidden" value={eventId} />
 					{notifiedInputField2 !== null && <input name="notified" type="hidden" value={Number(notifiedInputField2)} />}
@@ -71,7 +76,7 @@ export default function BookStatus({ props }: {
 					</button>
 				</form>
 			</div>
-		</details>
+		</div>
 	)
 }
 

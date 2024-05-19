@@ -14,13 +14,18 @@ export default async function getAllEventsOrRequestsPreviewDataWithOwnerData(opt
 	if (offset) params.offset = String(offset);
 
 	let url = `http://localhost:3000/${dataType}?` + new URLSearchParams(params);
+	let tags: string[] = [];
+	if (type) {
+		tags.push(dataType + type); // gets revalidated if only dataType preview of that type specific type is changed, or dataType of that type is deleted or a new one inserted 
+	} else {
+		tags.push(dataType); // gets revalidated if any dataType preview is changed, or new one is inserted 
+	}
 
-	const res = await fetch(url, {
-		cache: 'no-store'
-	});
+	console.time(`fetch data: ${dataType}, type: ${type}, offset: ${offset}`);
+	const res = await fetch(url, { next: { tags } });
+	console.timeEnd(`fetch data: ${dataType}, type: ${type}, offset: ${offset}`);
 
-	let b = new Promise((res, rej) => setTimeout(() => res(1), 5000));
-	await b;
+	await new Promise(res => setTimeout(() => res(1), 1000)); // for testing
 
 	return res.json();
 

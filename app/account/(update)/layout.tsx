@@ -1,4 +1,4 @@
-import Back from '@/app/ui/Back';
+import BackButton from '@/app/ui/buttons/Back';
 
 export default function AccountEditLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
@@ -6,7 +6,7 @@ export default function AccountEditLayout({ children }: Readonly<{ children: Rea
 		<div className="flex md:mx-auto max-w-xs flex-col">
 			{children}
 			<div className="self-end">
-				<Back />
+				<BackButton />
 			</div>
 		</div>
 	)

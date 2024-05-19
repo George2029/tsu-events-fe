@@ -1,4 +1,4 @@
-import { Star } from '@/app/ui/icons';
+import { Star } from '@/app/ui/icons/icons';
 
 export default function EventFooter({ props }: { props: { createdAtTime: string, rating: number } }) {
 	let { createdAtTime, rating } = props;

@@ -2,7 +2,7 @@ import BookStatus from '@/app/ui/event/BookStatus';
 import book from '@/app/actions/events/event/book';
 import updateBook from '@/app/actions/events/event/updateBook';
 import { ParticipantStatus } from '@/app/classes/participants/enums/participantStatus.enum';
-import { NotNotifiedMicro, MinusUserMicro, NotifiedMicro, CheckCircleMicro, PlusUserMicro } from '@/app/ui/microIcons';
+import { NotNotifiedMicro, MinusUserMicro, NotifiedMicro, CheckCircleMicro, PlusUserMicro } from '@/app/ui/icons/microIcons';
 import getParticipant from '@/app/actions/events/event/getParticipant';
 
 export default async function Book({ props }: { props: { eventId: number } }) {
@@ -10,6 +10,7 @@ export default async function Book({ props }: { props: { eventId: number } }) {
 
 
 	let participant = await getParticipant(eventId);
+	console.log(participant);
 
 	let { id } = participant;
 
@@ -27,6 +28,8 @@ export default async function Book({ props }: { props: { eventId: number } }) {
 
 	let notifiedInputField: boolean | null = null;
 	let notifiedInputField2: boolean | null = null;
+
+	if (participant?.status === ParticipantStatus.ISPRESENT) return <div className="text-green-500">You're present!</div>;
 
 	let going = participant?.status === ParticipantStatus.ISGOING;
 	let notified = participant?.notified;

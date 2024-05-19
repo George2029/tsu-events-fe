@@ -6,9 +6,9 @@ import { DateTime, DateTimeFormatOptions } from "luxon";
 
 import { plainToInstance } from 'class-transformer';
 
-import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
+import { MovieIcon, BoardGameIcon, ContestIcon, CustomIcon } from '@/app/ui/icons/eventsBarIcons';
 
-import { ChevronDownMicro } from '@/app/ui/microIcons';
+import { ChevronDownMicro } from '@/app/ui/icons/microIcons';
 
 import { Event } from '@/app/classes/events/event';
 import type { EventJSON } from '@/app/types/events/eventTypes';
@@ -16,13 +16,13 @@ import type { EventJSON } from '@/app/types/events/eventTypes';
 import Participants from './Participants';
 import EventConfigs from './EventConfigs';
 
-import Back from '@/app/ui/Back';
+import BackButton from '@/app/ui/buttons/Back';
 
 const CreatorPlaceholder = () => <div className="h-5 w-full bg-loading dark:bg-darkloading animate-pulse rounded-lg"></div>;
 
 const CreatorPreview = dynamic(() => import('@/app/ui/user/FetchCreatorPreviewAndDisplay'), { loading: () => <CreatorPlaceholder /> });
 
-const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'), { loading: () => <div></div> });
+const ModButton = dynamic(() => import('@/app/ui/buttons/Mod'), { loading: () => <div></div> });
 
 export default async function Page(
 	{ params }: { params: { id: string } }
@@ -33,8 +33,9 @@ export default async function Page(
 	let res = await fetch(`http://localhost:3000/events/${params.id}`, { cache: 'no-store' });
 
 	if (!res.ok) notFound()
-	let b = new Promise((res, rej) => setTimeout(() => res(1), 3000));
-	await b;
+
+	await new Promise((res) => setTimeout(() => res(1), 1500));
+	console.log(`artificially delayed by 1500ms)`);
 
 	let eventJSON: EventJSON = await res.json();
 
@@ -72,7 +73,7 @@ export default async function Page(
 
 	switch (type) {
 		case "CUSTOM_EVENT":
-			eventIcon = OtherEventIcon;
+			eventIcon = CustomIcon;
 			iconCaption = 'Custom event';
 			break;
 		case "MOVIE_EVENT":
@@ -91,17 +92,15 @@ export default async function Page(
 
 	return (
 		<>
-			<div className="mx-auto px-5 flex flex-col max-w-xl w-full">
-				<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
-					<div className="p-2">
-						<div className="h-[4.5rem] flex justify-between text-center text-balance gap-4 text-lg">
-							<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
-							<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
-						</div>
+			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
+				<div className="p-2">
+					<div className="h-[4.5rem] flex justify-between text-center text-balance gap-4 text-lg">
+						<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
+						<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
 					</div>
 					<div className="flex flex-col mt-4 gap-3 p-2">
 						<div>
-							<div title="asdf" className="text-sm font-semibold">Starts at</div>
+							<div title="The time the event starts" className="text-sm font-semibold">Starts at</div>
 							<div>{eventStartTime}</div>
 						</div>
 						<div>
@@ -117,11 +116,14 @@ export default async function Page(
 						<CreatorPreview props={{ userId, createdAtString }} />
 					</div>
 				</div>
-				<div className="flex justify-between">
-					<ModEventIcon props={{ id }} />
-					<Back />
-				</div>
 			</div>
+			<div className="flex justify-between">
+				<div>
+					<ModButton props={{ id }} />
+				</div>
+				<BackButton />
+			</div>
+
 		</>
 	)
 }

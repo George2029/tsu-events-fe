@@ -1,5 +1,5 @@
-import { Audio } from '@/app/ui/events/enums/audio.enum';
-import { Subtitles } from '@/app/ui/events/enums/subtitles.enum';
+import { Audio } from '@/app/classes/events/enums/audio.enum';
+import { Subtitles } from '@/app/classes/events/enums/subtitles.enum';
 
 export class MovieEventConfig {
 	id: number;

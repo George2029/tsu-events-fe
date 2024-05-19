@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { SunIcon, MoonIcon, PCIcon, ArrowUp } from '@/app/ui/icons';
+import { SunIcon, MoonIcon, PCIcon, ArrowUp } from '@/app/ui/icons/icons';
 
 let inAreaToBeTriggered = false;
 let lastPageTop = 0;

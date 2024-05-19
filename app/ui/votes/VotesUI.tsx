@@ -1,6 +1,6 @@
 import vote from '@/app/actions/votes/vote';
-import { CheckIcon, XIcon } from '@/app/ui/icons';
-import { ThumbsUpMini, ThumbsDownMini } from '@/app/ui/miniIcons';
+import { CheckIcon, XIcon } from '@/app/ui/icons/icons';
+import { ThumbsUpMini, ThumbsDownMini } from '@/app/ui/icons/miniIcons';
 
 export default function VoteClientComponent({ props }: {
 	props: {

@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
-import { ChevronDownMicro } from '@/app/ui/microIcons';
-import { CheckIcon, XIcon } from '@/app/ui/icons';
-import Back from '@/app/ui/Back';
+import { ChevronDownMicro } from '@/app/ui/icons/microIcons';
+import { CheckIcon, XIcon } from '@/app/ui/icons/icons';
+import Back from '@/app/ui/buttons/Back';
 import { getRequest } from '@/app/actions/requests/getRequest';
 import { DateTime, DateTimeFormatOptions } from "luxon";
-import { MovieIcon, BoardGameIcon, ContestIcon, OtherEventIcon } from '@/app/ui/icons/eventsBarIcons';
+import { MovieIcon, BoardGameIcon, ContestIcon, CustomIcon } from '@/app/ui/icons/eventsBarIcons';
 
-const ModEventIcon = dynamic(() => import('@/app/ui/moderation/ModEventIcon'), { loading: () => <div className="order-2"></div> });
+const ModButtong = dynamic(() => import('@/app/ui/buttons/Mod'), { loading: () => <div className="order-2"></div> });
 
 const Vote = dynamic(() => import('./Vote'), { loading: () => <div className="h-[1.625rem] w-full bg-loading dark:bg-darkloading rounded-lg"></div> });
 
@@ -26,7 +26,7 @@ const NoVotesCount = dynamic(() => import('./NoVotesCount'), {
 	loading: () => <VotesPlaceholder />
 });
 
-const RequestorEditIcon = dynamic(() => import('@/app/ui/exp/RequestorEditIcon'), { loading: () => <div className="order-1"></div> });
+const RequestorButton = dynamic(() => import('@/app/ui/buttons/Requestor'), { loading: () => <div className="order-1"></div> });
 
 const CreatorPreview = dynamic(() => import('@/app/ui/user/FetchCreatorPreviewAndDisplay'), { loading: () => <CreatorPlaceholder /> });
 
@@ -37,10 +37,9 @@ export default async function RequestPage({ params }: {
 }) {
 
 	let request = await getRequest(params.id);
-	let b = new Promise((res, rej) => setTimeout(() => res(1), 3000));
-	await b;
 
-	console.log(request);
+	await new Promise((res) => setTimeout(() => res(1), 1500));
+	console.log(`fetched req with 1500ms delay`);
 
 	let {
 		id,
@@ -61,7 +60,7 @@ export default async function RequestPage({ params }: {
 
 	switch (type) {
 		case "CUSTOM_EVENT":
-			eventIcon = OtherEventIcon;
+			eventIcon = CustomIcon;
 			iconCaption = 'Custom event';
 			break;
 		case "MOVIE_EVENT":
@@ -140,10 +139,10 @@ export default async function RequestPage({ params }: {
 			</div>
 			<div className="flex justify-between">
 				<div>
-					<RequestorEditIcon props={{ id }} />
+					<RequestorButton props={{ id }} />
 				</div>
 				<div>
-					<ModEventIcon props={{ id, request: true }} />
+					<ModButtong props={{ id, request: true }} />
 				</div>
 				<Back />
 			</div>

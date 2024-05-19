@@ -6,7 +6,7 @@ export let getRequest = async (id: string): Promise<Request> => {
 
 	if (isNaN(+id)) notFound();
 
-	let res = await fetch(`http://localhost:3000/requests/${+id}`, { cache: 'no-store' });
+	let res = await fetch(`http://localhost:3000/requests/${+id}`, { next: { tags: ['request' + id] } });
 
 	if (!res.ok) notFound()
 	let requestJson = await res.json();

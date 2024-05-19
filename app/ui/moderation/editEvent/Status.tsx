@@ -1,40 +1,20 @@
-import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
+export default function Type({ props }: { props: { existingValue: string } }) {
+	const { existingValue } = props;
+	let display = (str: string): string => {
+		str = str.toLowerCase().split('_').join(' ');
+		return str[0].toUpperCase() + str.substring(1);
+	}
 
-export default function Status({ props }: { props: { existingValue: EventStatus } }) {
-	let { existingValue } = props;
 	return (
 		<fieldset>
-			<legend className="text-sm font-semibold leading-8">Status: {existingValue}</legend>
-			<input
-				id={"NOTPASSED"}
-				value={"NOTPASSED"}
-				name="status"
-				type="radio"
-				className={`hidden peer/NOTPASSED`}
-			/>
-			<label htmlFor={"NOTPASSED"} className={`inline-block peer-checked/NOTPASSED:text-selected text-sm leading-8`}>
-				NOTPASSED
-			</label>
-			<input
-				id={"PASSED"}
-				value={"PASSED"}
-				name="status"
-				type="radio"
-				className={`hidden peer/PASSED`}
-			/>
-			<label htmlFor={"PASSED"} className={`ml-2 inline-block peer-checked/PASSED:text-selected text-sm leading-8`}>
-				PASSED
-			</label>
-			<input
-				id={"CANCELED"}
-				value={"CANCELED"}
-				name="status"
-				type="radio"
-				className={`hidden peer/CANCELED`}
-			/>
-			<label htmlFor={"CANCELED"} className={`ml-2 inline-block peer-checked/CANCELED:text-selected text-sm leading-8`}>
-				CANCELED
-			</label>
+			<label htmlFor="status" className="block text-sm font-semibold ">Edit status:</label>
+			<select name="status" id="status" className="mt-1 text-sm rounded-md border border-slate-300 placeholder-slate-400 focus:ring-1 focus:outline-none  focus:border-sky-500 focus:ring-sky-500 focus:border-focused bg-white dark:bg-gray-700">
+				<option value="">{display(existingValue)}</option>
+				<option value="NOTPASSED" hidden={existingValue === "NOTPASSED"}>Notpassed</option>
+				<option value="PASSED" hidden={existingValue === "PASSED"}>Passed</option>
+				<option value="CANCELED" hidden={existingValue === "CANCELED"}>Canceled</option>
+			</select>
 		</fieldset>
 	)
 }
+

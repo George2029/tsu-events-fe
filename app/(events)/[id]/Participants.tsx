@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-import { UserGroup } from '@/app/ui/icons';
+import { UserGroup } from '@/app/ui/icons/icons';
 
 const NumberOfParticipants = dynamic(() => import('./NumberOfParticipants'), {
 	loading: () => <div className="w-6 h-6 rounded-lg animate-pulse bg-sky-200 dark:bg-neutral-800"></div>

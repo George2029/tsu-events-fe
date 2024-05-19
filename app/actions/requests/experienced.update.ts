@@ -5,19 +5,23 @@ import { validate } from 'class-validator';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
+import { revalidateTag } from 'next/cache';
 
-import { UpdateRequestDto } from '@/app/classes/requests/dto/experienced.update-request.dto';
+import { ExperiencedUpdateRequestDto } from '@/app/classes/requests/dto/experienced.update-request.dto';
 
 type PrevState = {
 	message: string;
 }
 
-export default async function updateEvent(prevState: PrevState, formData: FormData) {
+export default async function experiencedUpdateRequest(prevState: PrevState, formData: FormData) {
 
 	let sid = cookies().get('connect.sid');
 	if (!sid) return redirect('/signin');
 
 	let id = String(formData.get('id'));
+
+	let previousType = formData.get('previousType');
+
 	let title = String(formData.get('title')).trim();
 	let location = String(formData.get('location')).trim();
 	let description = formData.get('description');
@@ -25,7 +29,7 @@ export default async function updateEvent(prevState: PrevState, formData: FormDa
 	let startTime = new Date(String(formData.get('startTime')));
 	let endTime = new Date(String(formData.get('endTime')));
 
-	let updateRequestDto: UpdateRequestDto = {};
+	let updateRequestDto: ExperiencedUpdateRequestDto = {};
 
 	if (title) {
 		updateRequestDto.title = title;
@@ -39,11 +43,11 @@ export default async function updateEvent(prevState: PrevState, formData: FormDa
 		updateRequestDto.type = type;
 	}
 
-	if (startTime) {
+	if (!isNaN(startTime.getTime())) {
 		updateRequestDto.startTime = startTime;
 	}
 
-	if (endTime) {
+	if (!isNaN(endTime.getTime())) {
 		updateRequestDto.endTime = endTime;
 	}
 
@@ -54,11 +58,19 @@ export default async function updateEvent(prevState: PrevState, formData: FormDa
 	}
 
 	console.log(updateRequestDto);
+	if (!Object.keys(updateRequestDto).length) {
+		console.log('redirect bc of empty dto');
+		redirect('/requests/' + id);
+	}
 
-	let request = plainToInstance(UpdateRequestDto, updateRequestDto);
+	let request = plainToInstance(ExperiencedUpdateRequestDto, updateRequestDto);
 	let valid = await validate(request);
 
-	if (valid.length) return { message: JSON.stringify(valid) };
+	if (valid.length) {
+		console.log(`requestor edit attempt has failed due to invalid data: `, valid);
+		return { message: valid[0] };
+	}
+
 
 	let res = await fetch(`http://localhost:3000/experienced/requests/${id}`, {
 		method: "PUT",
@@ -77,10 +89,23 @@ export default async function updateEvent(prevState: PrevState, formData: FormDa
 	}
 
 	let newRequest = await res.json();
-	console.log(newRequest);
 
-	return {
-		message: 'all good'
+	console.log(`experienced user has updated their request: `, newRequest);
+
+
+	if (type !== previousType) {
+		revalidateTag('request' + id);
+		revalidateTag('requests' + type);
+		revalidateTag('requests' + previousType); // if type is changed, then route with events of the previous type has to be revalidated as well.
+	} else {
+		if (title || startTime || location) {
+			revalidateTag('request' + id);
+			revalidateTag('requests' + type);
+		} else {
+			revalidateTag('request' + id);
+		}
 	}
+
+	redirect('/requests/' + id);
 
 }

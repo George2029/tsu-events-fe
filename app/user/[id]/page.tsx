@@ -1,4 +1,4 @@
-import { VisitsIcon, LevelIcon, Trophy } from '@/app/ui/icons';
+import { VisitsIcon, LevelIcon, Trophy } from '@/app/ui/icons/icons';
 import { DateTime } from "luxon";
 import getUserPublic from '@/app/actions/user/getUserPublic';
 

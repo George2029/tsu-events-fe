@@ -1,5 +1,5 @@
 import getVote from '@/app/actions/votes/getVote';
-import { ThumbsUpMini, ThumbsDownMini } from '@/app/ui/miniIcons';
+import { ThumbsUpMini, ThumbsDownMini } from '@/app/ui/icons/miniIcons';
 import vote from '@/app/actions/votes/vote';
 import isVerified from '@/app/actions/user/isVerified';
 

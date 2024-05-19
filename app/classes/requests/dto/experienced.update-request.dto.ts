@@ -2,7 +2,7 @@ import { IsOptional, IsEnum, IsString, IsNotEmpty, IsDate } from 'class-validato
 import { Type } from 'class-transformer';
 import { EventType } from './../../events/enums/eventType.enum';
 
-export class UpdateRequestDto {
+export class ExperiencedUpdateRequestDto {
 	@IsOptional()
 	@IsNotEmpty()
 	@IsString()
