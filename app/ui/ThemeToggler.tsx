@@ -9,13 +9,13 @@ let lastPageTop = 0;
 let triggered = false;
 
 export default function ThemeToggler() {
-	const { theme, setTheme, systemTheme } = useTheme()
+	const { theme, setTheme } = useTheme()
 	const [expanded, setExpanded] = useState(false);
 	const [show, setShow] = useState(false);
 
 	let currentThemeIcon: any;
 
-	if (systemTheme === theme) {
+	if (theme === 'system') {
 		currentThemeIcon = PCIcon;
 	} else {
 		if (theme === 'light') {
@@ -54,9 +54,12 @@ export default function ThemeToggler() {
 		}
 		lastPageTop = vp.pageTop;
 	}
+
 	useEffect(() => {
 		window.visualViewport?.addEventListener('scroll', onScroll);
+		return () => window.visualViewport?.removeEventListener('scroll', onScroll);
 	}, []);
+
 	const liStyle = `list-none hover:bg-background/20 hover:dark:text-darktitle dark:focus:bg-darkgenreBarBG focus:bg-background/20 focus:text-darktitle dark:focus:text-darktitle px-2 flex dark:hover:bg-darkgenreBarBG/30 gap-2 cursor-pointer p-1 focus:outline-none`;
 
 	return (

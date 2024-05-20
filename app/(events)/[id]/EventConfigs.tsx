@@ -1,6 +1,6 @@
 import { Config } from '@/app/ui/icons/icons';
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
-import Link from 'next/link';
+//import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const AmountOfConfigs = dynamic(() => import('./NumberOfConfigs'), {
@@ -16,7 +16,7 @@ export default async function EventConfigs({ props }: { props: { eventId: number
 				<div>
 					<AmountOfConfigs props={{ eventId, type }} />
 				</div>
-				<Link href={`/${eventId}/configs/${type.toLowerCase()}`} className="md:active:scale-90 duration-300 active:scale-50 cursor-pointer text-specialIcons dark:text-darkspecialIcons hover:animate-pulse">{Config}</Link>
+				<button title="to be implemented" className="md:active:scale-90 duration-300 active:scale-50 cursor-pointer text-specialIcons dark:text-darkspecialIcons hover:text-active dark:hover:text-darkactive">{Config}</button>
 			</div>
 		</div>
 	)

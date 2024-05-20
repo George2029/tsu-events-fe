@@ -14,7 +14,7 @@ type PrevState = {
 	message: string;
 }
 
-export default async function modUpdateRequest(prevState: PrevState, formData: FormData) {
+export default async function modUpdateRequest(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
 	let sid = cookies().get('connect.sid');
 	if (!sid) return redirect('/signin');

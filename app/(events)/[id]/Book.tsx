@@ -1,16 +1,19 @@
 import BookStatus from '@/app/ui/event/BookStatus';
 import book from '@/app/actions/events/event/book';
 import updateBook from '@/app/actions/events/event/updateBook';
-import { ParticipantStatus } from '@/app/classes/participants/enums/participantStatus.enum';
-import { NotNotifiedMicro, MinusUserMicro, NotifiedMicro, CheckCircleMicro, PlusUserMicro } from '@/app/ui/icons/microIcons';
 import getParticipant from '@/app/actions/events/event/getParticipant';
+
+import { ParticipantStatus } from '@/app/classes/participants/enums/participantStatus.enum';
+
+import { NotNotifiedMicro, MinusUserMicro, NotifiedMicro, CheckCircleMicro, PlusUserMicro } from '@/app/ui/icons/microIcons';
+import { ShieldCheckFilled } from '@/app/ui/icons/fillIcons';
 
 export default async function Book({ props }: { props: { eventId: number } }) {
 	let { eventId } = props;
 
 
 	let participant = await getParticipant(eventId);
-	console.log(participant);
+	console.log(`participant: `, participant);
 
 	let { id } = participant;
 
@@ -29,7 +32,11 @@ export default async function Book({ props }: { props: { eventId: number } }) {
 	let notifiedInputField: boolean | null = null;
 	let notifiedInputField2: boolean | null = null;
 
-	if (participant?.status === ParticipantStatus.ISPRESENT) return <div className="text-green-500">You're present!</div>;
+	if (participant?.status === ParticipantStatus.ISPRESENT) return (
+		<div className="flex gap-2 items-center text-green-500">
+			{ShieldCheckFilled}
+			<div>Visited!</div>
+		</div>)
 
 	let going = participant?.status === ParticipantStatus.ISGOING;
 	let notified = participant?.notified;

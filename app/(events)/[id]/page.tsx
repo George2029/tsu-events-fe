@@ -8,9 +8,13 @@ import { plainToInstance } from 'class-transformer';
 
 import { MovieIcon, BoardGameIcon, ContestIcon, CustomIcon } from '@/app/ui/icons/eventsBarIcons';
 
-import { ChevronDownMicro } from '@/app/ui/icons/microIcons';
+import { ChevronDownMicro, CheckMicro, NoSymbolMicro } from '@/app/ui/icons/microIcons';
+import { PassedFilled, NotPassedFilled, CanceledFilled } from '@/app/ui/icons/fillIcons';
+//import { TimeMini, LocationMini } from '@/app/ui/icons/miniIcons';
+import { LocationMicro, TimeMicro } from '@/app/ui/icons/microIcons';
 
 import { Event } from '@/app/classes/events/event';
+import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
 import type { EventJSON } from '@/app/types/events/eventTypes';
 
 import Participants from './Participants';
@@ -69,7 +73,20 @@ export default async function Page(
 	let eventEndTime = DateTime.fromJSDate(endTime).toLocaleString(myTimeConfig);
 
 	let eventIcon: any;
+	let statusIcon: any;
 	let iconCaption = '';
+
+
+	switch (status) {
+		case EventStatus.NOTPASSED:
+			statusIcon = <div title="not passed">{NotPassedFilled}</div>;
+			break;
+		case EventStatus.PASSED:
+			statusIcon = <div className="text-gray-500" title="passed">{PassedFilled} </div>;
+			break;
+		case EventStatus.CANCELED:
+			statusIcon = <div className="text-gray-500" title="canceled">{CanceledFilled} </div>;
+	}
 
 	switch (type) {
 		case "CUSTOM_EVENT":
@@ -96,22 +113,31 @@ export default async function Page(
 				<div className="p-2">
 					<div className="h-[4.5rem] flex justify-between text-center text-balance gap-4 text-lg">
 						<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
-						<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
+						<div className="flex flex-col justify-between">
+							<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
+							{statusIcon}
+						</div>
 					</div>
 					<div className="flex flex-col mt-4 gap-3 p-2">
 						<div>
-							<div title="The time the event starts" className="text-sm font-semibold">Starts at</div>
+							<div title="The time the event starts" className="flex items-center gap-1 text-sm font-semibold">
+								Starts at
+								<div>{TimeMicro}</div>
+							</div>
 							<div>{eventStartTime}</div>
 						</div>
 						<div>
-							<div className="text-sm font-semibold">Location</div>
-							<div>{location}</div>
+							<div className="flex items-center gap-1 text-sm font-semibold">
+								Location
+								<div>{LocationMicro}</div>
+							</div>
+							<div className="text-nowrap overflow-x-scroll">{location}</div>
 						</div>
 						<details>
 							<summary className="flex gap-1 cursor-pointer text-sm font-semibold"><span>Description</span><span className="self-center">{ChevronDownMicro}</span></summary>
 							<div>{description ? description : 'No description for this event'}</div>
 						</details>
-						<Participants props={{ placesTotal, eventId: id }} />
+						<Participants props={{ placesTotal, eventId: id, status }} />
 						<EventConfigs props={{ eventId: id, type }} />
 						<CreatorPreview props={{ userId, createdAtString }} />
 					</div>

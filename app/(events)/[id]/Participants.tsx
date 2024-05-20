@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
+import { EventStatus } from '@/app/classes/events/enums/eventStatus.enum';
 import Link from 'next/link'
 
-import { UserGroup } from '@/app/ui/icons/icons';
+import { UserGroupFilled } from '@/app/ui/icons/fillIcons';
 
 const NumberOfParticipants = dynamic(() => import('./NumberOfParticipants'), {
 	loading: () => <div className="w-6 h-6 rounded-lg animate-pulse bg-sky-200 dark:bg-neutral-800"></div>
@@ -12,8 +13,9 @@ const Book = dynamic(() => import('./Book'), {
 	loading: () => <div className="h-[3.25rem] w-32 bg-loading dark:bg-darkloading rounded-md"></div>
 })
 
-export default function Participants({ props }: { props: { placesTotal: number, eventId: number } }) {
-	let { placesTotal, eventId } = props;
+export default function Participants({ props }: { props: { placesTotal: number, eventId: number, status: EventStatus } }) {
+	let { placesTotal, eventId, status } = props;
+	console.log(status);
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -27,13 +29,17 @@ export default function Participants({ props }: { props: { placesTotal: number, 
 						</div>
 					</div>
 					<div className="flex gap-2">
-						<Link href={`/${eventId}/participants`} className="md:active:scale-90 active:scale-50 duration-300 text-specialIcons dark:text-darkspecialIcons cursor-pointer self-center">{UserGroup}</Link>
+						<Link href={`/${eventId}/participants`} className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-50 duration-300 text-specialIcons dark:text-darkspecialIcons cursor-pointer self-center">{UserGroupFilled}</Link>
 						<div className="self-center">
 							<NumberOfParticipants props={{ eventId }} />
 						</div>
 					</div>
 				</div>
-				<Book props={{ eventId }} />
+				{(status === EventStatus.NOTPASSED) &&
+					(
+						<Book props={{ eventId }} />
+					)
+				}
 			</div>
 		</div>
 	)

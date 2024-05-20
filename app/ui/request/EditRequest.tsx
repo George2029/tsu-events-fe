@@ -45,7 +45,8 @@ export default function EditRequest({ props }: {
 		existingEndTime,
 	} = props;
 
-	let [formState, setFormState] = useFormState(existingStatus ? editAsMod : edit, { message: '' });
+	let action = existingStatus ? editAsMod : edit;
+	let [formState, setFormState] = useFormState(action, { message: '' });
 
 	let deleteRequestBinded = deleteRequest.bind(null, id, existingType);
 	return (
@@ -63,7 +64,7 @@ export default function EditRequest({ props }: {
 					<EndTime props={{ existingValue: existingEndTime }} />
 				</div>
 				<div className="mt-6 flex flex-col items-end">
-					<div>{formState?.message}</div>
+					<div>{formState.message}</div>
 					<UpdateRequestButton />
 				</div>
 			</form>

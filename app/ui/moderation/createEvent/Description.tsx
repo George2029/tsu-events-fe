@@ -2,9 +2,8 @@
 import { useState, useRef } from 'react';
 import { XIconMicro, PencilMicro } from '@/app/ui/icons/microIcons';
 
-export default function Description({ props }: { props: { existingValue?: string | null } }) {
-	let { existingValue } = props;
-	const [state, setState] = useState(!!existingValue);
+export default function Description() {
+	const [state, setState] = useState(false);
 	let inputRef = useRef<HTMLTextAreaElement>(null);
 
 	return (
@@ -39,7 +38,6 @@ export default function Description({ props }: { props: { existingValue?: string
 					name="description"
 					rows={3}
 					className="w-full mt-1 text-sm font-semibold rounded-md border border-slate-300 placeholder-slate-400 focus:ring-1 focus:outline-none  focus:border-sky-500 focus:ring-sky-500 focus:border-focused bg-white dark:bg-gray-700"
-					placeholder={existingValue ? existingValue : ''}
 					maxLength={1000}
 				/>
 				<p className="mt-1 text-sm leading-6 text-gray-500">Write a few sentences about event</p>

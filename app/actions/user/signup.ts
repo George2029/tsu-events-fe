@@ -1,7 +1,6 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import setCookie from 'set-cookie-parser';
 import { CreateUserDto } from '@/app/classes/users/dto/create-user.dto';
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
@@ -58,18 +57,21 @@ export default async function signUp(prevState: any, formData: FormData) {
 			message: 'something went wrong'
 		}
 	} else {
-		let responseCookies = setCookie.parse(response);
 
-		responseCookies.forEach(cookie => {
-			cookies().set({
-				name: cookie.name,
-				value: cookie.value,
-				httpOnly: cookie.httpOnly,
-				path: cookie.path,
-				maxAge: cookie.maxAge,
-				secure: cookie.secure
-			});
+		let cookie = String(response.headers.get('set-cookie')).split('; ');
+		let sessionId = cookie[0].split('=')[1];
+		let expires = cookie[2].split('=')[1];
+		console.log(sessionId, expires);
+
+		cookies().set({
+			name: 'connect.sid',
+			value: sessionId,
+			httpOnly: true,
+			path: '/',
+			expires: new Date(expires),
+			secure: false,
 		});
+
 		console.log(`username ${username} successfully signed up!`);
 		return redirect('/account');
 	}

@@ -30,7 +30,7 @@ export default function RootLayout({
 					<div className="bg-background text-text dark:text-darktext dark:bg-darkbackground">
 						<main className="overflow-hidden relative flex max-w-4xl min-h-screen flex-col items-center mx-auto">
 							<ThemeToggler />
-							<div className="absolute top-4 right-14 z-50 font-bold text-xl select-none self-center">Uni Events</div>
+							<div className="absolute top-4 right-14 z-50 font-bold text-xl select-none self-center">UEMS</div>
 							<NavBar />
 							<div className="pb-20 md:pb-10  w-full items-center flex flex-col">
 								{children}

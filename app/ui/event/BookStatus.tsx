@@ -1,8 +1,27 @@
 'use client'
 
 import { useState } from 'react'
+import { useFormStatus } from 'react-dom';
 
 import { ParticipantStatus } from '@/app/classes/participants/enums/participantStatus.enum';
+
+function Submit({ props }: { props: { title: string, icon: any } }) {
+	let { title, icon } = props;
+	const status = useFormStatus();
+	return (
+		<button disabled={status.pending} className="w-full flex justify-between gap-2 p-2 rounded-lg cursor-pointer dark:hover:ring-1 hover:text-active dark:hover:text-darktext dark:hover:ring-darkactive">
+			{
+				status.pending ? 'Wait...' :
+					<>
+						<div>{title}</div>
+						<div>{icon}</div>
+					</>
+			}
+
+		</button>
+	)
+}
+
 
 export default function BookStatus({ props }: {
 	props: {
@@ -54,26 +73,19 @@ export default function BookStatus({ props }: {
 			</div>
 
 			<div className={`${!open && 'hidden'} ring-1 ring-border dark:ring-darkborder bg-button dark:bg-darkgenreBarBG text-nowrap absolute right-0 top-10 rounded-lg`}>
-				<form onClick={() => setOpen(false)} action={action}>
+				<form action={action}>
 					<input name="eventId" type="hidden" value={eventId} />
 					<input name="id" type="hidden" value={id} />
 					{notifiedInputField !== null && <input name="notified" type="hidden" value={Number(notifiedInputField)} />}
 					{statusInputField !== null && <input name="status" type="hidden" value={statusInputField} />}
-
-					<button className="w-full flex justify-between gap-2 p-2 rounded-lg cursor-pointer dark:hover:ring-1 hover:text-active dark:hover:text-darktext dark:hover:ring-darkactive">
-						<div>{actionTitle}</div>
-						<div>{actionIcon}</div>
-					</button>
+					<Submit props={{ title: actionTitle, icon: actionIcon }} />
 				</form>
-				<form onClick={() => setOpen(false)} action={action}>
+				<form action={action}>
 					<input name="id" type="hidden" value={id} />
 					<input name="eventId" type="hidden" value={eventId} />
 					{notifiedInputField2 !== null && <input name="notified" type="hidden" value={Number(notifiedInputField2)} />}
 					{statusInputField2 !== null && <input name="status" type="hidden" value={statusInputField2} />}
-					<button className="w-full flex justify-between gap-2 p-2 rounded-lg cursor-pointer dark:hover:ring-1 hover:text-active dark:hover:text-darktext dark:hover:ring-darkactive">
-						<div>{actionTitle2}</div>
-						<div>{actionIcon2}</div>
-					</button>
+					<Submit props={{ title: actionTitle2, icon: actionIcon2 }} />
 				</form>
 			</div>
 		</div>

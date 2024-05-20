@@ -13,7 +13,7 @@ type PrevState = {
 	message: string;
 }
 
-export default async function experiencedUpdateRequest(prevState: PrevState, formData: FormData) {
+export default async function experiencedUpdateRequest(prevState: PrevState, formData: FormData): Promise<{ message: string }> {
 
 	let sid = cookies().get('connect.sid');
 	if (!sid) return redirect('/signin');
@@ -68,7 +68,7 @@ export default async function experiencedUpdateRequest(prevState: PrevState, for
 
 	if (valid.length) {
 		console.log(`requestor edit attempt has failed due to invalid data: `, valid);
-		return { message: valid[0] };
+		return { message: String(valid[0]) };
 	}
 
 

@@ -16,7 +16,7 @@ export default function Event() {
 					</div>
 					<div>
 						<div className="text-sm font-semibold">Location</div>
-						<div className="h-6 w-44 bg-loading dark:bg-darkloading rounded-md animate-pulse"></div>
+						<div className="h-6 w-full bg-loading dark:bg-darkloading rounded-md animate-pulse"></div>
 					</div>
 					<div className="flex gap-1 items-center">
 						<div className="text-sm font-semibold">Description</div>

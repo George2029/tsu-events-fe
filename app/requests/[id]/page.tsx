@@ -104,7 +104,7 @@ export default async function RequestPage({ params }: {
 					</div>
 					<div>
 						<div className="text-sm font-semibold">Location</div>
-						<div>{location}</div>
+						<div className="text-nowrap overflow-x-scroll">{location}</div>
 					</div>
 					<details>
 						<summary className="flex gap-1 cursor-pointer text-sm font-semibold">
