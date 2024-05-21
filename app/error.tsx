@@ -1,5 +1,6 @@
 'use client'
 
+import Back from '@/app/ui/buttons/Back'
 import { useEffect } from 'react'
 
 export default function Error({
@@ -25,6 +26,7 @@ export default function Error({
 			>
 				Try again
 			</button>
+			<Back />
 		</div>
 	)
 }

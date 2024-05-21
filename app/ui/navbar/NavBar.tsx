@@ -1,4 +1,6 @@
-import { RequestIcon, AccountIcon, HomeIcon, AboutIcon } from './icons';
+import { RequestIcon, AccountIcon, HomeIcon } from './icons';
+import { QuestionMarkCircle } from '@/app/ui/icons/icons';
+
 let navBarItems = [
 	{
 		title: 'Home',
@@ -11,9 +13,9 @@ let navBarItems = [
 		href: '/requests'
 	},
 	{
-		title: 'About',
-		icon: AboutIcon,
-		href: '/about'
+		title: 'FAQ',
+		icon: QuestionMarkCircle,
+		href: '/faq'
 	},
 	{
 		title: 'Account',
@@ -21,6 +23,7 @@ let navBarItems = [
 		href: '/account'
 	},
 ];
+
 import NavItem from './NavItem';
 
 export default function NavBar() {

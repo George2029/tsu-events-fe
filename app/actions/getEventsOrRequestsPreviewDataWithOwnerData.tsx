@@ -21,9 +21,13 @@ export default async function getAllEventsOrRequestsPreviewDataWithOwnerData(opt
 		tags.push(dataType); // gets revalidated if any dataType preview is changed, or new one is inserted 
 	}
 
-	console.time(`fetch data: ${dataType}, type: ${type}, offset: ${offset}`);
+	console.time(`fetch data`);
+
 	const res = await fetch(url, { next: { tags } });
-	console.timeEnd(`fetch data: ${dataType}, type: ${type}, offset: ${offset}`);
+
+	//	const res = await fetch(url, { cache: 'no-store' });
+
+	console.timeEnd(`fetch data`);
 
 	await new Promise(res => setTimeout(() => res(1), 1000)); // for testing
 
