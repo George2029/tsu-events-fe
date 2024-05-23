@@ -12,7 +12,7 @@ type UserPublic = {
 
 export default async function getUserPublic(id: string): Promise<UserPublic> {
 	if (isNaN(+id)) notFound();
-	let res = await fetch(`http://localhost:3000/users/${id}`, { cache: 'no-store' });
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/${id}`, { cache: 'no-store' });
 	if (!res.ok) notFound();
 	let user = await res.json();
 	user.createdAt = new Date(user.createdAt);

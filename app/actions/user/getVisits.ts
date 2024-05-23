@@ -6,7 +6,7 @@ export default async function(): Promise<Visit[]> {
 	let sid = cookies().get('connect.sid');
 	if (!sid) redirect('/signin');
 
-	let req = await fetch(`http://localhost:3000/participants`, {
+	let req = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/participants`, {
 		headers: {
 			cookie: `${sid.name}=${sid.value}`
 		}

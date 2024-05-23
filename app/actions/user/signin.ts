@@ -15,7 +15,7 @@ export async function signIn(prevState: any, formData: FormData) {
 	let myHeaders = new Headers([["Content-Type", "application/json"]]);
 
 	try {
-		response = await fetch('http://localhost:3000/auth/login', {
+		response = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/auth/login`, {
 			method: 'POST',
 			body: JSON.stringify(rawFormData),
 			headers: myHeaders
@@ -28,19 +28,7 @@ export async function signIn(prevState: any, formData: FormData) {
 
 	// super basic custom parser
 
-	let cookie = String(response.headers.get('set-cookie')).split('; ');
-	let sessionId = cookie[0].split('=')[1];
-	let expires = cookie[2].split('=')[1];
-	console.log(sessionId, expires);
 
-	cookies().set({
-		name: 'connect.sid',
-		value: sessionId,
-		httpOnly: true,
-		path: '/',
-		expires: new Date(expires),
-		secure: false,
-	});
 
 	if (!response.ok) {
 		console.log(`${rawFormData.username} unsuccessfully attempted to log-in`)
@@ -49,6 +37,19 @@ export async function signIn(prevState: any, formData: FormData) {
 		}
 	} else {
 		console.log(`username ${rawFormData.username} successfully logged in`);
+		let cookie = String(response.headers.get('set-cookie')).split('; ');
+		let sessionId = cookie[0].split('=')[1];
+		let expires = cookie[2].split('=')[1];
+		console.log(sessionId, expires);
+
+		cookies().set({
+			name: 'connect.sid',
+			value: sessionId,
+			httpOnly: true,
+			path: '/',
+			expires: new Date(expires),
+			secure: false,
+		});
 		return redirect('/account');
 	}
 

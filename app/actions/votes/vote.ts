@@ -13,7 +13,7 @@ export default async function vote(requestId: number, value: boolean): Promise<b
 	let valid = await validate(convertedDto);
 	console.log(valid);
 
-	let res = await fetch(`http://localhost:3000/votes`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/votes`, {
 		method: 'POST',
 		headers: {
 			'Cookie': `${sid.name}=${sid.value}`,

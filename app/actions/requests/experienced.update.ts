@@ -72,7 +72,7 @@ export default async function experiencedUpdateRequest(prevState: PrevState, for
 	}
 
 
-	let res = await fetch(`http://localhost:3000/experienced/requests/${id}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/experienced/requests/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-type": "application/json",

@@ -15,7 +15,7 @@ export default async function({ params }: { params: { id: string, userId: string
 	console.log(sid);
 	if (!sid) redirect('/signin');
 
-	let req = await fetch('http://localhost:3000/mod/participants/' + id, {
+	let req = await fetch('http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/participants/' + id, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default async function({ params }: { params: { id: string, userId: string
 
 	// let it be async (if it is the first time a user has been present at an event, they will become the experienced)
 
-	fetch(`http://localhost:3000/mod/users/${userId}/incrementVisits`, {
+	fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/users/${userId}/incrementVisits`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',

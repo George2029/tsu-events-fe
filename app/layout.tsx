@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import 'dotenv/config';
 import 'reflect-metadata';
 import "./globals.css";
 import dynamic from 'next/dynamic';

@@ -34,12 +34,9 @@ export default async function Page(
 
 	if (isNaN(+params.id)) notFound();
 
-	let res = await fetch(`http://localhost:3000/events/${params.id}`, { cache: 'no-store' });
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/events/${params.id}`, { cache: 'no-store' });
 
 	if (!res.ok) notFound()
-
-	await new Promise((res) => setTimeout(() => res(1), 1500));
-	console.log(`artificially delayed by 1500ms)`);
 
 	let eventJSON: EventJSON = await res.json();
 

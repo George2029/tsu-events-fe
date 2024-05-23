@@ -83,7 +83,7 @@ export default async function modUpdateRequest(prevState: PrevState, formData: F
 		redirect('/requests/' + id);
 	}
 
-	let res = await fetch(`http://localhost:3000/mod/requests/${id}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/requests/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-type": "application/json",

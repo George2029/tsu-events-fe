@@ -11,7 +11,7 @@ export default async function book(formData: FormData) {
 	let eventId = formData.get(`eventId`)
 	let notified = !!Number(formData.get('notified'));
 
-	let res = await fetch('http://localhost:3000/participants', {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/participants`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

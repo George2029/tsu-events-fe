@@ -6,7 +6,7 @@ type UserPreview = {
 }
 
 export default async function getUserPreview(userId: number): Promise<UserPreview> {
-	let res = await fetch(`http://localhost:3000/users/${userId}/preview`, { cache: 'no-store' });
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/${userId}/preview`, { cache: 'no-store' });
 
 	return res.json();
 }

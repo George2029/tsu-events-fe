@@ -9,7 +9,7 @@ export let getRequestAsOwner = async (id: string): Promise<Request> => {
 	let sid = cookies().get('connect.sid');
 	if (!sid) notFound();
 
-	let res = await fetch(`http://localhost:3000/experienced/requests/${+id}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/experienced/requests/${+id}`, {
 		cache: 'no-store',
 		headers: {
 			Cookie: `${sid.name}=${sid.value}`

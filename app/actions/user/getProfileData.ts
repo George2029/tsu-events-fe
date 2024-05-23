@@ -7,7 +7,7 @@ export default async function getProfileData({ name, value }: { name: string, va
 	let response: any;
 
 	try {
-		response = await fetch('http://localhost:3000/user', {
+		response = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user`, {
 			cache: 'no-store',
 			headers: {
 				Cookie: `${name}=${value}`

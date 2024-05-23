@@ -13,7 +13,7 @@ export default async function getAllEventsOrRequestsPreviewDataWithOwnerData(opt
 	if (type) params.type = type;
 	if (offset) params.offset = String(offset);
 
-	let url = `http://localhost:3000/${dataType}?` + new URLSearchParams(params);
+	let url = `http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/${dataType}?` + new URLSearchParams(params);
 	let tags: string[] = [];
 	if (type) {
 		tags.push(dataType + type); // gets revalidated if only dataType preview of that type specific type is changed, or dataType of that type is deleted or a new one inserted 
@@ -21,15 +21,7 @@ export default async function getAllEventsOrRequestsPreviewDataWithOwnerData(opt
 		tags.push(dataType); // gets revalidated if any dataType preview is changed, or new one is inserted 
 	}
 
-	console.time(`fetch data`);
-
 	const res = await fetch(url, { next: { tags } });
-
-	//	const res = await fetch(url, { cache: 'no-store' });
-
-	console.timeEnd(`fetch data`);
-
-	await new Promise(res => setTimeout(() => res(1), 1000)); // for testing
 
 	return res.json();
 

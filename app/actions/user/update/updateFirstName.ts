@@ -27,7 +27,7 @@ export default async function updateFirstName(prevState: any, formData: FormData
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/user/firstName',
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user/firstName`,
 			{
 				method: 'PUT',
 				headers: {

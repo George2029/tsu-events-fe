@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 export default async function deleteEvent(id: number, type: EventType) {
 	let sid = cookies().get('connect.sid');
 	if (!sid) redirect('/signin');
-	let res = await fetch(`http://localhost:3000/mod/events/${id}`,
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events/${id}`,
 		{
 			method: 'DELETE',
 			headers: {

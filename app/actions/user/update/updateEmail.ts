@@ -27,7 +27,7 @@ export default async function updateEmail(prevState: any, formData: FormData) {
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/user/email',
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user/email`,
 			{
 				method: 'PUT',
 				headers: {

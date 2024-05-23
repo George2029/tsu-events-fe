@@ -28,7 +28,7 @@ export default async function updatePassword(prevState: any, formData: FormData)
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/user/password',
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user/password`,
 			{
 				method: 'PUT',
 				headers: {

@@ -65,7 +65,7 @@ export default async function(id: number, prevState: PrevState, formData: FormDa
 		}
 	}
 
-	let req = await fetch(`http://localhost:3000/mod/users/${id}`, {
+	let req = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/users/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',

@@ -79,7 +79,7 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 		return { message: String(valid[0]) };
 	}
 
-	let res = await fetch(`http://localhost:3000/mod/events/${id}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-type": "application/json",
@@ -96,7 +96,6 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 		}
 	}
 
-	let editedEvent = await res.json();
 	console.log(`The moderator has edited an event: `, id);
 
 	if (type !== previousType) {

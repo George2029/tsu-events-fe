@@ -4,7 +4,7 @@ export default async function isModOrAdmin(): Promise<boolean> {
 	let sid = cookies().get('connect.sid');
 	if (!sid) return false;
 
-	let res = await fetch('http://localhost:3000/mod',
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod`,
 		{
 			cache: 'no-store',
 			headers: {

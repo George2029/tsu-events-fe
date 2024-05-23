@@ -1,7 +1,7 @@
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
 
 export default async function getAllConfigs(eventId: number, type: EventType) {
-	let res = await fetch(`http://localhost:3000/configs/${eventId}/${type}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/configs/${eventId}/${type}`, {
 		cache: 'no-store'
 	});
 

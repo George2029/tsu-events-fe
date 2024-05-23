@@ -37,7 +37,7 @@ export default async function signUp(prevState: any, formData: FormData) {
 	let myHeaders = new Headers([["Content-Type", "application/json"]]);
 
 	try {
-		response = await fetch('http://localhost:3000/users', {
+		response = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users`, {
 			method: 'POST',
 			body: JSON.stringify(createUserDto),
 			headers: myHeaders

@@ -164,7 +164,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 		}
 	}
 
-	let res = await fetch('http://localhost:3000/mod/events', {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events`, {
 		method: "POST",
 		headers: {
 			"Content-type": "application/json",
@@ -187,7 +187,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 
 	if (movieConfigDtos.length) {
 		for (let i = 0; i < movieConfigDtos.length; i++) {
-			let res = await fetch('http://localhost:3000/mod/events/movie', {
+			let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events/movie`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json",
@@ -202,7 +202,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 
 	if (boardGamesConfigDtos.length) {
 		for (let i = 0; i < boardGamesConfigDtos.length; i++) {
-			let res = await fetch('http://localhost:3000/mod/events/boardgames', {
+			let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events/boardgames`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json",
@@ -217,7 +217,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 
 	if (contestConfigDtos.length) {
 		for (let i = 0; i < contestConfigDtos.length; i++) {
-			let res = await fetch('http://localhost:3000/mod/events/contest', {
+			let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events/contest`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json",
@@ -232,7 +232,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 
 	if (customConfigDtos.length) {
 		for (let i = 0; i < customConfigDtos.length; i++) {
-			let res = await fetch('http://localhost:3000/mod/events/custom', {
+			let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/events/custom`, {
 				method: "POST",
 				headers: {
 					"Content-type": "application/json",

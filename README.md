@@ -1,2 +1,2 @@
-The FrontEnd part of the TSU-Events app.
-Built with NextJS
+University Events Management System
+

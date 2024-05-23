@@ -17,8 +17,9 @@ const config: Config = {
 				'border': '#000000',
 				'genreBarBG': '#FFFFFF',
 				'themeTogglerBG': '#FFFFFF',
-				'specialIcons': '#802626',
+				'specialIcons': '#86198F',
 				'button': '#FFFFFF',
+				'loading': '#BFDBFE',
 
 				'darktext': "#EEEFF0",
 				'darkbackground': "#090A29",
@@ -30,6 +31,7 @@ const config: Config = {
 				'darkthemeTogglerBG': '#1D1D29',
 				'darkspecialIcons': '#EAB308',
 				'darkbutton': '#202253',
+				'darkloading': '#1E293B',
 			},
 			fontFamily: {
 				'display': ['Grenze_Gotisch']

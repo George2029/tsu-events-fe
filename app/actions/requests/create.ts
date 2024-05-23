@@ -35,7 +35,7 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 
 	if (valid.length) return { message: valid.toString() };
 
-	let res = await fetch('http://localhost:3000/experienced/requests', {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/experienced/requests`, {
 		method: "POST",
 		headers: {
 			"Content-type": "application/json",

@@ -29,7 +29,7 @@ export default async function passwordResetRequest(prevState: any, formData: For
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/users/resetPasswordRequest',
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/resetPasswordRequest`,
 			{
 				method: 'POST',
 				headers: {

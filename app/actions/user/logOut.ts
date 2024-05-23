@@ -13,7 +13,7 @@ export default async function logOut() {
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/auth/logout', {
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/auth/logout`, {
 			method: 'POST',
 			headers: {
 				Cookie: `${sid.name}=${sid.value}`

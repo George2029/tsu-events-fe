@@ -1,6 +1,5 @@
 import { Config } from '@/app/ui/icons/icons';
 import { EventType } from '@/app/classes/events/enums/eventType.enum';
-//import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const AmountOfConfigs = dynamic(() => import('./NumberOfConfigs'), {

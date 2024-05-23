@@ -13,7 +13,7 @@ export default async function logOutAll() {
 	let res: any;
 
 	try {
-		res = await fetch('http://localhost:3000/auth/logoutAll', {
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/auth/logoutAll`, {
 			method: 'POST',
 			headers: {
 				Cookie: `${sid.name}=${sid.value}`

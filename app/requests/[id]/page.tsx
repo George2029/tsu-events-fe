@@ -38,9 +38,6 @@ export default async function RequestPage({ params }: {
 
 	let request = await getRequest(params.id);
 
-	await new Promise((res) => setTimeout(() => res(1), 1500));
-	console.log(`fetched req with 1500ms delay`);
-
 	let {
 		id,
 		type,

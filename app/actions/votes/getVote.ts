@@ -7,7 +7,7 @@ type Vote = {
 export default async function getVote(requestId: number): Promise<Vote | null> {
 	let sid = cookies().get('connect.sid');
 	if (!sid) return null;
-	let res = await fetch(`http://localhost:3000/votes/voter/${requestId}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/votes/voter/${requestId}`, {
 		cache: 'no-store',
 		headers: {
 			Cookie: `${sid.name}=${sid.value}`

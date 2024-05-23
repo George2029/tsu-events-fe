@@ -14,7 +14,7 @@ export default async function updateBook(formData: FormData) {
 
 	let obj = status ? { notified, status } : { notified };
 
-	let res = await fetch(`http://localhost:3000/participants/${id}`, {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/participants/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
