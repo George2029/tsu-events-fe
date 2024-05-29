@@ -109,7 +109,7 @@ export default async function Page(
 			<div className="mt-20 bg-cardBG dark:bg-darkcardBG ring-1 rounded-xl ring-border dark:ring-darkborder p-2">
 				<div className="p-2">
 					<div className="h-[4.5rem] flex justify-between text-center text-balance gap-4 text-lg">
-						<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-scroll">{title}</div>
+						<div className="self-center font-bold text-center dark:text-darktitle text-title grow overflow-auto">{title}</div>
 						<div className="flex flex-col justify-between">
 							<div custom-attribute={iconCaption} className="relative hover:after:z-10 hover:after:absolute hover:after:top-8 hover:after:right-0 hover:after:w-24 text-xs hover:after:bg-background dark:hover:after:bg-darkbackground dark:hover:after:ring-darkactive hover:after:ring-1 hover:after:rounded-lg hover:after:ring-active hover:after:p-2 hover:after:content-[attr(custom-attribute)]" >{eventIcon}</div>
 							{statusIcon}
@@ -128,7 +128,7 @@ export default async function Page(
 								Location
 								<div>{LocationMicro}</div>
 							</div>
-							<div className="text-nowrap overflow-x-scroll">{location}</div>
+							<div className="text-nowrap overflow-x-auto">{location}</div>
 						</div>
 						<details>
 							<summary className="flex gap-1 cursor-pointer text-sm font-semibold"><span>Description</span><span className="self-center">{ChevronDownMicro}</span></summary>

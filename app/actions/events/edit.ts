@@ -16,7 +16,9 @@ type PrevState = {
 
 export default async function EditEvent(prevState: PrevState, formData: FormData) {
 	let sid = cookies().get('connect.sid');
-	if (!sid) return redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
+	}
 
 	let previousType = formData.get('previousType');
 	let id = String(formData.get('id'));
@@ -110,5 +112,6 @@ export default async function EditEvent(prevState: PrevState, formData: FormData
 			revalidateTag('event' + id);
 		}
 	}
-	return redirect(`/${id}`);
+	redirect(`https://${process.env.DOMAIN_NAME}/${id}`);
+
 }

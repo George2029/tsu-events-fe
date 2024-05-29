@@ -1,8 +1,10 @@
 'use server'
 
+import { notFound } from 'next/navigation';
+
 import type { UserSession } from '@/app/types/user/userSession.type';
 
-export default async function getProfileData({ name, value }: { name: string, value: string }): Promise<UserSession | boolean> {
+export default async function getProfileData({ name, value }: { name: string, value: string }): Promise<UserSession> {
 
 	let response: any;
 
@@ -27,9 +29,8 @@ export default async function getProfileData({ name, value }: { name: string, va
 		return user;
 	} else {
 		let res = await response.json();
-		console.log(res);
-		console.log(`getProfileData: failure`);
-		return false
+		console.log(`getProfileData: FAILED: `, res);
+		notFound()
 	}
 
 

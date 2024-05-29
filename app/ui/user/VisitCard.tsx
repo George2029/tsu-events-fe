@@ -9,14 +9,9 @@ import { QRCodeIcon, CheckIcon, NoSymbol } from '@/app/ui/icons/icons';
 import { ChevronDownMicro, TimeMicro } from '@/app/ui/icons/microIcons';
 import { ShieldCheckFilled } from '@/app/ui/icons/fillIcons';
 
-//import { headers } from 'next/headers';
-
 export default function VisitCard({ props }: { props: { visit: Visit } }) {
 
 	let { visit: { id, eventId, userId, status, event } } = props;
-
-	//const headersList = headers();
-	//const hostname = headersList.get('x-forwarded-host');
 
 	let participantStatusBlock: any;
 
@@ -47,7 +42,7 @@ export default function VisitCard({ props }: { props: { visit: Visit } }) {
 
 	}
 
-	let qrcodeLink = 'http://' + '10.20.167.65:3001' + '/participantIsPresent/' + id + '/' + eventId + '/' + userId;
+	let qrcodeLink = 'https://' + process.env.DOMAIN_NAME + '/participantIsPresent/' + id + '/' + eventId + '/' + userId;
 
 	console.log(qrcodeLink);
 	let startTimeString = DateTime.fromJSDate(new Date(event.startTime)).toLocaleString(DateTime.DATETIME_SHORT);

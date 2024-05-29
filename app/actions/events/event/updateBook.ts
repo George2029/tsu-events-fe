@@ -5,7 +5,9 @@ import { redirect } from 'next/navigation';
 export default async function updateBook(formData: FormData) {
 
 	let sid = cookies().get('connect.sid');
-	if (!sid) redirect('/signin')
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`)
+	}
 
 	let eventId = formData.get(`eventId`);
 	let notified = !!Number(formData.get('notified'));
@@ -30,6 +32,6 @@ export default async function updateBook(formData: FormData) {
 	}
 	let json = await res.json();
 	console.log(`participant ${id} updated:`, json);
-	redirect(`/${eventId}`);
+	redirect(`https://${process.env.DOMAIN_NAME}/${eventId}`);
 
 }

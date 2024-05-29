@@ -10,9 +10,49 @@ summary {
  list-style: none;
 }
 
-@layer components {
+.remove-defaults {
+   -webkit-appearance: none;
+   -moz-appearance:    none;
+   appearance:         none;
+}
+
+@layer base {
+
+	.custom-input {
+			@apply block;
+			@apply mt-1;
+			@apply border;
+			@apply shadow-sm;
+			@apply border-slate-300;
+			@apply placeholder-slate-400;
+			@apply focus:outline-none;
+			@apply focus:border-sky-500;
+			@apply focus:ring-sky-500;
+			@apply rounded-md;
+			@apply focus:ring-1;
+			@apply dark:bg-gray-700;
+
+	}
+
+	.inputDigit {
+			@apply h-10;
+			@apply w-10;
+			@apply block;
+			@apply mt-1;
+			@apply border;
+			@apply shadow-sm;
+			@apply border-slate-300;
+			@apply placeholder-slate-400;
+			@apply focus:outline-none;
+			@apply focus:border-sky-500;
+			@apply focus:ring-sky-500;
+			@apply rounded-md;
+			@apply focus:ring-1;
+			@apply dark:bg-gray-700;
+	}
 
 	.btn {
+
 		@apply flex;
 		@apply w-fit;
 		@apply gap-2;
@@ -33,7 +73,15 @@ summary {
 		@apply active:scale-50;
 		@apply md:active:scale-90;
 
+		@apply disabled:bg-gray-500;
+		@apply disabled:ring-0;
+
+		@apply dark:disabled:text-black;
+		@apply dark:disabled:bg-[#202253];
+
+
 	}
+
 	.required {
 			@apply after:content-['*'] ;
 			@apply after:ml-0.5 ;

@@ -5,7 +5,7 @@ export default function AccountEditLayout({ children }: Readonly<{ children: Rea
 
 		<div className="flex md:mx-auto max-w-xs flex-col">
 			{children}
-			<div className="self-end">
+			<div>
 				<BackButton />
 			</div>
 		</div>

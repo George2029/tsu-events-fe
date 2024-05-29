@@ -1,28 +1,16 @@
 'use server'
 
-import { redirect } from 'next/navigation';
+type PrevState = {
+	message: string
+}
 
-export default async function passwordResetRequest(prevState: any, formData: FormData) {
+export default async function passwordResetRequest(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
-	let username = formData.get('username');
+	let email = formData.get('email') && String(formData.get('email')).trim();
 
-	if (!username) {
+	if (!email) {
 		return {
-			message: 'username should not be empty'
-		}
-	}
-
-	let trimmedUsername = username.toString().trim();
-
-	if (!trimmedUsername) {
-		return {
-			message: 'username should not be empty'
-		}
-	}
-
-	if (trimmedUsername.length > 15 || trimmedUsername.length < 6) {
-		return {
-			message: `please, don't bruteforce`
+			message: 'email should not be empty'
 		}
 	}
 
@@ -36,7 +24,7 @@ export default async function passwordResetRequest(prevState: any, formData: For
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					username: trimmedUsername,
+					email: email,
 				})
 			})
 	} catch (error) {
@@ -49,17 +37,11 @@ export default async function passwordResetRequest(prevState: any, formData: For
 
 	if (!res.ok) {
 		resJson = await res.json();
-		console.log(resJson);
-		return {
-			message: JSON.stringify(resJson)
-		}
-	} else {
-		resJson = await res.json();
-		console.log(resJson);
-		return {
-			email: resJson.email,
-			message: ''
-		};
+		console.log(`RESET REQUEST FAILED: `, resJson);
 	}
+
+	return {
+		message: 'message was sent to the specified email address, if a user with such email exists'
+	};
 
 }

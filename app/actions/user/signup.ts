@@ -69,11 +69,11 @@ export default async function signUp(prevState: any, formData: FormData) {
 			httpOnly: true,
 			path: '/',
 			expires: new Date(expires),
-			secure: false,
+			secure: true,
 		});
 
 		console.log(`username ${username} successfully signed up!`);
-		return redirect('/account');
+		return redirect(`https://${process.env.DOMAIN_NAME}/account`);
 	}
 
 

@@ -4,7 +4,7 @@ import type { Visit } from '@/app/types/visit';
 
 export default async function(): Promise<Visit[]> {
 	let sid = cookies().get('connect.sid');
-	if (!sid) redirect('/signin');
+	if (!sid) redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 
 	let req = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/participants`, {
 		headers: {

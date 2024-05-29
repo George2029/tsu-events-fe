@@ -23,14 +23,14 @@ export default function EventOrRequestPreviewCard({ props }: { props: { requests
 
 	let eventIcon: any;
 
-	let startTimeString = DateTime.fromJSDate(new Date(startTime)).toLocaleString({
+	let startTimeString = DateTime.fromJSDate(new Date(startTime)).setLocale('en-US').toLocaleString({
 		day: 'numeric',
 		month: 'long',
 		hour: 'numeric',
 		minute: '2-digit'
 	})
 
-	let createdAtString = DateTime.fromJSDate(new Date(createdAt)).toLocaleString(DateTime.DATETIME_SHORT);
+	let createdAtString = DateTime.fromJSDate(new Date(createdAt)).setLocale('en-US').toLocaleString(DateTime.DATETIME_SHORT);
 
 	let iconCaption = '';
 

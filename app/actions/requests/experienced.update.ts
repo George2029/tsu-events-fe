@@ -16,7 +16,9 @@ type PrevState = {
 export default async function experiencedUpdateRequest(prevState: PrevState, formData: FormData): Promise<{ message: string }> {
 
 	let sid = cookies().get('connect.sid');
-	if (!sid) return redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
+	}
 
 	let id = String(formData.get('id'));
 
@@ -60,7 +62,7 @@ export default async function experiencedUpdateRequest(prevState: PrevState, for
 	console.log(updateRequestDto);
 	if (!Object.keys(updateRequestDto).length) {
 		console.log('redirect bc of empty dto');
-		redirect('/requests/' + id);
+		redirect(`https://${process.env.DOMAIN_NAME}/requests/` + id);
 	}
 
 	let request = plainToInstance(ExperiencedUpdateRequestDto, updateRequestDto);
@@ -106,6 +108,6 @@ export default async function experiencedUpdateRequest(prevState: PrevState, for
 		}
 	}
 
-	redirect('/requests/' + id);
+	redirect(`https://${process.env.DOMAIN_NAME}/requests/` + id);
 
 }

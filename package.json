@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3005",
+    "dev": "next dev --experimental-https -p 443",
     "build": "next build ",
-    "start": "next start ",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.7",
+    "@vkid/sdk": "^1.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",

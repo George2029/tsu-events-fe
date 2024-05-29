@@ -3,14 +3,19 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
 
-export async function signIn(prevState: any, formData: FormData) {
+type PrevState = {
+	message: string,
+}
+
+export async function signIn(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
 	const rawFormData = {
-		username: formData.get('username'),
+		email: formData.get('email'),
 		password: formData.get('password'),
 	}
 
 	let response: any;
+	console.log(rawFormData);
 
 	let myHeaders = new Headers([["Content-Type", "application/json"]]);
 
@@ -26,17 +31,13 @@ export async function signIn(prevState: any, formData: FormData) {
 		}
 	}
 
-	// super basic custom parser
-
-
-
 	if (!response.ok) {
-		console.log(`${rawFormData.username} unsuccessfully attempted to log-in`)
+		console.log(`${rawFormData.email} unsuccessfully attempted to log-in`, await response.json())
 		return {
-			message: 'username or password is wrong'
+			message: 'email or password is wrong'
 		}
 	} else {
-		console.log(`username ${rawFormData.username} successfully logged in`);
+		console.log(`email ${rawFormData.email} successfully logged in`);
 		let cookie = String(response.headers.get('set-cookie')).split('; ');
 		let sessionId = cookie[0].split('=')[1];
 		let expires = cookie[2].split('=')[1];
@@ -48,9 +49,9 @@ export async function signIn(prevState: any, formData: FormData) {
 			httpOnly: true,
 			path: '/',
 			expires: new Date(expires),
-			secure: false,
+			secure: true,
 		});
-		return redirect('/account');
+		return redirect(`https://${process.env.DOMAIN_NAME}/account`);
 	}
 
 

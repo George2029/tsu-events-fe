@@ -32,6 +32,9 @@ const config: Config = {
 				'darkspecialIcons': '#EAB308',
 				'darkbutton': '#202253',
 				'darkloading': '#1E293B',
+
+				'vkButtonBG': '#0077FF',
+				'darkvkButtonBG': '#000000',
 			},
 			fontFamily: {
 				'display': ['Grenze_Gotisch']

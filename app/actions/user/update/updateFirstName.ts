@@ -1,12 +1,19 @@
 'use server'
+
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export default async function updateFirstName(prevState: any, formData: FormData) {
+type PrevState = {
+	message: string
+}
+
+export default async function updateFirstName(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
 	let sid = cookies().get('connect.sid');
 
-	if (!sid) redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
+	}
 
 	let firstName = formData.get('firstName')?.toString().trim();
 
@@ -53,7 +60,7 @@ export default async function updateFirstName(prevState: any, formData: FormData
 	} else {
 		let resJson = await res.json();
 		console.log(resJson);
-		return redirect('/account');
+		redirect(`https://${process.env.DOMAIN_NAME}/account`);
 	}
 
 }

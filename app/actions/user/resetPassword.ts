@@ -1,6 +1,12 @@
 'use server'
 
-export default async function resetPassword(prevState: any, formData: FormData) {
+import { redirect } from 'next/navigation';
+
+type PrevState = {
+	message: string
+}
+
+export default async function resetPassword(prevState: PrevState, formData: FormData) {
 
 	let id = formData.get('id');
 
@@ -21,49 +27,36 @@ export default async function resetPassword(prevState: any, formData: FormData) 
 		}
 	}
 
-	let strengthCheckRegex = /^(?=.*[A-Z])(?=.*[!@#\-$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/;
 
-	if (!password.match(strengthCheckRegex)) {
+	if (password.length < 12) {
 		return {
-			message: 'password should contain at least 1 special symbol, 1 capital latin letter, 1 digit, 1 lowercase latin letter, and be at least 8 characters'
+			message: 'password should contain at least 12 symbols'
 		}
 	}
 
-	let res: any;
-
-	try {
-		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/resetpw`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					id,
-					password: password
-				})
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/resetpw`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id,
+				password: password
 			})
-	} catch (error) {
-		console.log(error);
-		if (error instanceof Error) {
-			throw new Error(error.message);
-		}
-	}
+		})
 
 	let resJson: any;
 
 	if (!res.ok) {
 		resJson = await res.json();
-		console.log(resJson);
+		console.log(`FATAL RESET PASSWORD: `, resJson);
 		return {
 			status: false,
 			message: JSON.stringify(resJson)
 		}
 	} else {
-		return {
-			status: true,
-			message: ''
-		}
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 	}
 
 }

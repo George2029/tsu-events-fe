@@ -1,12 +1,19 @@
 'use server'
+
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export default async function updateUsername(prevState: any, formData: FormData) {
+type PrevState = {
+	message: string;
+}
+
+export default async function updateUsername(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
 	let sid = cookies().get('connect.sid');
 
-	if (!sid) redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
+	}
 
 	let username = formData.get('username');
 
@@ -40,14 +47,6 @@ export default async function updateUsername(prevState: any, formData: FormData)
 		}
 	}
 
-	if (stringifiedUsername.length < 6 || stringifiedUsername.length > 30) {
-		return {
-			message: 'username should not be less than 6 characters and not greater than 30 characters'
-		}
-	}
-
-
-
 	let res: any;
 
 	try {
@@ -79,7 +78,7 @@ export default async function updateUsername(prevState: any, formData: FormData)
 	} else {
 		let resJson = await res.json();
 		console.log(resJson);
-		return redirect('/account');
+		redirect(`https://${process.env.DOMAIN_NAME}/account`);
 	}
 
 }

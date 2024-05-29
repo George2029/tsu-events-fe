@@ -6,7 +6,9 @@ import { redirect } from 'next/navigation';
 export default async function book(formData: FormData) {
 
 	let sid = cookies().get('connect.sid');
-	if (!sid) redirect('/signin')
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`)
+	}
 
 	let eventId = formData.get(`eventId`)
 	let notified = !!Number(formData.get('notified'));
@@ -27,6 +29,6 @@ export default async function book(formData: FormData) {
 	}
 	let json = await res.json();
 	console.log(`new Participant has been created:`, json);
-	redirect(`/account/visits`);
+	redirect(`https://${process.env.DOMAIN_NAME}/account/visits`);
 
 }

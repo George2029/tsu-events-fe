@@ -7,7 +7,7 @@ export default async function logOutAll() {
 	const sid = cookies().get('connect.sid');
 
 	if (!sid) {
-		return redirect('/signin');
+		return redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 	}
 
 	let res: any;
@@ -25,13 +25,7 @@ export default async function logOutAll() {
 		}
 	}
 
-	if (res.ok) {
-		console.log(`successful total logOut`);
-		cookies().delete('connect.sid');
-		return redirect('/signin');
-
-	} else {
-		console.log(`unsuccessful total logOut`);
-		return redirect('/signin');
-	}
+	console.log(`successful total logOut`);
+	cookies().delete('connect.sid');
+	return redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 }

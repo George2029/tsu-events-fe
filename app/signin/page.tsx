@@ -1,4 +1,7 @@
 'use client'
+
+import * as VKID from '@vkid/sdk';
+import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom';
 import { signIn } from '@/app/actions/user/signin';
 import Link from 'next/link';
@@ -20,75 +23,89 @@ function SignInButton() {
 	)
 }
 
+const Email = () => {
+	return (
+		<label htmlFor="email" className="custom-label">
+			<span>Email</span>
+			<input
+				id="email"
+				name="email"
+				type="email"
+				required
+			/>
+		</label>
+	)
+}
+
+const Password = () => {
+	return (
+		<label htmlFor="password" className="custom-label">
+			<span>Password</span>
+			<input
+				id="password"
+				name="password"
+				type="password"
+				required
+			/>
+		</label>
+
+	)
+}
+
 export default function SignInPage() {
+
+	useEffect(() => {
+
+		VKID.Config.set({
+			app: 51930833,
+			redirectUrl: 'https://localhost/vkidAuth'
+		});
+
+		const oneTap = new VKID.OneTap();
+
+		const container = document.getElementById('VkIdSdkOneTap');
+
+		if (container) {
+			oneTap.render({ container, lang: VKID.Languages.ENG });
+		}
+
+		return () => {
+			oneTap.close();
+		}
+
+	}, []);
 
 	const [state, formAction] = useFormState(signIn, initState);
 
 	return (
-		<div className="md:mt-10">
-			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight ">
-						Sign in to your account
-					</h2>
-				</div>
+		<div className="md:mt-10 max-w-80 w-full">
+			<div className="flex flex-col gap-10 justify-center px-6 py-12">
 
-				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form className="space-y-6" action={formAction} >
-						<div>
-							<div className="flex items-center justify-between">
-								<label htmlFor="username" className="block text-sm font-medium leading-6 ">
-									Username
-								</label>
-							</div>
-							<div className="mt-2">
-								<input
-									id="username"
-									name="username"
-									type="text"
-									autoComplete="username"
-									required
-									className="block text-black w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								/>
-							</div>
-						</div>
+				<h2 className="text-center text-2xl font-bold leading-9 tracking-tight ">
+					Sign in to your account
+				</h2>
 
-						<div>
-							<div className="flex items-center justify-between">
-								<label htmlFor="password" className="block text-sm font-medium leading-6 ">
-									Password
-								</label>
-								<div className="text-sm">
-									<Link href="/account/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
-										Forgot password?
-									</Link>
-								</div>
-							</div>
-							<div className="mt-2">
-								<input
-									id="password"
-									name="password"
-									type="password"
-									autoComplete="current-password"
-									required
-									className="block text-black w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								/>
-							</div>
-						</div>
-
-						<div>
-							<div className="p-2">
-								{state?.message}
-							</div>
-							<SignInButton />
-						</div>
-					</form>
-					<div className="text-sm mt-5">
-						<a href="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
-							Don't have an account? Sign-up
-						</a>
+				<form className="space-y-6" action={formAction} >
+					<Email />
+					<Password />
+					<div className="text-sm">
+						<Link href="/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+							Forgot password?
+						</Link>
 					</div>
-				</div>
+					<div className="p-2">
+						{state?.message}
+					</div>
+					<SignInButton />
+					<Link href="/signup" className="text-sm font-semibold text-indigo-600 hover:text-indigo-500">
+						Don't have an account? Sign up
+					</Link>
+				</form>
+
+
+				<div id="VkIdSdkOneTap"></div>
+
+
 			</div>
 		</div>
 	)

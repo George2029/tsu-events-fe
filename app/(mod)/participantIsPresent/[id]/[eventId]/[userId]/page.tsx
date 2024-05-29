@@ -15,7 +15,7 @@ export default async function({ params }: { params: { id: string, userId: string
 	console.log(sid);
 	if (!sid) redirect('/signin');
 
-	let req = await fetch('http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/participants/' + id, {
+	let req = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/participants/${id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',

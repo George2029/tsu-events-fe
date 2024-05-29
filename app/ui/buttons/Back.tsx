@@ -10,10 +10,11 @@ export default function Back() {
 		if (ref.current) {
 			ref.current.focus();
 		}
+		return () => ref.current?.blur();
 	}, []);
 
 	return (
-		<button ref={ref} onKeyDown={(e) => {
+		<button type="button" ref={ref} onKeyDown={(e) => {
 			console.log(e.key);
 			if (e.key === "Escape") {
 				if (ref.current) {

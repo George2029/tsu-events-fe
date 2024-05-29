@@ -17,7 +17,9 @@ type PrevState = {
 export default async function modUpdateRequest(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
 	let sid = cookies().get('connect.sid');
-	if (!sid) return redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
+	}
 
 	let id = String(formData.get('id'));
 
@@ -80,7 +82,7 @@ export default async function modUpdateRequest(prevState: PrevState, formData: F
 
 	if (!Object.keys(updateRequestDto).length) {
 		console.log('no update bc dto is empty');
-		redirect('/requests/' + id);
+		redirect(`https://${process.env.DOMAIN_NAME}/requests/` + id);
 	}
 
 	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/requests/${id}`, {
@@ -117,6 +119,6 @@ export default async function modUpdateRequest(prevState: PrevState, formData: F
 		}
 	}
 
-	redirect('/requests/' + id);
+	redirect(`https://${process.env.DOMAIN_NAME}/requests/` + id);
 
 }

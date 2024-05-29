@@ -20,7 +20,9 @@ type PrevState = {
 export default async function createEvent(prevState: PrevState, formData: FormData) {
 
 	let sid = cookies().get('connect.sid');
-	if (!sid) return redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
+	}
 
 	let title = formData.get('title')?.toString().trim();
 	let location = formData.get('location')?.toString().trim();
@@ -247,6 +249,6 @@ export default async function createEvent(prevState: PrevState, formData: FormDa
 
 	revalidateTag('events' + type);
 	revalidateTag('events');
-	redirect(`/${newEvent.id}`);
+	redirect(`https://${process.env.DOMAIN_NAME}/${newEvent.id}`);
 
 }

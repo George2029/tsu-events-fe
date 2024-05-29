@@ -1,12 +1,19 @@
 'use server'
+
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export default async function updatePassword(prevState: any, formData: FormData) {
+type PrevState = {
+	message: string
+}
+
+export default async function updatePassword(prevState: PrevState, formData: FormData): Promise<PrevState> {
 
 	let sid = cookies().get('connect.sid');
 
-	if (!sid) redirect('/signin');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/account`);
+	}
 
 	let oldPassword = formData.get('oldPassword')?.toString().trim();
 	let newPassword = formData.get('newPassword')?.toString().trim();
@@ -17,11 +24,10 @@ export default async function updatePassword(prevState: any, formData: FormData)
 		}
 	}
 
-	let strengthCheckRegex = /^(?=.*[A-Z])(?=.*[!@#\-$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/;
 
-	if (!newPassword.match(strengthCheckRegex)) {
+	if (newPassword.length < 12) {
 		return {
-			message: 'password should contain at least 1 special symbol, 1 capital latin letter, 1 digit, 1 lowercase latin letter, and be at least 8 characters'
+			message: '12+ characters'
 		}
 	}
 
@@ -57,7 +63,7 @@ export default async function updatePassword(prevState: any, formData: FormData)
 	} else {
 		resJson = await res.json();
 		console.log(resJson);
-		return redirect('/account');
+		redirect(`https://${process.env.DOMAIN_NAME}/account`);
 	}
 
 }

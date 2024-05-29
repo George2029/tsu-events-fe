@@ -32,8 +32,8 @@ export default async function UserPublicPage({ params }: { params: { id: string 
 				</div>
 			</div>
 			<div className="p-2">
-				<div className="overflow-scroll">@{username}</div>
-				<div className="overflow-scroll">aka {firstName}</div>
+				<div className="overflow-x-auto">@{username}</div>
+				<div className="overflow-x-auto">aka {firstName}</div>
 			</div>
 			<span className="font-light text-sm self-end">Member since {registrationDateString}</span>
 
