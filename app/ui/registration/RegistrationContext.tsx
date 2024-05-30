@@ -36,7 +36,7 @@ export type RegistrationContextObject = {
 	}
 };
 
-export default createContext<RegistrationContextObject>({
+let defaultValues: RegistrationContextObject = {
 	currentPage: 'username',
 	data: {
 		username: {
@@ -69,6 +69,19 @@ export default createContext<RegistrationContextObject>({
 			valid: false,
 			message: ''
 		}
+	}
+}
+
+export type RegistrationContext = {
+	contextState: RegistrationContextObject;
+	setContextState: (obj: RegistrationContextObject) => void;
+}
+
+
+export default createContext<RegistrationContext>({
+	contextState: defaultValues,
+	setContextState: function(obj: RegistrationContextObject) {
+		return
 	}
 
 })

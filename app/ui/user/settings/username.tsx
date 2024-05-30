@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect, KeyboardEvent, MouseEvent, ChangeEvent, FocusEvent } from 'react';
-import isEmailFree from '@/app/actions/user/signup/isEmailFree';
-import updateEmail from '@/app/actions/user/update/updateEmail';
+import isUsernameFree from '@/app/actions/user/signup/isUsernameFree';
+import updateUsername from '@/app/actions/user/update/updateUsername';
 import { useModalPortal } from '@/app/ui/ModalContext';
 
-import { MailIcon } from '@/app/ui/icons/icons';
+import { AtSymbol } from '@/app/ui/icons/icons';
 import { PencilMicro, CheckMicro, XIconMicro } from '@/app/ui/icons/microIcons';
 
 function Test({ props }: { props: { text: string, valid: boolean } }) {
@@ -18,26 +18,23 @@ function Test({ props }: { props: { text: string, valid: boolean } }) {
 	)
 }
 
-function validateEmail(email: string) {
-	var re = /\S+@\S+\.\S+/;
-	return re.test(email);
-}
+export default function({ props }: { props: { username: string } }) {
 
-export default function({ props }: { props: { email: string } }) {
+	let { username } = props;
 
 	let [isEditPressed, setIsEditPressed] = useState(false);
 	let inputRef = useRef<HTMLInputElement>(null);
-	let { email } = props;
 	let modalKey = useRef(1);
 	let isUpdateActivated = useRef(false);
+	let valueRef = useRef(username);
 
 
-	let [inputState, setInputState] = useState(email);
+	let [inputState, setInputState] = useState(username);
 
 	let { setModalContext } = useModalPortal();
 
 	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.value.trim() != inputState) {
+		if ((e.target.value.length < 30) && e.target.value.trim() != inputState) {
 			setInputState(e.target.value)
 		}
 	}
@@ -51,7 +48,7 @@ export default function({ props }: { props: { email: string } }) {
 	const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Escape") {
 			setIsEditPressed(false);
-			setInputState(email)
+			setInputState(valueRef.current)
 		}
 	}
 
@@ -66,44 +63,33 @@ export default function({ props }: { props: { email: string } }) {
 		let value = inputRef.current?.value;
 
 		if (!value) {
-			isUpdateActivated.current = false;
-			return;
+			return
 		}
 
-		if (email === value) {
-			setIsEditPressed(false);
-			isUpdateActivated.current = false;
-			return;
-		}
-
-		if (!validateEmail(value)) {
-			setModalContext(<Test key={modalKey.current} props={{ text: `invalid email!`, valid: false }} />);
-			modalKey.current++;
-			isUpdateActivated.current = false;
-			return;
-		}
-
-		let free = await isEmailFree(value);
-
-		if (free) {
-			let res = await updateEmail(value);
-			if (res) {
-				setModalContext(<Test key={modalKey.current} props={{ text: `Verification link sent to ${value}!`, valid: true }} />);
-			} else {
-				setModalContext(<Test key={modalKey.current} props={{ text: `Something went wrong!`, valid: false }} />);
-			}
+		if (valueRef.current === value) {
 			setIsEditPressed(false);
 		} else {
-			setModalContext(<Test key={modalKey.current} props={{ text: `Such email already exists!`, valid: false }} />);
+			let free = await isUsernameFree(value);
+
+			if (free) {
+				let res = await updateUsername(value);
+				if (res) {
+					setModalContext(<Test key={modalKey.current} props={{ text: `Username updated!`, valid: true }} />);
+					setIsEditPressed(false);
+					valueRef.current = value;
+				} else {
+					setModalContext(<Test key={modalKey.current} props={{ text: `Something went wrong!`, valid: false }} />);
+				}
+			} else {
+				setModalContext(<Test key={modalKey.current} props={{ text: `Such username already exists!`, valid: false }} />);
+			}
+
+			modalKey.current++;
 		}
-
-		modalKey.current++;
-
 		isUpdateActivated.current = false;
 	}
 
 	useEffect(() => {
-
 		if (isEditPressed) {
 			inputRef.current?.focus();
 		}
@@ -115,7 +101,7 @@ export default function({ props }: { props: { email: string } }) {
 	return (
 		<form className="flex items-center justify-between gap-4">
 			<div className="flex items-center gap-4">
-				<div className="text-specialIcons dark:text-darkspecialIcons">{MailIcon}</div>
+				<div className="text-specialIcons dark:text-darkspecialIcons">{AtSymbol}</div>
 				<input onFocus={onInputFocus} ref={inputRef} disabled={!isEditPressed} onKeyDown={onKeyDown} onChange={onInputChange} className="focus:ring-0 px-0 py-0 border-0 bg-transparent w-40 text-sm text-nowrap overflow-x-auto" value={inputState} />
 			</div>
 			<div className="flex gap-2">
@@ -125,7 +111,7 @@ export default function({ props }: { props: { email: string } }) {
 
 				<button type="button" onClick={() => {
 					setIsEditPressed(e => !e);
-					setInputState(email)
+					setInputState(valueRef.current)
 				}
 				}>
 					{isEditPressed ? <div className="text-red-500">{XIconMicro}</div> : PencilMicro}

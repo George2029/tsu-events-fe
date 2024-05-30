@@ -1,22 +1,19 @@
 import { useContext, useRef, useEffect } from 'react';
 import RegistrationContext from './RegistrationContext';
 import { GoBackIcon } from '@/app/ui/icons/icons';
-import type { RegistrationContextObject } from './RegistrationContext';
 
-export default function FirstName({ props }: { props: { setState: (obj: RegistrationContextObject) => void } }) {
+export default function FirstName() {
 
-	const ctx = useContext(RegistrationContext);
+	const { contextState, setContextState } = useContext(RegistrationContext);
 	const input = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
 		input.current?.focus();
 		return () => input.current?.blur();
-	}, [ctx.currentPage !== 'firstName']);
-
-	let { setState } = props;
+	}, [contextState.currentPage !== 'firstName']);
 
 	return (
-		<form className={`${(ctx.currentPage !== 'firstName') && 'hidden'}`}>
+		<form className={`${(contextState.currentPage !== 'firstName') && 'hidden'}`}>
 			<label htmlFor="firstName" className="custom-label">
 				<span>
 					First Name
@@ -26,15 +23,15 @@ export default function FirstName({ props }: { props: { setState: (obj: Registra
 					id="firstName"
 					name="firstName"
 					type="text"
-					value={ctx.data.firstName.value}
-					className={`${ctx.data.firstName.valid && '!ring-green-500'}`}
+					value={contextState.data.firstName.value}
+					className={`${contextState.data.firstName.valid && '!ring-green-500'}`}
 					onChange={(e) => {
 						let { value } = e.target;
 						if (value) {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									firstName: {
 										valid: true,
 										message: '',
@@ -43,10 +40,10 @@ export default function FirstName({ props }: { props: { setState: (obj: Registra
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									firstName: {
 										valid: false,
 										message: '',
@@ -64,19 +61,19 @@ export default function FirstName({ props }: { props: { setState: (obj: Registra
 			</div>
 			<div className="flex justify-between">
 				<button type="button" onClick={() => {
-					props.setState({
+					setContextState({
 						currentPage: 'username',
-						data: ctx.data,
+						data: contextState.data,
 					});
 
 				}} className="btn">
 					<span>Back</span>{GoBackIcon}
 				</button>
-				<button type="submit" disabled={!ctx.data.firstName.valid} className="btn" onClick={(e) => {
+				<button type="submit" disabled={!contextState.data.firstName.valid} className="btn" onClick={(e) => {
 					e.preventDefault();
-					setState({
+					setContextState({
 						currentPage: 'password',
-						data: ctx.data,
+						data: contextState.data,
 					});
 				}}>Next</button>
 			</div>

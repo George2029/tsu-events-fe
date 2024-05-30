@@ -3,11 +3,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-type PrevState = {
-	message: string
-}
-
-export default async function updateEmail(prevState: PrevState, formData: FormData): Promise<PrevState> {
+export default async function updateEmail(email: string): Promise<boolean> {
 
 	let sid = cookies().get('connect.sid');
 
@@ -15,35 +11,15 @@ export default async function updateEmail(prevState: PrevState, formData: FormDa
 		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 	}
 
-	let email = formData.get('email');
-
-	if (!email) {
-		return {
-			message: 'email should not be empty'
-		}
-	}
-
-	let stringifiedEmail = email.toString().trim();
-
-	if (stringifiedEmail.length < 6 || stringifiedEmail.length > 40) {
-		return {
-			message: 'email should not be less than 6 characters or greater than 14 characters'
-		}
-	}
-
 	let res: any;
 
 	try {
-		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user/email`,
+		res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user/emailUpdate/${email}`,
 			{
-				method: 'PUT',
+				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json',
 					Cookie: `${sid.name}=${sid.value}`
 				},
-				body: JSON.stringify({
-					email: stringifiedEmail
-				})
 			})
 	} catch (error) {
 		if (error instanceof Error) {
@@ -51,18 +27,10 @@ export default async function updateEmail(prevState: PrevState, formData: FormDa
 		}
 	}
 
-	console.log(res);
-
 	if (!res.ok) {
-		let resJson = await res.json();
-		console.log(resJson);
-		return {
-			message: JSON.stringify(resJson)
-		}
-	} else {
-		let resJson = await res.json();
-		console.log(resJson);
-		redirect(`https://${process.env.DOMAIN_NAME}/account`);
+		console.log(await res.json());
 	}
+
+	return res.ok;
 
 }

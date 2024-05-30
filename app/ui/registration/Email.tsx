@@ -6,22 +6,20 @@ import { GoBackIcon } from '@/app/ui/icons/icons';
 import emailVerificationCode from '@/app/actions/user/signup/emailVerificationCode';
 import { NextIcon } from '@/app/ui/icons/icons';
 import RegistrationContext from './RegistrationContext';
-import type { RegistrationContextObject } from './RegistrationContext';
 
-export default function Email({ props }: { props: { setState: (obj: RegistrationContextObject) => void } }) {
+export default function Email() {
 
 	let isButtonPressed = useRef(false);
 	let inputRef = useRef<HTMLInputElement>(null);
-	let { setState } = props;
-	const ctx = useContext(RegistrationContext);
+	const { contextState, setContextState } = useContext(RegistrationContext);
 
 	useEffect(() => {
 		inputRef.current?.focus();
 		return () => inputRef.current?.blur();
-	}, [ctx.currentPage !== "email"]);
+	}, [contextState.currentPage !== "email"]);
 
 	return (
-		<form className={`${(ctx.currentPage !== 'email') ? 'hidden' : ''}`}>
+		<form className={`${(contextState.currentPage !== 'email') ? 'hidden' : ''}`}>
 			<label htmlFor="email" className="custom-label">
 				<span>
 					Email
@@ -30,17 +28,17 @@ export default function Email({ props }: { props: { setState: (obj: Registration
 					ref={inputRef}
 					id="email"
 					type="email"
-					value={ctx.data.email.value}
-					className={`${ctx.data.email.valid && '!ring-green-500'}`}
+					value={contextState.data.email.value}
+					className={`${contextState.data.email.valid && '!ring-green-500'}`}
 					maxLength={50}
 					required
 					onChange={(e) => {
 						let { value } = e.target;
 						if (value) {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									email: {
 										valid: true,
 										message: '',
@@ -54,10 +52,10 @@ export default function Email({ props }: { props: { setState: (obj: Registration
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									email: {
 										valid: false,
 										message: '',
@@ -76,19 +74,19 @@ export default function Email({ props }: { props: { setState: (obj: Registration
 			</label>
 
 			<div className="h-10 flex justify-center items-center">
-				{ctx.data.email.message}
+				{contextState.data.email.message}
 			</div>
 			<div className="flex justify-between">
 				<button type="button" onClick={() => {
-					props.setState({
+					setContextState({
 						currentPage: 'password2',
-						data: ctx.data,
+						data: contextState.data,
 					});
 
 				}} className="btn">
 					<span>Back</span>{GoBackIcon}
 				</button>
-				<button type="submit" disabled={!ctx.data.email.valid} onClick={async (e) => {
+				<button type="submit" disabled={!contextState.data.email.valid} onClick={async (e) => {
 					e.preventDefault();
 
 					if (isButtonPressed.current) {
@@ -96,14 +94,14 @@ export default function Email({ props }: { props: { setState: (obj: Registration
 					}
 					isButtonPressed.current = true;
 
-					let value = ctx.data.email.value;
+					let value = contextState.data.email.value;
 					let free = await isEmailFree(value)
-					await emailVerificationCode(ctx.data.email.value);
+					await emailVerificationCode(contextState.data.email.value);
 					if (free) {
-						setState({
+						setContextState({
 							currentPage: 'code',
 							data: {
-								...ctx.data,
+								...contextState.data,
 								email: {
 									value,
 									valid: true,
@@ -112,12 +110,12 @@ export default function Email({ props }: { props: { setState: (obj: Registration
 							}
 						});
 					} else {
-						setState({
-							currentPage: ctx.currentPage,
+						setContextState({
+							currentPage: contextState.currentPage,
 							data: {
-								...ctx.data,
+								...contextState.data,
 								email: {
-									value: ctx.data.email.value,
+									value: contextState.data.email.value,
 									valid: false,
 									message: 'Such email already exists'
 								}

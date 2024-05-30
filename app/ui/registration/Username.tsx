@@ -3,17 +3,15 @@ import isUsernameFree from '@/app/actions/user/signup/isUsernameFree';
 
 import Back from '@/app/ui/buttons/Back';
 import RegistrationContext from './RegistrationContext';
-import type { RegistrationContextObject } from './RegistrationContext';
 import { NextIcon } from '@/app/ui/icons/icons';
 
-export default function Username({ props }: { props: { setState: (obj: RegistrationContextObject) => void } }) {
+export default function Username() {
 
-	let { setState } = props;
 	let isButtonPressed = useRef(false);
-	const ctx = useContext(RegistrationContext);
+	const { contextState, setContextState } = useContext(RegistrationContext);
 
 	return (
-		<form className={`${(ctx.currentPage !== 'username') && 'hidden'}`}>
+		<form className={`${(contextState.currentPage !== 'username') && 'hidden'}`}>
 			<label htmlFor="username" className="custom-label">
 				<span>
 					Username
@@ -22,16 +20,16 @@ export default function Username({ props }: { props: { setState: (obj: Registrat
 					id="username"
 					name="username"
 					type="text"
-					value={ctx.data.username.value}
-					className={`${ctx.data.username.valid && '!ring-green-500'}`}
+					value={contextState.data.username.value}
+					className={`${contextState.data.username.valid && '!ring-green-500'}`}
 					onChange={(e) => {
 
 						let { value } = e.target;
 						if (value) {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									username: {
 										valid: true,
 										message: '',
@@ -40,10 +38,10 @@ export default function Username({ props }: { props: { setState: (obj: Registrat
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									username: {
 										valid: false,
 										message: '',
@@ -59,11 +57,11 @@ export default function Username({ props }: { props: { setState: (obj: Registrat
 				/>
 			</label>
 			<div className="h-10 flex justify-center items-center">
-				{ctx.data.username.message}
+				{contextState.data.username.message}
 			</div>
 			<div className="flex justify-between">
 				<Back />
-				<button type="submit" disabled={!ctx.data.username.valid} onClick={async (e) => {
+				<button type="submit" disabled={!contextState.data.username.valid} onClick={async (e) => {
 					e.preventDefault();
 
 					if (isButtonPressed.current) {
@@ -71,12 +69,12 @@ export default function Username({ props }: { props: { setState: (obj: Registrat
 					}
 					isButtonPressed.current = true;
 
-					let value = ctx.data.username.value;
+					let value = contextState.data.username.value;
 					if (await isUsernameFree(value)) {
-						setState({
+						setContextState({
 							currentPage: 'firstName',
 							data: {
-								...ctx.data,
+								...contextState.data,
 								username: {
 									value,
 									valid: true,
@@ -85,10 +83,10 @@ export default function Username({ props }: { props: { setState: (obj: Registrat
 							}
 						});
 					} else {
-						setState({
+						setContextState({
 							currentPage: 'firstName',
 							data: {
-								...ctx.data,
+								...contextState.data,
 								username: {
 									value,
 									valid: false,

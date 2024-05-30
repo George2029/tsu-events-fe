@@ -2,11 +2,10 @@ import { useContext, useRef, useEffect } from 'react';
 import RegistrationContext from './RegistrationContext';
 import { GoBackIcon } from '@/app/ui/icons/icons';
 import verifyCode from '@/app/actions/user/signup/verifyCode';
-import type { RegistrationContextObject } from './RegistrationContext';
 
-export default function Code({ props }: { props: { setState: (obj: RegistrationContextObject) => void } }) {
+export default function Code() {
 
-	const ctx = useContext(RegistrationContext);
+	const { contextState, setContextState } = useContext(RegistrationContext);
 
 	const isButtonPressed = useRef(false);
 
@@ -16,7 +15,7 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 	const fourthDigit = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
-		if (ctx.currentPage === 'code') {
+		if (contextState.currentPage === 'code') {
 			console.log('useEffect');
 			if (firstDigit.current?.value) {
 				if (secondDigit.current?.value) {
@@ -34,12 +33,10 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 		}
 
 		return () => firstDigit.current?.blur();
-	}, [ctx.currentPage !== 'code'])
-
-	let { setState } = props;
+	}, [contextState.currentPage !== 'code'])
 
 	return (
-		<form className={`${(ctx.currentPage !== 'code') && 'hidden'}`}>
+		<form className={`${(contextState.currentPage !== 'code') && 'hidden'}`}>
 			<span>
 				Enter the Code sent to Email
 			</span>
@@ -47,23 +44,23 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 				<input
 					ref={firstDigit}
 					inputMode="numeric"
-					value={ctx.data.code.digits[0]}
+					value={contextState.data.code.digits[0]}
 					className="inputDigit"
 					onChange={(e) => {
 						let { value } = e.target;
 						if (isNaN(+value) || value.length > 1) {
 							return;
 						}
-						let digits = ctx.data.code.digits;
+						let digits = contextState.data.code.digits;
 						digits[0] = value;
 
 						let valid = Boolean(value && secondDigit.current?.value && thirdDigit.current?.value && fourthDigit.current?.value);
 						if (value) {
 							secondDigit.current?.focus();
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid,
 										message: '',
@@ -72,10 +69,10 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid: false,
 										message: '',
@@ -89,7 +86,7 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 				<input
 					inputMode="numeric"
 					ref={secondDigit}
-					value={ctx.data.code.digits[1]}
+					value={contextState.data.code.digits[1]}
 					className="inputDigit"
 					onKeyDown={(e) => {
 						if (secondDigit.current?.value) {
@@ -105,16 +102,16 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 						if (isNaN(+value) || value.length > 1) {
 							return;
 						}
-						let digits = ctx.data.code.digits;
+						let digits = contextState.data.code.digits;
 						digits[1] = value;
 
 						let valid = Boolean(value && firstDigit.current?.value && thirdDigit.current?.value && fourthDigit.current?.value);
 						if (value) {
 							thirdDigit.current?.focus();
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid,
 										message: '',
@@ -123,10 +120,10 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid: false,
 										message: '',
@@ -140,7 +137,7 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 				<input
 					inputMode="numeric"
 					ref={thirdDigit}
-					value={ctx.data.code.digits[2]}
+					value={contextState.data.code.digits[2]}
 					className="inputDigit"
 					onKeyDown={(e) => {
 						if (thirdDigit.current?.value) {
@@ -156,16 +153,16 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 						if (isNaN(+value) || value.length > 1) {
 							return;
 						}
-						let digits = ctx.data.code.digits;
+						let digits = contextState.data.code.digits;
 						digits[2] = value;
 
 						let valid = Boolean(value && firstDigit.current?.value && secondDigit.current?.value && fourthDigit.current?.value);
 						if (value) {
 							fourthDigit.current?.focus();
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid,
 										message: '',
@@ -174,10 +171,10 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid: false,
 										message: '',
@@ -191,7 +188,7 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 				<input
 					inputMode="numeric"
 					ref={fourthDigit}
-					value={ctx.data.code.digits[3]}
+					value={contextState.data.code.digits[3]}
 					className="inputDigit"
 					onKeyDown={(e) => {
 						if (fourthDigit.current?.value) {
@@ -207,7 +204,7 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 						if (isNaN(+value) || value.length > 1) {
 							return;
 						}
-						let digits = ctx.data.code.digits;
+						let digits = contextState.data.code.digits;
 						digits[3] = value;
 
 						let valid = Boolean(value && firstDigit.current?.value && secondDigit.current?.value && thirdDigit.current?.value);
@@ -217,14 +214,14 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 							}
 							isButtonPressed.current = true;
 
-							let res = await verifyCode(ctx.data.email.value, String(ctx.data.code.digits.join('')));
+							let res = await verifyCode(contextState.data.email.value, String(contextState.data.code.digits.join('')));
 							if (!res) {
-								setState({
-									currentPage: ctx.currentPage,
+								setContextState({
+									currentPage: contextState.currentPage,
 									data: {
-										...ctx.data,
+										...contextState.data,
 										code: {
-											digits: ctx.data.code.digits,
+											digits: contextState.data.code.digits,
 											valid: false,
 											message: 'The code is wrong'
 										}
@@ -235,10 +232,10 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 							}
 							isButtonPressed.current = false;
 						} else if (value) {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid,
 										message: '',
@@ -247,10 +244,10 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									code: {
 										valid: false,
 										message: '',
@@ -263,33 +260,33 @@ export default function Code({ props }: { props: { setState: (obj: RegistrationC
 				/>
 			</div>
 			<div className="h-10">
-				{ctx.data.code.message}
+				{contextState.data.code.message}
 			</div>
 			<div className="flex justify-between">
 				<button type="button" onClick={() => {
-					setState({
+					setContextState({
 						currentPage: 'email',
-						data: ctx.data,
+						data: contextState.data,
 					});
 
 				}} className="btn">
 					<span>Back</span>{GoBackIcon}
 				</button>
-				<button type="submit" disabled={!ctx.data.code.valid} className="btn" onClick={async (e) => {
+				<button type="submit" disabled={!contextState.data.code.valid} className="btn" onClick={async (e) => {
 					e.preventDefault();
 					if (isButtonPressed.current) {
 						return
 					}
 					isButtonPressed.current = true;
 
-					let res = await verifyCode(ctx.data.email.value, String(ctx.data.code.digits.join('')));
+					let res = await verifyCode(contextState.data.email.value, String(contextState.data.code.digits.join('')));
 					if (!res) {
-						setState({
-							currentPage: ctx.currentPage,
+						setContextState({
+							currentPage: contextState.currentPage,
 							data: {
-								...ctx.data,
+								...contextState.data,
 								code: {
-									digits: ctx.data.code.digits,
+									digits: contextState.data.code.digits,
 									valid: false,
 									message: 'The code is wrong'
 								}

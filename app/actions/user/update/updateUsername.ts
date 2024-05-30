@@ -3,48 +3,12 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-type PrevState = {
-	message: string;
-}
-
-export default async function updateUsername(prevState: PrevState, formData: FormData): Promise<PrevState> {
+export default async function updateUsername(username: string): Promise<boolean> {
 
 	let sid = cookies().get('connect.sid');
 
 	if (!sid) {
 		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
-	}
-
-	let username = formData.get('username');
-
-	if (!username) {
-		return {
-			message: 'username should not be empty'
-		}
-	}
-
-	let stringifiedUsername = username.toString().trim();
-
-	if (stringifiedUsername === '') {
-		return {
-			message: 'username should not be empty'
-		}
-	}
-
-	let regexForTheFirstSymbol = /^[A-Za-z]/
-
-	if (!stringifiedUsername.match(regexForTheFirstSymbol)) {
-		return {
-			message: 'username should start with a latin letter'
-		}
-	}
-
-	let regexForValidSymbols = /[^A-Za-z0-9_]/;
-
-	if (stringifiedUsername.match(regexForValidSymbols)) {
-		return {
-			message: 'username should not contain any invalid characters'
-		}
 	}
 
 	let res: any;
@@ -58,7 +22,7 @@ export default async function updateUsername(prevState: PrevState, formData: For
 					Cookie: `${sid.name}=${sid.value}`
 				},
 				body: JSON.stringify({
-					username: stringifiedUsername
+					username
 				})
 			})
 	} catch (error) {
@@ -67,18 +31,9 @@ export default async function updateUsername(prevState: PrevState, formData: For
 		}
 	}
 
-	console.log(res);
-
 	if (!res.ok) {
-		let resJson = await res.json();
-		console.log(resJson);
-		return {
-			message: JSON.stringify(resJson)
-		}
-	} else {
-		let resJson = await res.json();
-		console.log(resJson);
-		redirect(`https://${process.env.DOMAIN_NAME}/account`);
+		console.log(`UPDATE USERNAME FAILED: `, await res.json());
 	}
+	return res.ok;
 
 }

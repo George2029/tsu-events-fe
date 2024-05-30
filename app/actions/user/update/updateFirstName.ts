@@ -3,32 +3,12 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-type PrevState = {
-	message: string
-}
-
-export default async function updateFirstName(prevState: PrevState, formData: FormData): Promise<PrevState> {
+export default async function updateFirstName(firstName: string): Promise<boolean> {
 
 	let sid = cookies().get('connect.sid');
 
 	if (!sid) {
 		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
-	}
-
-	let firstName = formData.get('firstName')?.toString().trim();
-
-	if (!firstName) {
-		return {
-			message: 'First name should not be empty'
-		}
-	}
-
-	let onlyLatinLettersRegex = /^[A-Za-z][A-Za-z\s]{0,50}$/;
-
-	if (!firstName.match(onlyLatinLettersRegex)) {
-		return {
-			message: 'Latin letters only, no more than 50'
-		}
 	}
 
 	let res: any;
@@ -42,7 +22,7 @@ export default async function updateFirstName(prevState: PrevState, formData: Fo
 					Cookie: `${sid.name}=${sid.value}`
 				},
 				body: JSON.stringify({
-					firstName: firstName
+					firstName
 				})
 			})
 	} catch (error) {
@@ -53,14 +33,8 @@ export default async function updateFirstName(prevState: PrevState, formData: Fo
 
 	if (!res.ok) {
 		let resJson = await res.json();
-		console.log(resJson);
-		return {
-			message: JSON.stringify(resJson)
-		}
-	} else {
-		let resJson = await res.json();
-		console.log(resJson);
-		redirect(`https://${process.env.DOMAIN_NAME}/account`);
+		console.log(`firstName update failed: `, resJson);
 	}
 
+	return res.ok;
 }

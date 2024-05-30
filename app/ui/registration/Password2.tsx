@@ -2,22 +2,19 @@ import { useContext, useRef, useEffect } from 'react';
 
 import { GoBackIcon } from '@/app/ui/icons/icons';
 import RegistrationContext from './RegistrationContext';
-import type { RegistrationContextObject } from './RegistrationContext';
 
-export default function Password2({ props }: { props: { setState: (obj: RegistrationContextObject) => void } }) {
+export default function Password2() {
 
-	const ctx = useContext(RegistrationContext);
+	const { contextState, setContextState } = useContext(RegistrationContext);
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
 		inputRef.current?.focus();
 		return () => inputRef.current?.blur();
-	}, [ctx.currentPage !== 'password2']);
-
-	let { setState } = props;
+	}, [contextState.currentPage !== 'password2']);
 
 	return (
-		<form className={`${(ctx.currentPage !== 'password2') && 'hidden'}`}>
+		<form className={`${(contextState.currentPage !== 'password2') && 'hidden'}`}>
 			<label htmlFor="password2" className="custom-label">
 				<span>
 					Password again
@@ -26,15 +23,15 @@ export default function Password2({ props }: { props: { setState: (obj: Registra
 					ref={inputRef}
 					id="password2"
 					type="password"
-					className={`${ctx.data.password2?.valid && '!ring-green-500'}`}
-					value={ctx.data.password2?.value}
+					className={`${contextState.data.password2.valid && '!ring-green-500'}`}
+					value={contextState.data.password2.value}
 					onChange={(e) => {
 						let { value } = e.target;
-						if (e.target.value === ctx.data.password?.value) {
-							setState({
-								currentPage: ctx.currentPage,
+						if (e.target.value === contextState.data.password.value) {
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									password2: {
 										valid: true,
 										message: '',
@@ -43,10 +40,10 @@ export default function Password2({ props }: { props: { setState: (obj: Registra
 								}
 							})
 						} else {
-							setState({
-								currentPage: ctx.currentPage,
+							setContextState({
+								currentPage: contextState.currentPage,
 								data: {
-									...ctx.data,
+									...contextState.data,
 									password2: {
 										valid: false,
 										message: '',
@@ -63,19 +60,19 @@ export default function Password2({ props }: { props: { setState: (obj: Registra
 			<div className="h-10"></div>
 			<div className="flex justify-between">
 				<button type="button" onClick={() => {
-					props.setState({
+					setContextState({
 						currentPage: 'password',
-						data: ctx.data,
+						data: contextState.data,
 					});
 
 				}} className="btn">
 					<span>Back</span>{GoBackIcon}
 				</button>
-				<button type="submit" className="btn" disabled={!ctx.data.password2?.valid} onClick={(e) => {
+				<button type="submit" className="btn" disabled={!contextState.data.password2.valid} onClick={(e) => {
 					e.preventDefault();
-					props.setState({
+					setContextState({
 						currentPage: 'email',
-						data: ctx.data
+						data: contextState.data
 					});
 				}}>
 					Next

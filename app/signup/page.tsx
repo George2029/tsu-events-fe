@@ -14,7 +14,7 @@ import Code from '@/app/ui/registration/Code';
 
 export default function SignUpPage() {
 
-	let [state, setState] = useState<RegistrationContextObject>({
+	let [contextState, setContextState] = useState<RegistrationContextObject>({
 		currentPage: 'username',
 		data: {
 			username: {
@@ -58,13 +58,13 @@ export default function SignUpPage() {
 				Sign up
 			</h2>
 
-			<RegistrationContext.Provider value={state}>
-				<Username props={{ setState }} />
-				<FirstName props={{ setState }} />
-				<Password props={{ setState }} />
-				<Password2 props={{ setState }} />
-				<Email props={{ setState }} />
-				<Code props={{ setState }} />
+			<RegistrationContext.Provider value={{ contextState, setContextState }}>
+				<Username />
+				<FirstName />
+				<Password />
+				<Password2 />
+				<Email />
+				<Code />
 			</RegistrationContext.Provider>
 
 		</div>
