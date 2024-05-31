@@ -16,7 +16,6 @@ summary {
    appearance:         none;
 }
 
-@layer base {
 
 	.custom-input {
 			@apply block;
@@ -121,7 +120,6 @@ summary {
 			@apply dark:bg-gray-700;
 		}
 	}
-}
 
 .avatar-bg-0 {background:linear-gradient(hsl(0 100% 45%),hsl(0 100% 30%))}
 .avatar-bg-1 {background:linear-gradient(hsl(1 100% 45%),hsl(1 100% 30%))}

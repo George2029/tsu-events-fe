@@ -1,6 +1,6 @@
 'use client'
 
-import * as VKID from '@vkid/sdk';
+//import * as VKID from '@vkid/sdk';
 import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom';
 import { signIn } from '@/app/actions/user/signin';
@@ -54,26 +54,27 @@ const Password = () => {
 
 export default function SignInPage() {
 
-	useEffect(() => {
-
-		VKID.Config.set({
-			app: 51930833,
-			redirectUrl: 'https://localhost/vkidAuth'
-		});
-
-		const oneTap = new VKID.OneTap();
-
-		const container = document.getElementById('VkIdSdkOneTap');
-
-		if (container) {
-			oneTap.render({ container, lang: VKID.Languages.ENG });
-		}
-
-		return () => {
-			oneTap.close();
-		}
-
-	}, []);
+	/*	useEffect(() => {
+	
+			VKID.Config.set({
+				app: 51930833,
+				redirectUrl: 'https://localhost/vkidAuth'
+			});
+	
+			const oneTap = new VKID.OneTap();
+	
+			const container = document.getElementById('VkIdSdkOneTap');
+	
+			if (container) {
+				oneTap.render({ container, lang: VKID.Languages.ENG });
+			}
+	
+			return () => {
+				oneTap.close();
+			}
+	
+		}, []);
+		*/
 
 	const [state, formAction] = useFormState(signIn, initState);
 
