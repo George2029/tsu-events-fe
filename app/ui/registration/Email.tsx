@@ -7,6 +7,11 @@ import emailVerificationCode from '@/app/actions/user/signup/emailVerificationCo
 import { NextIcon } from '@/app/ui/icons/icons';
 import RegistrationContext from './RegistrationContext';
 
+function validateEmail(email: string) {
+	var re = /\S+@\S+\.\S+/;
+	return re.test(email);
+}
+
 export default function Email() {
 
 	let isButtonPressed = useRef(false);
@@ -95,20 +100,49 @@ export default function Email() {
 					isButtonPressed.current = true;
 
 					let value = contextState.data.email.value;
-					let free = await isEmailFree(value)
-					await emailVerificationCode(contextState.data.email.value);
-					if (free) {
+					if (!validateEmail(value)) {
 						setContextState({
-							currentPage: 'code',
+							currentPage: contextState.currentPage,
 							data: {
 								...contextState.data,
 								email: {
-									value,
-									valid: true,
-									message: ''
+									value: contextState.data.email.value,
+									valid: false,
+									message: 'Invalid Email'
 								}
 							}
-						});
+						})
+						isButtonPressed.current = false;
+						return;
+					}
+					let free = await isEmailFree(value)
+					if (free) {
+						let ok = await emailVerificationCode(contextState.data.email.value);
+						if (!ok) {
+							setContextState({
+								currentPage: contextState.currentPage,
+								data: {
+									...contextState.data,
+									email: {
+										value: contextState.data.email.value,
+										valid: false,
+										message: 'Something went wrong!'
+									}
+								}
+							})
+						} else {
+							setContextState({
+								currentPage: 'code',
+								data: {
+									...contextState.data,
+									email: {
+										value,
+										valid: true,
+										message: ''
+									}
+								}
+							})
+						}
 					} else {
 						setContextState({
 							currentPage: contextState.currentPage,

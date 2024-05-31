@@ -1,7 +1,7 @@
 'use server'
 
-export default async function sendVerificationCode(email: string): Promise<void> {
-	await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/emailVerificationCode`,
+export default async function sendVerificationCode(email: string): Promise<boolean> {
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/users/emailVerificationCode`,
 		{
 			method: 'POST',
 			headers: {
@@ -11,4 +11,7 @@ export default async function sendVerificationCode(email: string): Promise<void>
 				email
 			})
 		});
+
+	return res.ok;
+
 }

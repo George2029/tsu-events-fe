@@ -1,36 +1,26 @@
-'use server'
-
-import { notFound } from 'next/navigation';
-
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 import type { UserSession } from '@/app/types/user/userSession.type';
 
-export default async function getProfileData({ name, value }: { name: string, value: string }): Promise<UserSession> {
-
-	let response: any;
-
-	try {
-		response = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user`, {
-			cache: 'no-store',
-			headers: {
-				Cookie: `${name}=${value}`
-			}
-		});
-	} catch (error) {
-		if (error instanceof Error) {
-			throw new Error(error.message);
-		}
+export default async function getProfileData(): Promise<UserSession> {
+	let sid = cookies().get('connect.sid');
+	if (!sid) {
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 	}
 
+	let response = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/user`, {
+		cache: 'no-store',
+		headers: {
+			Cookie: `${sid.name}=${sid.value}`
+		}
+	});
 
 	if (response.ok) {
-		console.log(`getProfileData: success`);
 		let user = await response.json();
 		user.createdAt = new Date(user.createdAt);
 		return user;
 	} else {
-		let res = await response.json();
-		console.log(`getProfileData: FAILED: `, res);
-		notFound()
+		redirect(`https://${process.env.DOMAIN_NAME}/signin`);
 	}
 
 

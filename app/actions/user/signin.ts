@@ -15,7 +15,6 @@ export async function signIn(prevState: PrevState, formData: FormData): Promise<
 	}
 
 	let response: any;
-	console.log(rawFormData);
 
 	let myHeaders = new Headers([["Content-Type", "application/json"]]);
 

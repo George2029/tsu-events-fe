@@ -3,32 +3,12 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-type PrevState = {
-	message: string
-}
-
-export default async function updatePassword(prevState: PrevState, formData: FormData): Promise<PrevState> {
+export default async function updatePassword(oldPassword: string, newPassword: string): Promise<boolean> {
 
 	let sid = cookies().get('connect.sid');
 
 	if (!sid) {
 		redirect(`https://${process.env.DOMAIN_NAME}/account`);
-	}
-
-	let oldPassword = formData.get('oldPassword')?.toString().trim();
-	let newPassword = formData.get('newPassword')?.toString().trim();
-
-	if (!oldPassword || !newPassword) {
-		return {
-			message: 'passwords should not be empty'
-		}
-	}
-
-
-	if (newPassword.length < 12) {
-		return {
-			message: '12+ characters'
-		}
 	}
 
 	let res: any;
@@ -56,14 +36,9 @@ export default async function updatePassword(prevState: PrevState, formData: For
 
 	if (!res.ok) {
 		resJson = await res.json();
-		console.log(resJson);
-		return {
-			message: JSON.stringify(resJson)
-		}
-	} else {
-		resJson = await res.json();
-		console.log(resJson);
-		redirect(`https://${process.env.DOMAIN_NAME}/account`);
+		console.log(`UPDATE PASSWORD FAILED: `, resJson);
 	}
+
+	return res.ok;
 
 }

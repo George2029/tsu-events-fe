@@ -2,6 +2,7 @@ import { useContext, useRef, useEffect } from 'react';
 import RegistrationContext from './RegistrationContext';
 import { GoBackIcon } from '@/app/ui/icons/icons';
 import verifyCode from '@/app/actions/user/signup/verifyCode';
+import createUser from '@/app/actions/user/signup';
 
 export default function Code() {
 
@@ -200,8 +201,14 @@ export default function Code() {
 						}
 					}}
 					onChange={async (e) => {
+						if (isButtonPressed.current) {
+							return
+						}
+						isButtonPressed.current = true;
+
 						let { value } = e.target;
 						if (isNaN(+value) || value.length > 1) {
+							isButtonPressed.current = false;
 							return;
 						}
 						let digits = contextState.data.code.digits;
@@ -209,10 +216,6 @@ export default function Code() {
 
 						let valid = Boolean(value && firstDigit.current?.value && secondDigit.current?.value && thirdDigit.current?.value);
 						if (valid) {
-							if (isButtonPressed.current) {
-								return
-							}
-							isButtonPressed.current = true;
 
 							let res = await verifyCode(contextState.data.email.value, String(contextState.data.code.digits.join('')));
 							if (!res) {
@@ -228,9 +231,26 @@ export default function Code() {
 									}
 								})
 							} else {
-								console.log('GGWP!');
+								let email = contextState.data.email.value;
+								let username = contextState.data.username.value;
+								let password = contextState.data.password.value;
+								let firstName = contextState.data.firstName.value;
+								let user = { email, username, password, firstName };
+								let ok = await createUser(user);
+								if (ok === false) {
+									setContextState({
+										currentPage: contextState.currentPage,
+										data: {
+											...contextState.data,
+											code: {
+												digits: contextState.data.code.digits,
+												valid: false,
+												message: 'Something went wrong!'
+											}
+										}
+									})
+								}
 							}
-							isButtonPressed.current = false;
 						} else if (value) {
 							setContextState({
 								currentPage: contextState.currentPage,
@@ -256,6 +276,7 @@ export default function Code() {
 								}
 							})
 						}
+						isButtonPressed.current = false;
 					}}
 				/>
 			</div>
@@ -293,7 +314,28 @@ export default function Code() {
 							}
 						})
 					} else {
-						console.log('GGWP!');
+						let email = contextState.data.email.value;
+						let username = contextState.data.username.value;
+						let password = contextState.data.password.value;
+						let firstName = contextState.data.firstName.value;
+						let user = { email, username, password, firstName };
+						let ok = await createUser(user);
+						if (!ok) {
+							setContextState({
+								currentPage: contextState.currentPage,
+								data: {
+									...contextState.data,
+									code: {
+										digits: contextState.data.code.digits,
+										valid: false,
+										message: 'Something went wrong!'
+									}
+								}
+							})
+
+						}
+
+
 					}
 					isButtonPressed.current = false;
 				}}>Next</button>

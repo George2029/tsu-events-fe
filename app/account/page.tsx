@@ -1,20 +1,14 @@
 import dynamic from 'next/dynamic';
-import Link from 'next/link'
-
-import { cookies } from 'next/headers';
-import { DateTime } from "luxon";
-import { redirect } from 'next/navigation';
 import getProfileData from '@/app/actions/user/getProfileData';
+import Link from 'next/link'
+import { DateTime } from "luxon";
 import { SettingsIcon, VisitsIcon, LevelIcon, Trophy } from '@/app/ui/icons/icons';
 
 const Visits = dynamic(() => import('./Visits'));
 
 export default async function AccountPage() {
 
-	const sid = cookies().get('connect.sid');
-	if (!sid) redirect('/signin');
-
-	let user = await getProfileData(sid);
+	let user = await getProfileData();
 
 	const { hue, username, firstName, visits, level, wins, createdAt } = user;
 
@@ -58,62 +52,3 @@ export default async function AccountPage() {
 		</div>
 	)
 }
-/*
- *
-				<div className="p-2 border rounded-md border-inputBorder">
-					<div className="flex justify-between text-sm font-semibold">
-						<div>Username</div>
-						<Link title="edit username" className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-75 duration-300" href="/account/username">{PencilMicro}</Link>
-					</div>
-					<div className="overflow-x-auto">{username}</div>
-				</div>
-				<div className="p-2 border rounded-md border-inputBorder">
-					<div className="flex justify-between text-sm font-semibold">
-						<div className="flex gap-2">
-							<div>Email</div>
-							<div className="text-specialIcons dark:text-darkspecialIcons self-center">{verifiedEmailIcon}</div>
-						</div>
-						<Link title="edit email" className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-75 duration-300" href="/account/email">{PencilMicro}</Link>
-					</div>
-					<div className="overflow-x-auto">{email}</div>
-				</div>
-				<div className="p-2 border rounded-md border-inputBorder">
-					<div className="flex justify-between text-sm font-semibold">
-						<div>First Name</div>
-						<Link title="edit first name" className="hover:text-active dark:hover:text-darkactive md:active:scale-90 active:scale-75 duration-300" href="/account/firstName">{PencilMicro}</Link>
-					</div>
-					<div className="overflow-x-auto whitespace-nowrap">{firstName}</div>
-				</div>
-				*/
-
-/*
- *
-<div>
- <BackButton />
-</div>
-<Link href="/account/password" className="btn">
- <span>Change Password</span>
-</Link>
-{(role !== 'REGULAR') &&
- <Link href="/request" className="btn">
-	 <span>Post a Request</span>
-	 <span>{PencilIcon}</span>
- </Link>}
-{(role === 'ADMINISTRATOR' || role === 'MODERATOR') &&
- <Link href="/event" className="btn">
-	 <span>Post an Event</span>
-	 <span>{EditIcon}</span>
- </Link>}
-<form action={logOut}>
- <button className="btn">
-	 <span>Log Out</span>
-	 <span>{LogOutIcon}</span>
- </button>
-</form>
-<form action={logOutAll}>
- <button className="btn">
-	 <span>Log Out from all devices</span>
-	 <span>{LogOutIcon}</span>
- </button>
-</form>
-*/
