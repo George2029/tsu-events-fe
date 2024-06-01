@@ -15,7 +15,7 @@ export default async function ModUserPage({ params }: { params: { id: string } }
 	let id = +params.id;
 	if (isNaN(id)) notFound();
 
-	let req = await fetch(`http://localhost:3000/mod/users/${params.id}`, {
+	let req = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/mod/users/${params.id}`, {
 		cache: 'no-store',
 		headers: {
 			Cookie: `connect.sid=${sid.value}`
