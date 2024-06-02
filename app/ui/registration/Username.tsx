@@ -84,7 +84,7 @@ export default function Username() {
 						});
 					} else {
 						setContextState({
-							currentPage: 'firstName',
+							currentPage: contextState.currentPage,
 							data: {
 								...contextState.data,
 								username: {
