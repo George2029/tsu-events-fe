@@ -79,12 +79,12 @@ export default function SignInPage() {
 	const [state, formAction] = useFormState(signIn, initState);
 
 	return (
-		<div className="md:mt-10 max-w-80 w-full">
+		<div className="px-10 max-w-80 w-full mt-16 md:mt-10">
 			<div className="flex flex-col gap-10 justify-center px-6 py-12">
 
-				<h2 className="text-center text-2xl font-bold leading-9 tracking-tight ">
-					Sign in to your account
-				</h2>
+				<div className="text-center text-2xl font-bold">
+					Sign in
+				</div>
 
 				<form className="space-y-6" action={formAction} >
 					<Email />
