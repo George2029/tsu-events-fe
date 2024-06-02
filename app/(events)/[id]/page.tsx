@@ -1,3 +1,5 @@
+'use server'
+
 import { notFound } from 'next/navigation'
 //import Skeleton from '@/app/ui/event/Skeleton';
 

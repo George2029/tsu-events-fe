@@ -1,3 +1,5 @@
+'use server'
+
 import { DateTime } from "luxon";
 import Link from 'next/link';
 import { QRCodeSVG } from 'qrcode.react';
@@ -9,7 +11,7 @@ import { QRCodeIcon, CheckIcon, NoSymbol } from '@/app/ui/icons/icons';
 import { ChevronDownMicro, TimeMicro } from '@/app/ui/icons/microIcons';
 import { ShieldCheckFilled } from '@/app/ui/icons/fillIcons';
 
-export default function VisitCard({ props }: { props: { visit: Visit } }) {
+export default async function VisitCard({ props }: { props: { visit: Visit } }) {
 
 	let { visit: { id, eventId, userId, status, event } } = props;
 

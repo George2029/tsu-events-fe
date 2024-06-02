@@ -1,3 +1,5 @@
+'use server'
+
 import Link from 'next/link'
 
 export default async function CreatorPreview({ props }: { props: { userId: number, firstName: string, hue: number, createdAtString: string } }) {

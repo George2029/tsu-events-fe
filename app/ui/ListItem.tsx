@@ -1,5 +1,3 @@
-"use client"
-
 import { DateTime } from "luxon";
 import Link from "next/link";
 import { MovieIcon, BoardGameIcon, ContestIcon, CustomIcon } from '@/app/ui/icons/eventsBarIcons';
@@ -17,14 +15,14 @@ export default function ListItem({ props }: { props: { requests?: boolean, item:
 	}
 	let eventIcon: any;
 
-	let startTimeString = DateTime.fromJSDate(new Date(startTime)).setLocale('en-US').toLocaleString({
+	let startTimeString = DateTime.fromJSDate(new Date(startTime)).toLocaleString({
 		day: 'numeric',
 		month: 'long',
 		hour: 'numeric',
 		minute: '2-digit'
-	});
+	}, { locale: 'en-gb' });
 
-	let createdAtString = DateTime.fromJSDate(new Date(createdAt)).toLocaleString(DateTime.DATETIME_SHORT, { locale: 'en-US' })
+	let createdAtString = DateTime.fromJSDate(new Date(createdAt)).toLocaleString(DateTime.DATETIME_SHORT, { locale: 'en-gb' })
 
 	let iconCaption = '';
 
