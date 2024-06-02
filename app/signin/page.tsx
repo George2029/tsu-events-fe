@@ -89,11 +89,6 @@ export default function SignInPage() {
 				<form className="space-y-6" action={formAction} >
 					<Email />
 					<Password />
-					<div className="text-sm">
-						<Link href="/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
-							Forgot password?
-						</Link>
-					</div>
 					<div className="p-2">
 						{state?.message}
 					</div>
@@ -111,3 +106,12 @@ export default function SignInPage() {
 		</div>
 	)
 }
+
+/*
+ *
+					<div className="text-sm">
+						<Link href="/forgotPassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
+							Forgot password?
+						</Link>
+					</div>
+					*/

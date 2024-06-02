@@ -8,7 +8,7 @@ export default async function ModEventPage({ params }: { params: { id: string } 
 
 	if (isNaN(+params.id)) notFound();
 
-	let res = await fetch(`http://localhost:3000/events/${params.id}`, { cache: 'no-store' });
+	let res = await fetch(`http://${process.env.NEST_HOST}:${process.env.NEST_PORT}/events/${params.id}`, { cache: 'no-store' });
 
 	if (!res.ok) notFound()
 
