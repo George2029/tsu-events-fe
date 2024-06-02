@@ -10,7 +10,7 @@ import { plainToInstance } from 'class-transformer';
 
 import { MovieIcon, BoardGameIcon, ContestIcon, CustomIcon } from '@/app/ui/icons/eventsBarIcons';
 
-import { ChevronDownMicro, CheckMicro, NoSymbolMicro } from '@/app/ui/icons/microIcons';
+import { ChevronDownMicro } from '@/app/ui/icons/microIcons';
 import { PassedFilled, NotPassedFilled, CanceledFilled } from '@/app/ui/icons/fillIcons';
 //import { TimeMini, LocationMini } from '@/app/ui/icons/miniIcons';
 import { LocationMicro, TimeMicro } from '@/app/ui/icons/microIcons';
@@ -53,10 +53,7 @@ export default async function Page(
 		placesTotal,
 		status,
 		startTime,
-		endTime,
-		rating,
 		createdAt,
-		updatedAt,
 		description,
 	} = event;
 
@@ -69,7 +66,7 @@ export default async function Page(
 
 	let eventStartTime = DateTime.fromJSDate(startTime).toLocaleString(myTimeConfig)
 	let createdAtString = DateTime.fromJSDate(createdAt).toLocaleString(DateTime.DATE_SHORT);
-	let eventEndTime = DateTime.fromJSDate(endTime).toLocaleString(myTimeConfig);
+	//let eventEndTime = DateTime.fromJSDate(endTime).toLocaleString(myTimeConfig);
 
 	let eventIcon: any;
 	let statusIcon: any;
