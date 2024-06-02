@@ -53,19 +53,22 @@ export default function SignUpPage() {
 
 	return (
 		<div className="px-10 max-w-80 w-full mt-16 md:mt-10">
+			<div className="flex flex-col gap-10 justify-center px-6 py-12">
 
-			<h2 className="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight">
-				Sign up
-			</h2>
+				<div className="text-center text-2xl font-bold">
+					Sign up
+				</div>
 
-			<RegistrationContext.Provider value={{ contextState, setContextState }}>
-				<Username />
-				<FirstName />
-				<Password />
-				<Password2 />
-				<Email />
-				<Code />
-			</RegistrationContext.Provider>
+
+				<RegistrationContext.Provider value={{ contextState, setContextState }}>
+					<Username />
+					<FirstName />
+					<Password />
+					<Password2 />
+					<Email />
+					<Code />
+				</RegistrationContext.Provider>
+			</div>
 
 		</div>
 	)

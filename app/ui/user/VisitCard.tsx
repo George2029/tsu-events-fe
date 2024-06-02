@@ -45,7 +45,7 @@ export default function VisitCard({ props }: { props: { visit: Visit } }) {
 	let qrcodeLink = 'https://' + process.env.DOMAIN_NAME + '/participantIsPresent/' + id + '/' + eventId + '/' + userId;
 
 	console.log(qrcodeLink);
-	let startTimeString = DateTime.fromJSDate(new Date(event.startTime)).toLocaleString(DateTime.DATETIME_SHORT);
+	let startTimeString = DateTime.fromJSDate(new Date(event.startTime)).toLocaleString(DateTime.DATETIME_SHORT, { locale: 'en-gb' });
 
 	return (
 		<li className="mt-4 p-4 space-y-4 bg-cardBG ring-border ring-1 rounded-xl dark:ring-darkborder hover:ring-active dark:hover:ring-darkactive dark:bg-darkcardBG">

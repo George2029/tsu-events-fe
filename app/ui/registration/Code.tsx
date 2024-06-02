@@ -38,10 +38,10 @@ export default function Code() {
 
 	return (
 		<form className={`${(contextState.currentPage !== 'code') && 'hidden'}`}>
-			<span>
+			<div className="text-center">
 				Enter the Code sent to Email
-			</span>
-			<div className="flex gap-2">
+			</div>
+			<div className="flex justify-center items-center gap-2">
 				<input
 					ref={firstDigit}
 					inputMode="numeric"
@@ -249,6 +249,18 @@ export default function Code() {
 											}
 										}
 									})
+								} else {
+									setContextState({
+										currentPage: contextState.currentPage,
+										data: {
+											...contextState.data,
+											code: {
+												digits: contextState.data.code.digits,
+												valid: false,
+												message: 'Please wait...'
+											}
+										}
+									})
 								}
 							}
 						} else if (value) {
@@ -333,6 +345,18 @@ export default function Code() {
 								}
 							})
 
+						} else {
+							setContextState({
+								currentPage: contextState.currentPage,
+								data: {
+									...contextState.data,
+									code: {
+										digits: contextState.data.code.digits,
+										valid: false,
+										message: 'Please wait...'
+									}
+								}
+							})
 						}
 
 
