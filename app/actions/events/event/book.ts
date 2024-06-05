@@ -29,6 +29,6 @@ export default async function book(formData: FormData) {
 	}
 	let json = await res.json();
 	console.log(`new Participant has been created:`, json);
-	redirect(`https://${process.env.DOMAIN_NAME}/account/visits`);
+	redirect(`https://${process.env.DOMAIN_NAME}/account`);
 
 }
